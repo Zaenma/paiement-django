@@ -1,0 +1,103 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block titre_dynamique %}Vous avez choisi de voyager avec <b class="text-secondary">
+    {{voyage.agencePrincipal}}</b>{% endblock %}
+
+{% block body %}
+<div class="main-section container mb-5 mt-5">
+    <h4>Merci de reiseigner ces information pour la génération de votre billet</h4>
+    <div id="" class="no-uicustom barre mb-4"></div>
+    <div class="row">
+        <div class="col-md-8">
+            <form action="" id=infosUser method="POST">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{fu.titre}}
+                        </div>
+                        <div class="col-md-6">
+                            {{fu.age}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{fu.nom}}
+                        </div>
+                        <div class="col-md-6">
+                            {{fu.prenom}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{fu.telephone}}
+                        </div>
+                        <div class="col-md-6">
+                            {{fu.email}}
+                            {{ fu.email.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{fu.condition}}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'utilisateur:index-utilisateur' vp.id %}" class="btn btn-outline-primary" onclick="document.getElementById('infosUser').submit();">Enregistrer et Continuer</a>
+                </div>
+                <!-- <button type="submit" class="btn btn-outline-primary d-flex justify-content-left">Enregistrer etContinuer</button> -->
+            </form>
+        </div>
+
+        {% if sv %}
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, rem?</p>
+        {% endif %}
+
+
+        <div class="col-md-4">
+            <div class="card text-left">
+                {% if voyage.typeVoyage == 'BU' %}
+                <img class="card-img-top" src="{% static "images/arret-bus.svg" %}" alt="">
+                {% endif %}
+                {% if voyage.typeVoyage == 'AV' %}
+                <img class="card-img-top" src="{% static "images/avion.svg" %}" alt="">
+                {% endif %}
+                {% if voyage.typeVoyage == 'BA' %}
+                <img class="card-img-top" src="{% static "images/bateau.svg" %}" alt="">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title text-primary">{{voyage.agencePrincipal}}</h4>
+                    <p class="card-text">Code de voyage : <b>{{voyage.codeVoyage}}</b></p>
+                    <p class="card-text">Ville de départ : <b>{{voyage.villeDepart}}</b></p>
+                    <p class="card-text">ville de destination : <b>{{voyage.villeArrivee}}</b></p>
+                    <p class="card-text">Date de départ : <b>{{voyage.dateDepert|date}}</b> à
+                        <b>{{voyage.dateDepert|time}}</b></p>
+                    <p class="card-text">Date de départ : <b>{{voyage.datearrivee|date}}</b> à
+                        <b>{{voyage.datearrivee|time}}</b></p>
+                    <p class="card-text prix">Prix : <b class="text-primary"> {{voyage.prix}} KMF</b>
+                    </p>
+                    <i>Bagages inclus</i>
+                </div>
+                <div class="card-footer">
+                    <i class="text-info">{{voyage.agencePrincipal}} assure votre voyage sans risque</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock body %}

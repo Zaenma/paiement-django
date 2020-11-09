@@ -1,0 +1,256 @@
+.section-formulaire {
+    min-width: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.form-control {
+    border-color: 2px #ed0cef !important;
+}
+
+.text-description {
+    margin-top: 230px;
+}
+
+.dialog-modale-form {
+    color: #000 !important;
+}
+
+/* style du formulaire après avoir scrollé la bar de navigation */
+
+.ftco-navbar-light.scrolled .btn-connexion {
+    background: #160f30;
+    border: 2px solid #ed0cef;
+    font-weight: bold;
+}
+
+.ftco-navbar-light.scrolled .btn-connexion:hover {
+    color: #ed0cef;
+}
+
+.ftco-navbar-light.scrolled .input-connection {
+    border: none;
+    outline: none;
+    padding-left: -300px;
+    /* border-bottom: 2px solid #160f30 !important; */
+}
+
+.ftco-navbar-light .btn.btn-outline-primary {
+    border: 2px solid #ffffff;
+}
+
+/* les icones dans les formulaires */
+.ftco-navbar-light.scrolled .par-defaut {
+    color: #160f30;
+}
+
+.ftco-navbar-light.scrolled .label-connexion {
+
+    color: #160f30;
+}
+
+.input-connection {
+    /* border: none; */
+    outline: none;
+    padding-left: -300px;
+    border: 2px solid #ffffff !important;
+}
+
+.btn-connexion {
+    height: 48px !important;
+    font-weight: bold;
+}
+
+.formulaire-connexion {
+    background: #6c757d;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 1.2em 0;
+}
+
+
+.par-defaut {
+    color: #ffffff;
+}
+
+/* .input-connection,
+.label-connexion {
+    transition: .4s;
+}
+
+.label-connexion {
+    top: 22px;
+    color: #fff;
+    font-weight: bold;
+    transform: translate(10px, -15px);
+    cursor: text;
+    transform-origin: left top;
+    position: absolute;
+}
+
+.input-connection::placeholder {
+    opacity: 0;
+}
+
+.input-connection:focus,
+.input-connection:not(:placeholder-shown) {
+    border-bottom: 2px solid red;
+}
+
+.input-connection:not(:placeholder-shown)~.label-connexion,
+.input-connection:focus~.label-connexion {
+    transform: translate(10px, -30px) scale(.8);
+    padding-left: 0;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-formulaire-achat {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.contenu-du-recherche {
+    margin-top: 200px;
+}
+
+.card {
+    background: rgba(255, 255, 255);
+    box-shadow: 1px 1px 2px 1px #888888;
+}
+
+.section-footer {
+    background: #160f30;
+    color: #fff;
+} */
+
+textarea,
+input,
+label {
+    transition: .4s;
+}
+
+label {
+    top: 22px;
+    color: #fff;
+    font-style: italic;
+    transform: translate(10px, -15px);
+    cursor: text;
+    transform-origin: left top;
+    position: absolute;
+}
+
+textarea::placeholder,
+input::placeholder {
+    opacity: 0;
+}
+
+input:focus,
+input:not(:placeholder-shown) {
+    /* border-bottom: 2px solid #64e291; */
+}
+
+
+input:not(:placeholder-shown)~label,
+textarea:not(:placeholder-shown)~label,
+textarea:focus~label,
+input:focus~label {
+    transform: translate(10px, -30px) scale(.8);
+    padding-left: 0;
+    color: rgba(255, 255, 255, 0);
+    font-style: italic;
+    /* font-weight: bold; */
+}
+
+.btn-formulaire-achat {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.contenu-du-recherche {
+    margin-top: 60px;
+}
+
+.card {
+    background: rgba(255, 255, 255);
+    box-shadow: 0 1px 1px 0 #d3d2d2;
+}
+
+.section-footer {
+    background: #160f30;
+    color: #fff;
+}
+
+.modal input {
+    font-weight: bold;
+    color: #160f30 !important;
+}
+
+.modal label,
+.formulaire-contact label {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.input-date {}
+
+.barre {
+    width: 20%;
+}
+
+.titre-card-compagnie {
+    color: #160f30 !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.bare-vertical {
+    height: 100%;
+    width: 2px;
+    background-color: #ed0cef;
+}
+
+.fleche {
+    color: #ed0cef;
+    font-size: 20px;
+}
+
+.prix {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+
+.navbar-wrap .lien-partenaire {
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.card-connexion {
+    background: #160f3081;
+    opacity: 0.7;
+
+    color: #ffffff;
+}
+
+.card-connexion .card-header {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-connexion .input-connection:focus {
+    border: 2px solid #ed0cef !important;
+}
+
+.card-connexion .input-connection {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.678);
+}
+
+.titre-agence {
+    font-size: 60px;
+    font-weight: bold;
+}

@@ -1,0 +1,636 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+
+<div class="main-section">
+    <!-- section header -->
+    {% block header %}
+    <section class="ftco-section ftco-no-pt ftco-no-pb" id="carousel">
+        <div class="container-fluid px-0">
+            <div class="row no-gutters justify-content-center">
+                <div class="col-md-12">
+                    <div id="demo" class="carousel slide" data-ride="carousel">
+
+                        <!-- Indicators -->
+                        <ul class="carousel-indicators">
+                            <li data-target="#demo" data-slide-to="0" class="active"></li>
+                            <li data-target="#demo" data-slide-to="1"></li>
+                            <li data-target="#demo" data-slide-to="2"></li>
+                        </ul>
+                        <!-- The slideshow -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active img"
+                                style="background-image: url('{% static "images/bus.jpg" %}'); height: 750px;">
+                                <div class="overlay"></div>
+                                <div class="container">
+                                    <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8 text w-100 text-center">
+                                            <h2 class="mb-4">Ne perdez pas du temps, ticket de bus devant vous !</h2>
+
+                                            <div id="" class="no-uicustom mb-4"></div>
+                                            <p>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="button"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#bus">Bus</a>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="bytton"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#avion">Avion</a>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="button"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#bateau">Bateau</a>
+                                                    </div>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item img"
+                                style="background-image: url('{% static "images/interilaire.jpg" %}'); height: 700px;">
+                                <div class="overlay"></div>
+                                <div class="container">
+                                    <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8 text w-100 text-center">
+                                            <h2 class="mb-4">votre billet d'avion sur n'importe quelle île</h2>
+                                            <!-- barre horizontale -->
+                                            <div id="" class="no-uicustom mb-4"></div>
+                                            <!-- les bouttons -->
+                                            <p>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="button"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#bus">Bus</a>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="bytton"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#avion">Avion</a>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="button"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#bateau">Bateau</a>
+                                                    </div>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item img"
+                                style="background-image: url('{% static "images/bateau.jpg" %}'); height: 750px;">
+                                <div class="overlay"></div>
+                                <div class="container">
+                                    <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+                                        <div class="col-md-8 text w-100 text-center">
+                                            <h2 class="mb-4">Assurence voyage maritime</h2>
+
+                                            <div id="" class="no-uicustom mb-4"></div>
+                                            <p>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="button"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#bus">Bus</a>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="bytton"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#avion">Avion</a>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-lg-4 col-12 col-xl-4">
+                                                        <a href="" type="button"
+                                                            class="btn btn-outline-primary btn-round btn-formulaire-achat"
+                                                            data-toggle="modal" data-target="#bateau">Bateau</a>
+                                                    </div>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- les bouttons pour naviguer entre les différents caroussels -->
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="ion-ios-arrow-round-back"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="ion-ios-arrow-round-forward"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    <!-- END section header -->
+
+
+    {% block body %}
+    <!-- Boite modal du formulaire des bus -->
+    <div class="modal fade" id="bus" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content dialog-modale-form">
+                <div class="modal-header">
+                    <b class="modal-title" id="exampleModalLongTitle">Ticket de bus </b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'accueil:recherche' %}" method="GET">
+                    <div class="modal-body">
+                        <div class="alert alert-info pb-1">
+                            <div class="d-flex">
+                                <p class="">Merci de bien remplire le formulaire</p>
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                            </button>
+                        </div>
+                        {% csrf_token %}
+
+                        <div class="input-group mb-3">
+                            {{bu.typev}}
+                        </div>
+
+                        <span>Je suis : </span>
+                        <div class="input-group mb-3">
+                            {{bu.ile}}
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input type="hidden" name="" value="BU">
+                        </div>
+
+                        <span>De : </span>
+                        <div class="input-group mb-3">
+                            {{bu.ville_depart}}
+                        </div>
+
+                        <span>A : </span>
+                        <div class="input-group mb-3">
+                            {{bu.ville_destination}}
+                        </div>
+
+                        <span>Le : </span>
+                        <div class="input-group mb-3">
+                            {{bu.date_depart}}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        <!-- <a href="{% url 'accueil:recherche' %}" class="btn btn-info">Recherche mon billet</a> -->
+                        <button type="submit" class="btn btn-info">Recherche</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Boite modal du formulaire pour les avions -->
+    <div class="modal fade" id="avion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content dialog-modale-form">
+                <div class="modal-header">
+                    <b class="modal-title" id="exampleModalLongTitle">Ticket d'Avion </b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'accueil:recherche' %}" method="GET">
+                    <div class="modal-body">
+                        <div class="alert alert-info pb-1">
+                            <div class="container-fluid">
+                                <div class="d-flex">
+                                    <p class="">Merci de bien remplire le formulaire</p>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+
+                        <div class="input-group mb-3">
+                            {{av.typev}}
+                        </div>
+
+                        <span>De : </span>
+                        <div class="input-group mb-3">
+                            {{av.ville_depart}}
+                        </div>
+
+                        <span>A : </span>
+                        <div class="input-group mb-3">
+                            {{av.ville_destination}}
+                        </div>
+
+                        <span>Le : </span>
+                        <div class="input-group mb-3">
+                            {{av.date_depart}}
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-info">Recherche</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Boite modal du formulaire pour les bateau -->
+    <div class="modal fade" id="bateau" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content dialog-modale-form">
+                <div class="modal-header">
+                    <b class="modal-title" id="exampleModalLongTitle">Ticket de Bateau </b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'accueil:recherche' %}" method="GET">
+                    <div class="modal-body">
+                        <div class="alert alert-info pb-1">
+                            <div class="container-fluid">
+                                <div class="d-flex">
+                                    <p class="">Merci de bien remplire le formulaire</p>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+
+                        <div class="input-group mb-3">
+                            {{ba.typev}}
+                        </div>
+
+                        <span>De : </span>
+                        <div class="input-group mb-3">
+                            {{ba.ville_depart}}
+                        </div>
+
+                        <span>A : </span>
+                        <div class="input-group mb-3">
+                            {{ba.ville_destination}}
+                        </div>
+
+                        <span>Le : </span>
+                        <div class="input-group mb-3">
+                            {{ba.date_depart}}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-info">Recherche mon billet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FIN BOITES MODAL -->
+
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 heading-title">
+                    <h1>A propos de Rahissi</h1>
+                    <div id="" class="no-uicustom barre mb-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                </div>
+                <div class="col-12 col-sm-5 col-md-5 col-lg-65 col-xl-5">
+                    <img src="{% static "images/travel.svg" %}" alt="Round Image" class="rounded img-fluid image-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 heading-title">
+                    <h1>Votre de voyage sous forme de QR code</h1>
+                    <div id="" class="no-uicustom barre mb-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                </div>
+                <div class="col-12 col-sm-5 col-md-5 col-lg-65 col-xl-5">
+                    <img src="{% static "images/qr-code.png" %}" alt="Round Image" class="rounded img-fluid image-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LES MOYENS DE TRANSPORTS QU'ON PROPOSE -->
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 heading-title">
+                    <h1>Transports terrestre</h1>
+                    <div id="" class="no-uicustom barre mb-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+                        perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+                        voluptatum nobis quos quibusdam mollitia repellat!
+                    </p>
+                </div>
+                <div class="col-12 col-sm-5 col-md-5 col-lg-65 col-xl-5">
+                    <img src="{% static "images/arret-bus.svg" %}" alt="Round Image" class="rounded img-fluid image-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LES DIFFÉRENTS SERVICES QU'ON PROPOSE -->
+    <section class="mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 heading-title">
+                    <h1>Nos différents services</h1>
+                    <div id="" class="no-uicustom barre mb-5"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3 mb-2 col-lg-3 col-xl-3">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/arret-bus.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Transport terestre</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+                                enim dolorum vero. Doloribus, aliquam iure id fugiat dolorum beatae recusandae.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 mb-2 w-75 col-md-3 col-lg-3 col-xl-3">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/avion.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Transport aérien</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+                                animi assumenda soluta atque debitis adipisci numquam nemo voluptatibus optio qui!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 mb-2 col-md-3 col-lg-3 col-xl-3">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/bateau.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Trasport maritime</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+                                omnis modi asperiores! Soluta eius et quia, esse animi laudantium voluptate.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6  col-md-3 col-lg-3 col-xl-3">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/arret-bus.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Trasfert d'argent</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae modi
+                                nisi repellendus neque voluptatum rem voluptates dolore quod quisquam!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LES MODES DE PAIEMENT DISPONIBLE -->
+    <section class="mt-5 mb-5">
+        <div class="container">
+            <div class="description-paiement">
+                <div class="col-md-12 heading-title">
+                    <h1>Les modes de paiement prise en charge</h1>
+                    <div id="" class="no-uicustom barre mb-5"></div>
+                </div>
+                <div class="paragraphe-description-paiement text-center mb-5">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde, dolorum!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-4 mb-2 col-lg-4 col-xl-4">
+                    <div class="card text-left">
+                        <img class="card-img-top w-75" src="{% static "images/paiement-mobile.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Paiement mobile</h4>
+                            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+                                voluptatibus.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 mb-2 w-75 col-md-4 col-lg-4 col-xl-4">
+                    <div class="card text-left">
+                        <img class="card-img-top text-center" src="{% static "images/cart-credit.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Paiement PyPal</h4>
+                            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+                                voluptatibus.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 mb-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/carte-credit.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Paiement par cart</h4>
+                            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+                                voluptatibus. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section ftco-section-2 section-signup page-header img"
+        style="background-image: url('{% static "images/bg_2.jpg" %}' )" ;>
+        <div class="overlay"></div>
+        <div class="container-fluid">
+            <div class="col-md-12 heading-title">
+                <h1>Companie d'assurence</h1>
+                <div id="" class="no-uicustom barre mb-5"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-4 mb-2 col-md-2 col-lg-2 col-xl-2">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/arret-bus.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title titre-card-compagnie">AB Aviation</h4>
+
+                            <div id="" class="no-uicustom barre mb-2"></div>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-2 mb-2 col-lg-2 col-xl-2">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/avion.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title titre-card-compagnie">EWA</h4>
+
+                            <div id="" class="no-uicustom barre mb-2"></div>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-2 mb-2 col-lg-2 col-xl-2">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/bateau.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title titre-card-compagnie">El Djaefar</h4>
+                            <div id="" class="no-uicustom barre mb-2"></div>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-2 mb-2 col-lg-2 col-xl-2">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/bateau.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title titre-card-compagnie">Gombessa</h4>
+                            <div id="" class="no-uicustom barre mb-2"></div>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae modi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-2 mb-2 col-lg-2 col-xl-2">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/bateau.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title titre-card-compagnie">Inter-île-Air</h4>
+                            <div id="" class="no-uicustom barre mb-2"></div>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae modi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="{% static "images/bateau.svg" %}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title titre-card-compagnie">Air Madagascar</h4>
+                            <div id="" class="no-uicustom barre mb-2"></div>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae modi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- - - - - -end- - - - -  -->
+
+    <!-- FORMULAIRE DE CONTACTE  -->
+    <section class="mt-5">
+        <div class="container-fluid">
+            <div class="col-md-12 heading-title">
+                <h1>Contacter l'agence principal</h1>
+                <div id="" class="no-uicustom barre mb-5"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 ">
+                    <form action="" method="post" class="formulaire-contact">
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" placeholder=" " required>
+                            <label for="">Votre nom complet (nom et prénom): </label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" placeholder=" " required>
+                            <label for="">Adresse électronique</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" placeholder=" " required>
+                            <label for="">Numéro de téléphone actif</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" placeholder=" " required>
+                            <label for="">Lieu de résidence</label>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" placeholder=" " required>
+                            <label for="">Titre du message</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="" class="form-control" placeholder=" " id=""></textarea>
+                            <label for="" class="label-form">Votre message bien détaillé</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-md-12 heading-title">
+                        <h4>Notre siège principal</h4>
+                        <div id="" class="no-uicustom barre mb-5"></div>
+                    </div>
+                    <address class="adresse">
+                        Bandracouni Anjouan (Comores) <br>
+                        Téléphoen : (+269) 3000000 | (+269) 4000000 <br>
+                        E-mail : missafara-rahissi@rahissi.com
+                    </address>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock body %}
+</div>

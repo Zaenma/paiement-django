@@ -1,0 +1,204 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block titre_dynamique %}Vous avez choisi de voyager avec {{voyage.agencePrincipal}} {% endblock %}
+
+{% block body %}
+<div class="main-section container">
+
+    <section class="mt-5">
+        <div class="card text-left mb-5">
+            <div class="card-header">
+                <h5 class="text-primary"> <b> Vous avez choisi de voyager avec {{vp.agencePrincipal}}, un voyage très
+                        simple
+                        et rapide </b></h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% if vp.typeVoyage == 'BA' %}
+                        <h4 class="card-title text-success"> <b> {{vp.agencePrincipal}}</b> Offre un voyage sous le
+                            numéro <b> {{vp.codeVoyage}} </b></h4>
+                        {% endif %}
+                        {% if vp.typeVoyage == 'AV' %}
+                        <h4 class="card-title text-success"> Le vol Numéro <b>{{vp.codeVoyage}}</b> de
+                            <b>{{vp.agencePrincipal}}</b></h4>
+                        {% endif %}
+                        {% if vp.typeVoyage == 'BU' %}
+                        <h4 class="card-title text-success"> Le vol Numéro <b>{{vp.codeVoyage}}</b> de
+                            <b>{{vp.agencePrincipal}}</b></h4>
+                        {% endif %}
+                        <div id="" class="no-uicustom mb-4 barre"></div>
+                        <p class="card-text">
+                            Le <b>{{vp.dateDepert|date}}</b> à <b>{{vp.dateDepert|time}} - {{vp.villeDepart}} </b>
+                            <i class="ion-ios-arrow-round-forward fleche"></i> <b> {{vp.villeArrivee}}</b> le
+                            <b>{{vp.datearrivee|date}} </b> à <b> {{vp.datearrivee|time}} </b><br>
+                            Quantité de bagage autorisé <b>{{vp.bagage}} Kg</b> avec sac à main
+                        </p>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="bare-vertical"></div>
+                    </div>
+                    <div class="col-md-3">
+                        Prix : <b>{{vp.prix}} KMF</b> aller simple <br><br>
+                        <b class="text-success">Choisir cette offre</b> <br>
+                        <a href="{% url 'utilisateur:index-utilisateur' vp.id %}" class="btn btn-outline-primary">Aller
+                            simple</a>
+                        <a href="{% url 'paiement:index-paiement' vp.id %}" class="btn btn-outline-primary">Aller
+                            retour</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-info d-flex justify-content-between">
+                <i> <b>{{vp.agencePrincipal}} </b>vous souhaite un bon voyage</i>
+                <i><b>{{vp.nombreSiege}}</b> sièges restants, à profiter avant la fermeture de l'offre</i>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <div class="alert alert-info">
+            <div class="container">
+                <p class="mb-0 ml-2">
+                    <h4>Parmi les principes de {{ vp.agencePrincipal }} d'assurer des voyages satisfaiants à ses clients
+                        💜</h4>
+                    Renseigner les informations suivantes pour la génération de votre ticket de transport 💌 très facile
+                    non ⁉
+                </p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                </button>
+            </div>
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{fu.titre}}
+                    </div>
+                    <div class="col-md-6">
+                        {{fu.age}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{fu.nom}}
+                    </div>
+                    <div class="col-md-6">
+                        {{fu.prenom}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        {{fu.telephone}}
+                    </div>
+                    <div class="col-md-6">
+                        {{fu.email}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="custom-control fill-checkbox mb-0 d-inline-block">
+                            {{fu.condition}}
+                            <span class="fill-control-indicator"> </span>
+                            <span class="fill-control-description ml-3"> Je garde ma session ouverte</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-outline-primary d-flex justify-content-left">Enregistrer et
+                    Continuer</button>
+            </div>
+        </form>
+    </section>
+
+
+
+
+    <!-- AFFICHAGE DES MOEYENS DE PAIEMENTS SI L'UTILISATEUR A BIEN RENSEIGNER SES INFORMATION -->
+
+    <section>
+        <div class="mt-5 mb-5">
+            <div class="alert alert-warning">
+                <div class="container">
+                    <p class="mb-0 ml-2">
+                        <b>
+                            <h4>Merci {{ su.nom }} {{ su.prenom }} pour la confiance</h4>
+                            <b class="text-primary">On prend en charge vos informations personnl, rien ne sera
+                                truqué</b>  <br>
+                            Votre session sera expirer dans 5 minutes, <br>
+                            Merci de finaliser la transaction avant la date d'expression de la session ❕.
+                        </b>
+                        {{nbv}}
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                    </button>
+                </div>
+            </div>
+
+            <h4 class="">Les moyens de paiement disponible</h4>
+            <div id="" class="no-uicustom mb-4 barre"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="holder.js/100px180/" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title text-secondary">Paiement mobil</h4>
+                            <div id="" class="no-uicustom mb-4 barre"></div>
+                            <p class="card-text">Vous devez disposer un téléphone integrant un porte monaie électronique
+                                pour ce mode de paiement</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="" class="btn btn-outline-primary w-100">Passer aux paiement mobile</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="holder.js/100px180/" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title text-secondary">paiement par PayPal</h4>
+                            <div id="" class="no-uicustom mb-4 barre"></div>
+                            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti,
+                                veritatis! adipisicing elit. Deleniti, veritatis!</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="" class="btn btn-outline-primary w-100">Passer aux paiement par PayPal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="holder.js/100px180/" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title text-secondary">Paiement par carte</h4>
+                            <div id="" class="no-uicustom mb-4 barre"></div>
+                            <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis,
+                                magnam.
+                                adipisicing elit. Deleniti, veritatis!</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="" class="btn btn-outline-primary w-100">Passer aux paiement par car de crédit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+
+
+{% endblock body %}

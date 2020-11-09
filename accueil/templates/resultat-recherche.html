@@ -1,0 +1,126 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block titre_dynamique %}Les résultats correspondant à votre critère de recherches{% endblock %}
+
+{% block body %}
+<div class="main-section container">
+   <div class="mb-5 mt-5">
+      <!-- On affiche le message d'alerte si on a pas trouver de voyage correspondant aux critères de recherches -->
+      {% if msg == 0 %}
+         <div class="alert alert-info">
+         <div class="container">
+             <div class="d-flex">
+                 <div class="alert-icon">
+                     <i class="ion-ios-information-circle-outline"></i>
+                 </div>
+                 <p class="mb-0 ml-2">
+                  <b>
+                     Aucun voyage ne correspond à votre critère de recherche <br>
+                     Merci de fournir d'autres critère ou consulter la liste des voyages disponible
+                   </b>
+                   {{nbv}}
+                  </p>
+             </div>
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+             </button>
+         </div>
+         </div>
+         <form action="" method="get">
+            {% csrf_token %}
+
+            <div class="row">
+               <div class="col-md-4">
+                  <span>De : </span>
+                  <div class="input-group mb-3">
+                     {{re.ville_depart}}
+                 </div>
+               </div>
+               <div class="col-md-4">
+                  <span>A : </span>
+                  <div class="input-group mb-3">
+                     {{re.ville_destination}}
+                 </div>
+               </div>
+               <div class="col-md-4">
+                  <span>Le : </span>
+                  <div class="input-group mb-3">
+                     {{re.date_depart}}
+                 </div>
+               </div>
+            </div>
+            <div class="input-group mb-3">
+               {{re.typev}}
+           </div>
+            <button type="submit" class="btn btn-outline-primary d-flex text-center justify-content-end mb-5 w-25">Chercher</button>
+         </form>
+      {% endif %}
+
+      {% for vp in vps %}
+      <div class="card text-left mb-5">
+         <div class="card-body">
+            <div class="row">
+               <div class="col-md-8">
+                  {% if vp.typeVoyage == 'BA' %}
+                     <h4 class="card-title text-success"> <b> {{vp.agencePrincipal}}</b> Offre un voyage sous le numéro <b> {{vp.codeVoyage}} </b></h4>
+                  {% endif %}
+                  {% if vp.typeVoyage == 'AV' %}
+                     <h4 class="card-title text-success"> Le vol Numéro <b>{{vp.codeVoyage}}</b> de <b>{{vp.agencePrincipal}}</b></h4>
+                  {% endif %}
+                  {% if vp.typeVoyage == 'BU' %}
+                     <h4 class="card-title text-success"> Le vol Numéro <b>{{vp.codeVoyage}}</b> de <b>{{vp.agencePrincipal}}</b></h4>
+                  {% endif %}
+                  <div id="" class="no-uicustom mb-4 barre"></div>
+                  <p class="card-text">
+                     Le <b>{{vp.dateDepert|date}}</b>  à <b>{{vp.dateDepert|time}} - {{vp.villeDepart}} </b> <i class="ion-ios-arrow-round-forward fleche"></i> <b> {{vp.villeArrivee}}</b>  le <b>{{vp.datearrivee|date}} </b> à <b> {{vp.datearrivee|time}} </b><br>
+                     Quantité de bagage autorisé <b>{{vp.bagage}} Kg</b> avec sac à main
+                  </p>
+               </div>
+               <div class="col-md-1">
+                  <div class="bare-vertical"></div>
+               </div>
+               <div class="col-md-3">
+                  Prix : <b>{{vp.prix}} KMF</b> aller simple <br><br>
+                  <b class="text-success">Choisir cette offre</b> <br>
+                  <!-- <a href="{% url 'utilisateur:index-utilisateur' vp.id %}" class="btn btn-outline-primary">Aller simple</a> -->
+                  <a href="{% url 'paiement:index-paiement' vp.id %}" class="btn btn-outline-primary">Continuer avec {{vp.agencePrincipal}}</a>
+               </div>
+            </div>
+         </div>
+         <div class="card-footer text-info d-flex justify-content-between">
+            <i> <b>{{vp.agencePrincipal}} </b>vous souhaite un bon voyage</i>
+            <i><b>{{vp.nombreSiege}}</b> sièges restants, à profiter avant la fermeture de l'offre</i>
+         </div>
+      </div>
+      {% endfor %}
+
+      <section class="ftco-section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                     <div class="pagination pagination-1 mb-4">
+                        {% if vps.has_previous %}
+                           <a href="?page={{ vps.previous_page_number }}">&laquo;</a>
+                        {% endif %}
+
+                        <a href="">{{ vps.number }}</a>
+
+                        {% if vps.has_next %}
+                           <a href="?page={{ vps.next_page_number }}">&raquo;</a>
+                        {% endif %}
+
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+</div>
+
+
+
+
+{% endblock body %}

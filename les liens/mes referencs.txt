@@ -1,0 +1,26 @@
+
+- Page d'administration 
+   https://docs.djangoproject.com/fr/3.1/ref/contrib/admin/#overview
+
+
+Cours, exercices et projet pyton : https://www.tresfacile.net/mini-projet-python-creation-dun-editeur-de-texte-partie1/
+
+CRUD avec django : https://sodocumentation.net/fr/django/topic/7317/crud-a-django
+
+Vérification des numéros de téléphone avec python : https://pypi.org/project/django-phone-field/
+
+Vérification des numéros de téléphone : https://stackoverflow.com/questions/19130942/whats-the-best-way-to-store-phone-number-in-django-models
+
+Bibliothèque pour les numéros de téléphone : https://github.com/stefanfoulis/django-phonenumber-field
+
+Authentification par téléphone mobile avec python : https://pypi.org/project/django_mobile_auth/#description
+
+réfférence pour le site français : https://www.ratp.fr/le-sms-ticket-bus
+
+vente de tickt en france : https://actu.fr/societe/coronavirus/coronavirus-sms-remplacent-vente-tickets-dans-tous-bus-dile-france_32348657.html
+
+réfférence de vente de ticket : https://www.iledefrance-mobilites.fr/titres-et-tarifs/detail/tab-sms
+
+paiement par SMS : https://www.starpass.fr/
+
+génération de QR code avec django : https://django-qr-code.readthedocs.io/en/latest/pages/README.html
