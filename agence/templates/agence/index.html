@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titre_dynamique %}Page de contacte de l'agence {{ ag.nom }} {% endblock %}
+
+
+{% block body %}
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="" method="POST">
+                    {{fmge.as_p}}
+                    <button class="btn btn-outline-primary">Envoyer le message</button>
+                </form>
+            </div>
+            <div class="col-md-6 mt-5">
+                <h4 class="text-info">Information de contacte</h4>
+                <p class="p-icone-agence"><span class="icon-agence"> ☎ </span> {{ ag.nom }}</p>
+                <p class="p-icone-agence"><span class="icon-agence"> ☎ </span> Téléphone fixe : {{ ag.telephoneFixe }}</p>
+                <p class="p-icone-agence"><span class="icon-agence"> 📞 </span> Téléphone portable : {{ ag.telephonePortable }}</p>
+                <p class="p-icone-agence"><span class="icon-agence"> 📩 </span>Adresse électronique : {{ ag.adresseEmail }}</p>
+                <p class="p-icone-agence"> <span class="icon-agence"> ☎ </span> Île : {{ ag.ileLocalisation }}</p>
+                <p class="p-icone-agence"><span class="icon-agence"> ☎ </span> Ville : {{ ag.villeLocalisation }}</p>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

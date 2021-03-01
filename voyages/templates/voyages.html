@@ -1,0 +1,107 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Liste des voyages{% endblock %}
+
+{% block barrenave %}
+
+<div class="px-0 bg-primary navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <nav class="navbar px-0 navbar-expand-lg navbar-light">
+               <a class="navbar-brand" href="{% url 'accueil:index-accueil' %}">C-Transports</a>
+
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                  aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="oi oi-menu"></span>
+               </button>
+
+               <div class="collapse navbar-collapse" id="ftco-nav">
+                  <ul class="navbar-nav ml-auto">
+                     <li class="nav-item mr-2 mt-2">
+                        <a href="" type="button" class="btn btn-info btn-formulaire-achat" data-toggle="modal"
+                           data-target="#tableau-bord-departs">Départs <i class="ion-ios-arrow-round-up"></i></a>
+                     </li>
+                     <li class="nav-item mt-2">
+                        <a href="" type="bytton" class="btn btn-info btn-formulaire-achat" data-toggle="modal"
+                           data-target="#tableau-bord-arrivees">Arrivées <i class="ion-ios-arrow-round-down"></i></a>
+                     </li>
+                     <li class="dropdown nav-item d-flex">
+                        <a href="#" class="dropdown-toggle nav-link d-flex align-items-center icon"
+                           data-toggle="dropdown">
+                           <b class="lien-partenaire">Nos partenaires</b>
+                           <b class="caret"></b>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                           {% for agence in agence %}
+                           <a href="{% url 'agence:agence' agence.id %}" class="dropdown-item">{{ agence.nom }}</a>
+                           {% endfor %}
+                           <div class="dropdown-divider">
+                           </div>
+                           <a href="#" class="dropdown-item">Devenir partenaire</a>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </nav>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock barrenave %}
+
+{% block header %}
+<section class="">
+
+   <div class="container">
+      <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+         <div class=" text w-100 page-accueil">
+            <h2 class="text-primary page-accueil">Liste des voyages trvouvés à votre critère de recherche</h2>
+            <div id="" class="no-uicustom barre mb-3"></div>
+         </div>
+      </div>
+   </div>
+
+</section>
+
+{% endblock header %}
+
+
+{% block body %}
+    <section class="container my-5">
+
+        {% for voyage in voyages %}
+        <div class="card text-left mb-3">
+            <div class="card-header">
+                <h5 class="card-title text-primary"> <b> {{voyage.agencePrincipal}}</b> Offre un voyage sous le numéro <b> {{voyage.codeVoyage}} </b></h5>
+            </div>
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-md-8">
+                     <h5 class="card-text">   
+                        Le <b>{{voyage.dateDepert|date}}</b>  à <b>{{voyage.dateDepert|time}} - {{voyage.villeDepart}} </b> <i class="ion-ios-arrow-round-forward"></i> <b> {{voyage.villeArrivee}}</b>  le <b>{{voyage.dateArrivee|date}} </b> à <b> {{voyage.dateArrivee|time}} </b><br>
+                        Quantité de bagage autorisé <b>{{voyage.bagage}} Kg</b> avec sac à main
+                     </h5>
+
+                  </div>
+                  <div class="col-md-1">
+                     <div class="bare-vertical"></div>
+                  </div>
+                  <div class="col-md-3">
+                     <h5>Prix : <b>{{voyage.prix}} KMF</b> aller simple</h5>
+                     
+                     <b class="text-info">Choisir cette offre</b> <br>
+                     <a href="{% url 'infos:information' voyage.id tag %}" class="btn btn-primary">Continuer avec {{voyage.agencePrincipal}}</a>
+                  </div>
+               </div>
+            </div>
+            <div class="card-footer text-info d-flex justify-content-between">
+               <i> <b>{{voyage.agencePrincipal}} </b>vous souhaite un bon voyage</i>
+               <i><b>{{voyage.nombreSiege}}</b> sièges restants, à profiter avant la fermeture de l'offre</i>
+            </div>
+         </div>
+        {% endfor %}
+    </section>
+{% endblock body %}

@@ -1,0 +1,203 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block barrenave %}
+
+<div class="px-0 bg-primary navbar-wrap mb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar px-0 navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="{% url 'infos:dashbord' %}">Paiement</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
+                        aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="oi oi-menu"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarsExample03">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item d-flex">
+                                <!-- <a class="nav-link d-flex align-items-center" href="#">Paramettres</a> -->
+                            </li>
+                            <li class="nav-item d-flex">
+                                <a class="nav-link d-flex align-items-center" href="{% url 'accueil:index-accueil' %}">Racheter</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock barrenave %}
+
+
+
+{% block header %}
+
+
+{% endblock header %}
+
+
+
+
+
+{% block body %}
+
+<div class="" id="formulaire-infos-personne">
+    <section class="container my-5">
+        <h2 class="text-success">Nous acceptons les moyens de paiement suivants</h2>
+        <div id="" class="no-uicustom mb-5 barre"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <h4 class="card-title"> <img src="{% static "images/mobilpayment.jpg" %}" class="img-paiement"
+                                alt="" srcset=""> Sur mobile</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+                    <div class="mt-3 card-footer">
+                        <div class="form-radio">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="radio-input" v-model="success">
+                                    <span class="checkmark"></span>
+                                    <span class="fill-control-description">Payer par mobile</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"> <img src="{% static "images/paypal.jpeg" %}" class="img-paiement" alt=""
+                                srcset=""> PayPal</h4>
+                        <p class="card-text">Body</p>
+                    </div>
+
+                    <div class="mt-3 card-footer">
+                        <div class="form-radio">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="radio-input" v-if="paypal">
+                                    <span class="checkmark"></span>
+                                    <span class="fill-control-description">Payer par PayPal</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><img src="{% static "images/carte_bancaire.jpg" %}" class="img-paiement"
+                                alt="" srcset="">Carte de crédit</h4>
+                        <p class="card-text">Text</p>
+                    </div>
+                    <div class="mt-3 card-footer">
+                        <div class="form-radio">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="radio-input">
+                                    <span class="checkmark"></span>
+                                    <span class="fill-control-description">Payer par Carte de crédit</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5" v-if="success">
+        <div class="card text-left">
+            <form action="" method="post">
+                <div class="card-header">
+                    <h4 class="card-title text-primary">Numéro de téléphone integrant le service OrangeMoney</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="paiement-mobil" class="label-form">Entrer votre numéro de téléphone</label>
+                                <input type="text" name="paiement-mobil" placeholder="Numéro de téléphone" id=""
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 my-2">
+                        <div class="bare-vertical"></div>
+                    </div>
+                    <div class="col-md-5">
+                        Information sur le voyage
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end card-footer">
+                    <button type="submit" class="btn btn-outline-primary">Valider le paiement</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <section class="container my-5" v-model="paypal">
+        <div class="card text-left">
+            <form action="" method="post">
+                <div class="card-header">
+                    <h4 class="card-title text-primary">Numéro de téléphone integrant le service OrangeMoney</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card-body">
+                            <h1>PayPal</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-1 my-2 mr-0">
+                        <div class="bare-vertical ml-0"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table">
+                            <tbody>
+                                <tr class="border-0">
+                                    <td><b>Compagnie</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.agencePrincipal }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">Ville de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeDepart }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">ville de destination</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateDepert }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date d'arrivée</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Heur du trajet</b></td>
+                                    <td><b class="infos-voyage">{{ heur }}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between card-footer">
+                    <b class="ml-5 text-primary bg-dark px-5 shadow">Prix HTT : <span class="ml-5 text-primary"> {{ prix }} KMF</span></b>
+                    <!-- <button type="submit" class="btn btn-outline-primary">Valider le paiement</button> -->
+                    <a href="{% url 'achat:success' pkv pku tag date %}" class="btn btn-primary">Success</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock body %}

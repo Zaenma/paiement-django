@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load qr_code %}
+
+{% block barrenave %}
+
+<div class="px-0 bg-primary navbar-wrap mb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar px-0 navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="{% url 'infos:dashbord' %}">Ticket de {{ contact_detail.first_name }}</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
+                        aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="oi oi-menu"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarsExample03">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item d-flex">
+                                <!-- <a class="nav-link d-flex align-items-center" href="#">Paramettres</a> -->
+                            </li>
+                            <li class="nav-item d-flex">
+                                <a class="nav-link d-flex align-items-center" href="{% url 'accueil:index-accueil' %}"></a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock barrenave %}
+
+
+
+{% block header %}
+
+
+{% endblock header %}
+
+
+
+
+{% block body %}
+
+    <div class="container my-5">
+        <div class="alert alert-success">
+            <b>Bravo {{ contact_detail.first_name }}, Merci d'avoir privilégié notre service pour l'achat de votre ticket de transport </b> <br>
+            <p>Vous pouvez signaler sur <a href="">cette page</a> en cas de remarque, ou si vous avez des suggestions particuliers <br> vous serez alerté pour tous nouvels voyages 👌 </p>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                {% qr_for_contact contact_detail=contact_detail size='S' %}
+            </div>
+            <div class="col-md-7">
+
+                <h4 class="text-success">Votre ticket de trasport pour le vol N°UTI6P-TYUU </h4>
+                <b> ➡ Merci de capturer le QR code, ou le télécharger</b> <br><br>
+                <b> ➡ Il est aussi disponible dans votre boite emal</b> 
+
+                <p class="text-primary">💜 Inter île air vous souhaite de passer un excellent voyage</p>
+                
+            </div>
+        </div>
+        
+
+
+
+
+    </div>
+
+{% endblock body %}

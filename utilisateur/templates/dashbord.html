@@ -1,0 +1,810 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+
+
+
+
+{% block barrenave %}
+
+
+{% endblock barrenave %}
+
+
+
+
+{% block header %}
+
+
+{% endblock header %}
+
+
+
+
+
+
+{% block body %}
+
+<div class="is-preload">
+    <div class="px-0 bg-primary navbar-wrap mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar px-0 navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="{% url 'infos:dashbord' %}">Page d'administration | AB Aviation</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
+                            aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="oi oi-menu"></span>
+                        </button>
+    
+                        <div class="collapse navbar-collapse" id="navbarsExample03">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item d-flex">
+                                    <a class="nav-link d-flex align-items-center actif" href="#"><i class="ion-ios-notifications"></i> <sup>1</sup></a>
+                                </li>
+                                <li class="nav-item d-flex">
+                                    <a class="nav-link d-flex align-items-center actif" href="#"> <i class="ion-ios-chatboxes"></i> <sup>5</sup> </a>
+                                    <a class="nav-link d-flex align-items-center actif" href="#"> <i class="ion-ios-person-add"></i><sup>0</sup></a>
+                                    <a class="nav-link d-flex align-items-center actif" href="#"> <i class="ion-ios-airplane"></i><sup>1</sup></a>
+                                    <a class="nav-link d-flex align-items-center actif" href="#"> <i class="ion-ios-boat"></i><sup>2</sup></a>
+                                    <a class="nav-link d-flex align-items-center actif" href="#"> <i class="ion-ios-bus"></i><sup>0</sup></a>
+                                </li>
+                                <li class="nav-item d-flex">
+                                    <a class="nav-link d-flex align-items-center actif" href="#">Paramèttres</a>
+                                </li>
+                                <li class="nav-item d-flex">
+                                    <a class="nav-link d-flex align-items-center" href="{% url 'accueil:index-accueil' %}">Déconnexion <i class="ion-ios-chatboxes"></i></a>
+                                </li>
+                            </ul>
+    
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <section class="container">
+            <div class="mb-5">
+                {% if action == None and element == None %}
+                <div class="d-flex justify-content-between mb-3">
+                    <b>Actions sur l'objet sélectionné</b>
+                    <a href="" class="btn btn-primary">Ajouter un voyage <i class="icon-plus"> </i> </a>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline">
+                            <input class="form-control" type="search" placeholder="Recherche" aria-label="Search">
+                            <button class="btn btn-primary btn-round" type="submit"><i
+                                    class="ion-ios-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-left">
+                            <div class="card-header">
+                                <span>Les filtres</span>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Title</h4>
+                                <p class="card-text">Body</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- ==================== Ajouter un voyage aérien =================== -->
+                {% if action == "ajout" and element == "aerien" %}
+                <div class="">
+                    <div class="my-4">
+                        <div class="alert alert-info">
+                            <h4 class=""> Ajout d'un voyage aérien</h4>
+                        </div>
+                        {% if statut %}
+                        <div class="alert alert-success">
+                            <b>Action effectuer avec succès</b>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span>Le nom de l'agence <i class="text-danger">*</i> </span>
+                                <div class="form-group">
+                                    {{form.agencePrincipal}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>Code (Identifiant) du voyage <i class="text-danger">*</i> </span>
+                                <div class="form-group">
+                                    {{form.codeVoyage}}
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="col-sm-6">
+                                <span>Ville de depart <i class="text-danger">*</i> </span>
+                                <div class="form-group">
+                                    {{form.villeDepart}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>Ville de destination <i class="text-danger">*</i> :</span>
+                                <div class="form-group">
+                                    {{form.villeArrivee}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>Ville d'éscale : </span>
+                                <div class="form-group">
+                                    {{form.villeEscale}}
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="col-sm-6">
+                                <span>Date de depart <i class="text-danger">*</i> : </span>
+                                <div class="form-group">
+                                    {{form.dateDepert}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>Date d'arrivée <i class="text-danger">*</i> : </span>
+                                <div class="form-group">
+                                    {{form.dateArrivee}}
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="col-sm-6">
+                                <span>Nombre de siège disponible <i class="text-danger">*</i> :</span>
+                                <div class="form-group">
+                                    {{form.nombreSiege}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>Prix par siège <i class="text-danger">*</i> : </span>
+                                <div class="form-group">
+                                    {{form.prix}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>Quantité de bagages en KG :</span>
+                                <div class="form-group">
+                                    {{form.bagage}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Ajouter le voyage</button>
+                    </form>
+                </div>
+                {% endif %}
+
+                <!-- ======================= Ajouter un voyage maritime ===================== -->
+                {% if action == "ajout" and element == "maritime" %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="my-4">
+                            <div class="alert alert-info">
+                                <h4 class=""> Ajout d'un voyage maritime</h4>
+                            </div>
+                            {% if statut %}
+                            <div class="alert alert-success">
+                                <b>Action effectuer avec succès</b>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <span>Le nom de l'agence <i class="text-danger">*</i> </span>
+                                    <div class="form-group">
+                                        {{form.agencePrincipal}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>Code (Identifiant) du voyage <i class="text-danger">*</i> </span>
+                                    <div class="form-group">
+                                        {{form.codeVoyage}}
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="col-sm-6">
+                                    <span>Ville de depart <i class="text-danger">*</i> </span>
+                                    <div class="form-group">
+                                        {{form.villeDepart}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>Ville de destination <i class="text-danger">*</i> :</span>
+                                    <div class="form-group">
+                                        {{form.villeArrivee}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>Ville d'éscale : </span>
+                                    <div class="form-group">
+                                        {{form.villeEscale}}
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="col-sm-6">
+                                    <span>Date de depart <i class="text-danger">*</i> : </span>
+                                    <div class="form-group">
+                                        {{form.dateDepert}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>Date d'arrivée <i class="text-danger">*</i> : </span>
+                                    <div class="form-group">
+                                        {{form.dateArrivee}}
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="col-sm-6">
+                                    <span>Nombre de siège disponible <i class="text-danger">*</i> :</span>
+                                    <div class="form-group">
+                                        {{form.nombreSiege}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>Prix par siège <i class="text-danger">*</i> : </span>
+                                    <div class="form-group">
+                                        {{form.prix}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>Quantité de bagages en KG :</span>
+                                    <div class="form-group">
+                                        {{form.bagage}}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Ajouter le voyage</button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- ======================= Ajouter une ville ===================== -->
+                {% if action == "ajout" and element == "ville" %}
+                <div class="">
+                    <div class="alert alert-info">
+                        <h4 class=""> Ajout d'une ville</h4>
+                    </div>
+                    {% if statut %}
+                    <div class="alert alert-success">
+                        <b>Action effectuer avec succès</b>
+                    </div>
+                    {% endif %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            {{ form.nom }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.ile }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter la ville</button>
+                    </form>
+                </div>
+                {% endif %}
+
+                <!-- ================== Ajouter une ville ======================= -->
+
+                {% if action == "ajout" and element == "ile" %}
+                <div class="">
+                    <div class="alert alert-info">
+                        <h4 class=""> Ajout d'une île</h4>
+                    </div>
+                    {% if statut %}
+                    <div class="alert alert-success">
+                        <b>Action effectuer avec succès</b>
+                    </div>
+                    {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            {{form.as_p}}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Ajouter une île</button>
+                    </form>
+                </div>
+                {% endif %}
+
+                <!-- ======================== Afficher les voyages aériens ================================= -->
+
+                {% if action == "affiche" and element == "aerien" %}
+                <div class="">
+                    <h4 class="mt-3 mb-3 fadeOut">Liste des vols déjà prévus</h4>
+                    <div class="card text-left">
+                        <div class="card-header mb-3">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
+                                </div>
+                                <div class="col-md-4">
+                                    <a class="btn btn-primary w-100 text-white">Ajouter <i class="icon-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table border-top-0">
+                                <thead>
+                                    <tr>
+                                        <th>Identifiant</th>
+                                        <th>depart</th>
+                                        <th>destination</th>
+                                        <th>D. depart</th>
+                                        <th>Durée</th>
+                                        <th>Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inf in donnee %}
+                                    <tr>
+                                        <td> <a
+                                                href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
+                                        </td>
+                                        <td>{{ inf.villeDepart }}</td>
+                                        <td>{{ inf.villeArrivee }}</td>
+                                        <td>{{ inf.dateDepert }}</td>
+                                        <td>{{ duree }}</td>
+                                        <td>{{ inf.prix }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ----------------------- Pagination ------------------------ -->
+                        <div class="card-footer mb-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pagination pagination-1 mb-4">
+                                            {% if donnee.has_previous %}
+                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                            {% endif %}
+
+                                            <a href="" class="active">{{ donnee.number }}</a>
+
+                                            {% if donnee.has_next %}
+                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="current">
+                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-5 text-center">
+                        <h1 class="text-success">Elle sera bientôt disponible</h1>
+                    </div>
+                </div>
+                {% endif %}
+                <!-- ======================== Afficher les voyages maritime ================================= -->
+
+                {% if action == "affiche" and element == "maritime" %}
+                <div class="">
+                    <h4>Liste des voyages prévus pour votre agence</h4>
+                    <div class="card text-left">
+                        <div class="card-header mb-3">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
+                                </div>
+                                <div class="col-md-4">
+                                    <a class="btn btn-primary w-100 text-white">Ajouter <i class="icon-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table border-top-0">
+                                <thead>
+                                    <tr>
+                                        <th>Identifiant</th>
+                                        <th>Départ</th>
+                                        <th>destination</th>
+                                        <th>D. depart</th>
+                                        <th>Durée</th>
+                                        <th>Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inf in donnee %}
+                                    <tr>
+                                        <td>
+                                            <a
+                                                href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
+                                        </td>
+                                        <td>{{ inf.villeDepart }}</td>
+                                        <td>{{ inf.villeArrivee }}</td>
+                                        <td>{{ inf.dateDepert }}</td>
+                                        <td>{{ duree }}</td>
+                                        <td>{{ inf.prix }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ----------------------- pagination -----------------------  -->
+                        <div class="card-footer mb-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pagination pagination-1 mb-4">
+                                            {% if donnee.has_previous %}
+                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                            {% endif %}
+
+                                            <a href="" class="active">{{ donnee.number }}</a>
+
+                                            {% if donnee.has_next %}
+                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="current">
+                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- ======================== Afficher les voyages terrestre ================================= -->
+
+                {% if action == "affiche" and element == "terreste" %}
+                <div class="">
+                    <h4>Liste des voyages prévus pour votre agence</h4>
+                    <div class="card text-left">
+                        <div class="card-header mb-3">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="" class="btn btn-primary w-100 text-white">Ajouter <i
+                                            class="icon-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table border-top-0">
+                                <thead>
+                                    <tr>
+                                        <th>Identifiant</th>
+                                        <th>Départ</th>
+                                        <th>Destination</th>
+                                        <th>D. depart</th>
+                                        <th>Durée</th>
+                                        <th>Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inf in donnee %}
+                                    <tr>
+                                        <td>
+                                            <a
+                                                href="{% url 'infos:dashbord' 'modification' inf.codeVoyage %}">{{ inf.codeVoyage }}</a>
+                                        </td>
+                                        <td>{{ inf.villeDepart }}</td>
+                                        <td>{{ inf.villeArrivee }}</td>
+                                        <td>{{ inf.dateDepert }}</td>
+                                        <td>{{ duree }}</td>
+                                        <td>{{ inf.prix }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ----------------------- Pagination ----------------------- -->
+                        <div class="card-footer mb-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pagination pagination-1 mb-4">
+                                            {% if donnee.has_previous %}
+                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                            {% endif %}
+
+                                            <a href="" class="active">{{ donnee.number }}</a>
+
+                                            {% if donnee.has_next %}
+                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="current">
+                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <!-- ====================== Afficher les îles ======================= -->
+
+                {% if action == "affiche" and element == "ile" %}
+                <div class="">
+                    <div class="card text-left">
+                        <div class="card-header">
+                            <h4>Liste des îles disponible</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table border-top-0">
+                                <thead>
+                                    <tr>
+                                        <th>#id</th>
+                                        <th>Nome</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inf in donnee %}
+                                    <tr>
+                                        <td>{{ inf.id }}</td>
+                                        <td>{{ inf.nom }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <!-- ===================== Afficher les villes =========================== -->
+
+                {% if action == "affiche" and element == "ville" %}
+                <div class="">
+                    <div class="card text-left">
+                        <div class="card-header">
+                            <h4>Liste des villes disponible</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#id</th>
+                                        <th>Ville</th>
+                                        <th>Île</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inf in donnee %}
+                                    <tr>
+                                        <td>{{ inf.id }}</td>
+                                        <td>{{ inf.nom }}</td>
+                                        <td>{{ inf.ile }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ----------------------- Pagination ----------------------- -->
+                        <div class="card-footer mb-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pagination pagination-1 mb-4">
+                                            {% if donnee.has_previous %}
+                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                            {% endif %}
+
+                                            <a href="" class="active">{{ donnee.number }}</a>
+
+                                            {% if donnee.has_next %}
+                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="current">
+                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+
+
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="inner">
+
+                <!-- Search -->
+                <section>
+                    <div class="text-center">
+                        <img class="img-fluid h-50 w-75 rounded" src="{% static "images/zaenma.jpg" %}" alt="">
+                    </div>
+                    <h4 class="text-center mt-4 text-secondary">Saindou Salim</h4>
+                </section>
+
+                <!-- Menu -->
+                <nav id="menu">
+                    <!-- <header class="major">
+                        <h2>Menu</h2>
+                    </header> -->
+                    <ul>
+                        <!-- 
+                            <li><a href="" class="">Ajourd'hui</a> <br></li>
+                            <li><a href="">Cette semaine</a></li>
+                            <li><a href="">Ce mois-ci</a></li>
+                            <li><a href="">Cette année</a></li>
+                         -->
+                        <li>
+                            <span class="opener">Les Achats</span>
+                            <ul>
+                                <li>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <a href="" class="card-text">Ajourd'hui</a> <br>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div
+                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
+                                        <a href="" class="card-text">Cette semaine</a> <br>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="" class="card-text">Ce mois</a> <br>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div
+                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2 border-bottom-0">
+                                        <a href="" class="card-text">Cette année</a> <br>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li><a href="#">Etiam Dolore</a></li>
+                        <li><a href="#">Adipiscing</a></li> -->
+                        <li>
+                            <span class="opener">Les messages</span>
+                            <ul>
+                                <li><a href="" class="">Nos répondus</a></li>
+                                <li><a href="" class="">Ajourd'hui</a></li>
+                                <li><a href="">Cette semaine</a></li>
+                                <li><a href="">Ce mois-ci</a></li>
+                                <li><a href="">Cette année</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Destinations | Départs</span>
+                            <ul>
+                                <li><a href="" class="">îles</a></li>
+                                <li>
+                                    <div
+                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
+                                        <a href="{% url 'infos:dashbord' 'affiche' 'ville' %}"
+                                            class="card-text">Ville</a>
+                                        <a href="{% url 'infos:dashbord' 'ajout' 'ville' %}" class="text-secondary">
+                                            Ajouter <i class="icon-plus"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Voyages</span>
+                            <ul>
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="{% url 'infos:dashbord' 'affiche' 'maritime' %}"
+                                            class="card-text">Voyages
+                                            maritime</a>
+                                        <a href="{% url 'infos:dashbord' 'ajout' 'maritime' %}" class="text-secondary">
+                                            Ajouter
+                                            <i class="icon-plus"></i></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div
+                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2 border-bottom-0">
+                                        <a href="{% url 'infos:dashbord' 'affiche' 'aerien' %}"
+                                            class="card-text">Voyages
+                                            aérien</a>
+                                        <a href="{% url 'infos:dashbord' 'ajout' 'aerien' %}" class="text-secondary">
+                                            Ajouter <i class="icon-plus"></i></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div
+                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
+                                        <a href="{% url 'infos:dashbord' 'affiche' 'terreste' %}"
+                                            class="card-text">Voyages
+                                            terrestre</a>
+                                        <a href="{% url 'infos:dashbord' 'ajout' 'terreste' %}" class="text-secondary">
+                                            Ajouter
+                                            <i class="icon-plus"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Maximus Erat</a></li>
+                        <li><a href="#">Sapien Mauris</a></li>
+                        <li><a href="#">Amet Lacinia</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Section -->
+                <section>
+                    <header class="major">
+                        <h2>Ante interdum</h2>
+                    </header>
+                    <div class="mini-posts">
+                        <article>
+                            <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+                        </article>
+                    </div>
+                    <ul class="actions">
+                        <li><a href="#" class="button">More</a></li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+    {% endblock body %}
+
+    {% block script %}
+
+    <script src="{% static 'js/js-perso/jquery.min.js' %}"></script>
+    <script src="{% static 'js/js-perso/browser.min.js' %}"></script>
+    <script src="{% static 'js/js-perso/breakpoints.min.js' %}"></script>
+    <script src="{% static 'js/js-perso/main.js' %}"></script>
+
+    {% endblock script %}

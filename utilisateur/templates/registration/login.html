@@ -1,0 +1,107 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block barrenave %}
+
+<div class="px-0 bg-primary navbar-wrap mb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar px-0 navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="{% url 'infos:dashbord' %}">Page de Connexion</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
+                        aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="oi oi-menu"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarsExample03">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item d-flex">
+                                <!-- <a class="nav-link d-flex align-items-center" href="#">Paramettres</a> -->
+                            </li>
+                            <li class="nav-item d-flex">
+                                <a class="nav-link d-flex" href=""><samp class=""></samp>facebook</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock barrenave %}
+
+
+
+{% block header %}
+
+
+{% endblock header %}
+
+
+
+
+
+
+{% block body %}
+
+<section class="container my-5">
+
+
+
+    <div class="">
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-lg-6 col-12">
+                <b class="text-primary">Comores Transport</b>
+                <p>Booster vos sociétés de trasports et les rendre accesible pour tout les usagers !</p>
+                <img src="{% static "images/login.svg" %}" alt="Round Image" class="rounded img-fluid image-2 w-75 h-75">
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="">Conectez vous</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if form.errors %}
+                        <p class="text-danger">Désolé ! les Identifiants ne sont pas corrects, veillez réessayer plus tard !</p>
+                        {% endif %}
+                    
+                        {% if next %}
+                            {% if user.is_authenticated %}
+                                <p>Your account doesn't have access to this page. To proceed,
+                                please login with an account that has access.</p>
+                            {% else %}
+                                <p>Please login to see this page.</p>
+                            {% endif %}
+                        {% endif %}
+        
+                        <form method="post" action="">
+                            {% csrf_token %}
+
+                            <span>{{ form.username.label_tag }}</span> <br>
+                            <span class="">{{ form.username }}</span><br>
+                            <span>{{ form.password.label_tag }}</span><br>
+                            <span class="">{{ form.password }}</span>
+                          
+                            <input type="submit" value="login" />
+                            <input type="hidden" name="next" value="{{ next }}" />
+                        </form>
+                        {% if form.errors %}
+                        <p><a href="{% url 'infos:password' %}">Mot de passe oublié ?</a></p>
+                        {% endif %}
+                        
+                    </div>
+                    <div class="card-footer">
+                        <a href="" class="btn btn-secondary">Contactez nous</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</section>
+{% endblock body %}

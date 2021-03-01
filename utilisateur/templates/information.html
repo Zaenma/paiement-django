@@ -1,0 +1,367 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}C-Transports | Informations personnelles{% endblock %}
+
+
+{% block header %}
+<section class="">
+    <div class="container">
+        <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+            <div class=" text w-100 page-accueil">
+                <h4 class="text-primary page-accueil">Remplissez l'un des formulaire suivant pour continuer</h4>
+                <div id="" class="no-uicustom barre mb-3"></div>
+
+                <div class="alert alert-warning pb-1">
+                    <div class="d-flex">
+                        <h5 class="text-white py-3">Si vous disposez d'un code d'abonnement, merci de remplir le
+                            formulaire correspondant !</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock header %}
+
+{% block body %}
+
+<section class="container my-5" id="formulaire-infos-personne">
+
+
+    <section>
+        <div class="modal-header tabulation-2">
+            <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 bg-info">
+                <li class="nav-item px-lg-2">
+                    <a class="nav-link active py-3 px-0" data-toggle="tab" href="#infos-personnelles"><span
+                            class="ion-ios-airplae">Informations personnelles</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-3 h-100" data-toggle="tab" href="#formulaire-abonnement"><span
+                            class="ion-ios-bu"></span>
+                        Je dispose d'un code d'abonnement</a>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-body">
+
+            <div class="tab-content rounded mt-2 text-white">
+                <div class="tab-pane fade" id="formulaire-abonnement">
+                    {% if erreur %}
+                    <div class="alert alert-warning pb-1">
+                        <div class="d-flex">
+                            <p>Merci de bien vérifier votre code d'abonnement si vous en disposez ! </p>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                        </button>
+    
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Informations du passager</h5>
+                                </div>
+                                <form action="" method="GET">
+                                    <div class="card-body">
+                                        {% csrf_token %}
+
+                                        <h4>Insérez le code d'abonnement</h4>
+                                        <div class="form-group">
+                                            {{ abf.codeAbonnement }}
+                                        </div>
+                                        <span>Nombre de place </span>
+                                        <div class="form-group">
+                                            {{ abf.nombrePlace }}
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button type="" class="btn btn-primary" onclick="afficher();">Valider
+                                            mes Informations</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">Informations du vol choisi |
+                                    {{ infvoyage.agencePrincipal }}</div>
+                                <div class="card-body">
+                                    <b class="card-title pb-1">Code du vol : {{ infvoyage.codeVoyage }}</b> <br>
+                                    <div id="" class="no-uicustom mb-3"></div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Départ le</th>
+                                                <th>Arrivé le</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{infvoyage.dateDepert|date}} à <b>{{infvoyage.dateDepert|time}}
+                                                </td>
+                                                <td>{{infvoyage.dateArrivee|date}} à <b>{{infvoyage.dateArrivee|time}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div id="" class="no-uicustom mb-3"></div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Départ à</th>
+                                                <th>Destination</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{infvoyage.villeDepart}}</td>
+                                                <td>{{infvoyage.villeArrivee}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="alert alert-warning pb-1">
+                                        <div class="d-flex">
+                                            <h5 class="text-white">Aller simple</h5>
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <h4> Prix HTT : <span class="text-primary">{{ infvoyage.prix}} KMF</span> </h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- formulaire d'enregistrement des informations personnelles -->
+                <div class="tab-pane active" id="infos-personnelles">
+                    <!-- <h2 class="text-white">Avion</h2> -->
+                    {% if erreur %}
+                    <div class="alert alert-warning pb-1">
+                        <div class="d-flex">
+                            <p>Merci de corrier les erreurs suivantes avant d'envoyer le formulaire</p>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                        </button>
+    
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Informations du passager</h5>
+                                </div>
+                                <form action="" method="POST">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            {% csrf_token %}
+
+                                            <div class="col-md-6">
+                                                <span>Nom :</span>
+                                                <div class="form-group">
+                                                    {{ form.nom }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Prénom : </span>
+                                                <div class="form-group">
+                                                    {{form.prenom}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Date de naissance :</span>
+                                                <div class="form-group">
+                                                    {{form.dateNaissance}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Adesse e-mail : </span>
+                                                <div class="form-group">
+                                                    {{ form.email }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Téléphone principal :</span>
+                                                <div class="from-group">
+                                                    {{ form.telephone }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Téléphone secondaire : </span>
+                                                <div class="form-group">
+                                                    {{ form.telephoneSupplementaire }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-header">
+                                        <h5>Piece d'identité</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-warning pb-1">
+                                            <div class="d-flex">
+                                                <p class="">Ces champs sont obligatoires si vous ne disposez qu'une
+                                                    pièce d'identité
+                                                    étrangère</p>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                            </button>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span>Pays d'origine : </span>
+                                                <div class="form-group">
+                                                    {{ form.telephoneSupplementaire }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Type de pièce : </span>
+                                                <div class="form-group">
+                                                    {{ form.telephoneSupplementaire }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Numéro de la pièce : </span>
+                                                <div class="form-group">
+                                                    {{ form.telephoneSupplementaire }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>Téléphone secondaire : </span>
+                                                <div class="form-group">
+                                                    {{ form.telephoneSupplementaire }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-header">
+                                        <h5> Informations du voyage </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <span>Nombre de places à réserver (possible de reserver plus d'un sière
+                                            uniquement pour les
+                                            transports terrestre)</span>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="from-group">
+                                                    {{ form.nombreSiegeReserve }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-header">
+                                        <h5> Conditions d'utilisation </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex">
+                                            <div class="from-group">
+                                                {{ form.condition }}
+                                            </div>
+                                            <span class="ml-3">Condition d'utilisation</span>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="form-group">
+                                                {{ form.recevoirAlert }}
+                                            </div>
+                                            <span class="ml-3">Obtenez tous les derniers détails sur votre vol ainsi que
+                                                des
+                                                renseignements des trajets envoyés directement sur votre téléphone
+                                                portable !</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button type="" class="btn btn-primary px-3" onclick="afficher();">Valider mes Informations</button>
+                                    </div>
+                                </form>
+                            </div>
+                            {% if erf %}
+                            <div class="alert alert-danger">
+                                {% for er in erf %}
+                                {{ er }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">Informations du vol choisi |
+                                    {{ infvoyage.agencePrincipal }}</div>
+                                <div class="card-body">
+                                    <b class="card-title pb-1">Code du vol : {{ infvoyage.codeVoyage }}</b> <br>
+                                    <div id="" class="no-uicustom mb-3"></div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Départ le</th>
+                                                <th>Arrivé le</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{infvoyage.dateDepert|date}} à <b>{{infvoyage.dateDepert|time}}
+                                                </td>
+                                                <td>{{infvoyage.dateArrivee|date}} à <b>{{infvoyage.dateArrivee|time}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div id="" class="no-uicustom mb-3"></div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Départ à</th>
+                                                <th>Destination</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{infvoyage.villeDepart}}</td>
+                                                <td>{{infvoyage.villeArrivee}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="alert alert-warning pb-1">
+                                        <div class="d-flex">
+                                            <h5 class="text-white">Aller simple</h5>
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <h4> Prix HTT : <span class="text-primary">{{ infvoyage.prix}} KMF</span> </h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+</section>
+
+{% endblock body %}

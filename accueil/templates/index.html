@@ -1,0 +1,718 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}C-Transports | accueil{% endblock %}
+
+{% block barrenave %}
+
+<div class="px-0 bg-primary navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <nav class="navbar px-0 navbar-expand-lg navbar-light">
+               <a class="navbar-brand" href="{% url 'accueil:index-accueil' %}">C-Transports</a>
+
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                  aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="oi oi-menu"></span>
+               </button>
+
+               <div class="collapse navbar-collapse" id="ftco-nav">
+                  <ul class="navbar-nav ml-auto">
+                     <li class="nav-item mr-2 mt-2">
+                        <a href="" type="button" class="btn btn-info btn-formulaire-achat" data-toggle="modal"
+                           data-target="#tableau-bord-departs">Départs <i class="ion-ios-arrow-round-up"></i></a>
+                     </li>
+                     <li class="nav-item mt-2">
+                        <a href="" type="bytton" class="btn btn-info btn-formulaire-achat" data-toggle="modal"
+                           data-target="#tableau-bord-arrivees">Arrivées <i class="ion-ios-arrow-round-down"></i></a>
+                     </li>
+                     <li class="dropdown nav-item d-flex">
+                        <a href="#" class="dropdown-toggle nav-link d-flex align-items-center icon"
+                           data-toggle="dropdown">
+                           <b class="lien-partenaire">Nos partenaires</b>
+                           <b class="caret"></b>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                           {% for agence in agence %}
+                           <a href="{% url 'agence:agence' agence.id %}" class="dropdown-item">{{ agence.nom }}</a>
+                           {% endfor %}
+                           <div class="dropdown-divider">
+                           </div>
+                           <a href="#" class="dropdown-item">Devenir partenaire</a>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </nav>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock barrenave %}
+
+
+{% block header %}
+
+<!-- BOITE MODAL DE FORMULAIRE DES BUS -->
+<section>
+   <div class="modal fade" id="bus" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content dialog-modale-form">
+            <div class="modal-header">
+               <b class="modal-title" id="exampleModalLongTitle">Ticket de bus </b>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form action="{% url 'voyages:voyages' %}" method="GET">
+               <div class="modal-body">
+                  <div class="alert alert-info pb-1">
+                     <div class="d-flex">
+                        <p class="">Merci de bien remplire le formulaire</p>
+                     </div>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                     </button>
+
+                  </div>
+                  {% csrf_token %}
+
+                  <div class="input-group mb-3">
+                     {{av.typev}}
+                  </div>
+
+                  <span>L'île où vous vous trouvez : </span>
+                  <div class="input-group mb-3">
+                     {{bu.ile}}
+                  </div>
+
+                  <div class="input-group mb-3">
+                     <input type="hidden" name="" value="BU">
+                  </div>
+
+                  <span>Ville de départ : </span>
+                  <div class="input-group mb-3">
+                     {{bu.ville_depart}}
+                  </div>
+
+                  <span>Ville de destination : </span>
+                  <div class="input-group mb-3">
+                     {{bu.ville_destination}}
+                  </div>
+
+                  <span>Date de depart : </span>
+                  <div class="input-group mb-3">
+                     {{bu.date_depart}}
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-info">Recherche mon ticket de transport</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+<!-- Modal de formulaire de recherche de billet d'avion  -->
+<section>
+   <div class="modal fade" id="avion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content dialog-modale-form">
+            <div class="modal-header">
+               <b class="modal-title" id="exampleModalLongTitle">Ticket d'Avion </b>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form action="{% url 'voyages:voyages' %}" method="GET">
+               <div class="modal-body">
+                  <div class="alert alert-info pb-1">
+                     <div class="container-fluid">
+                        <div class="d-flex">
+                           <p class="">Merci de bien remplire le formulaire</p>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                        </button>
+                     </div>
+                  </div>
+                  {% csrf_token %}
+
+                  <div class="input-group mb-3">
+                     {{av.typev}}
+                  </div>
+
+                  <span>île de depart : </span>
+                  <div class="input-group mb-3">
+                     {{av.ville_depart}}
+                  </div>
+
+                  <span>île de destination </span>
+                  <div class="input-group mb-3">
+                     {{av.ville_destination}}
+                  </div>
+
+                  <span>Date de depart </span>
+                  <div class="input-group mb-3">
+                     {{av.date_depart}}
+                  </div>
+
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-info">Recherche mon biellet</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Modal de formulaire de recherche de billet de bateau  -->
+<section>
+   <div class="modal fade" id="bateau" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content dialog-modale-form">
+            <div class="modal-header">
+               <b class="modal-title" id="exampleModalLongTitle">Ticket de Bateau </b>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form action="{% url 'voyages:voyages' %}" method="GET">
+               <div class="modal-body">
+                  <div class="alert alert-info pb-1">
+                     <div class="container-fluid">
+                        <div class="d-flex">
+                           <p class="">Merci de bien remplire le formulaire</p>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                        </button>
+                     </div>
+                  </div>
+                  {% csrf_token %}
+                  <div class="input-group mb-3">
+                     {{ba.typev}}
+                  </div>
+                  <span>Ville de depart : </span>
+                  <div class="input-group mb-3">
+                     {{ba.ville_depart}}
+                  </div>
+
+                  <span>Ville de destination : </span>
+                  <div class="input-group mb-3">
+                     {{ba.ville_destination}}
+                  </div>
+
+                  <span>Date de depart : </span>
+                  <div class="input-group mb-3">
+                     {{ba.date_depart}}
+                  </div>
+
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                     <button type="submit" class="btn btn-info">Recherche mon billet</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Tableau de bord des arrivées -->
+<section>
+   <div class="modal fade" id="tableau-bord-arrivees" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content dialog-modale-form bg-dark">
+            <div class="modal-header tabulation-2">
+               <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 text-white">
+                  <li class="nav-item">
+                     <a class="nav-link py-3" data-toggle="tab" href="#bateau-bord"><span
+                           class="ion-ios-boat mr-2"></span>Bateau</a>
+                  </li>
+                  <li class="nav-item px-lg-2">
+                     <a class="nav-link active py-3" data-toggle="tab" href="#avion-bord"><span
+                           class="ion-ios-airplane mr-2"></span>Avion</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link py-3" data-toggle="tab" href="#bus-bord"><span class="ion-ios-bus mr-2"></span>
+                        Bus</a>
+                  </li>
+               </ul>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+
+               <div class="tab-content rounded mt-2 text-white">
+                  <div class="tab-pane container p-4 fade" id="bateau-bord">
+                     <!-- <h2 class="text-white">Bateau</h2> -->
+
+                     <table class="table">
+                        <thead>
+                           <tr class="border-top-0">
+                              <th>Departs</th>
+                              <th>Destinations</th>
+                              <th>Heures d'arrivé</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for heurb in heurbateau %}
+                           <tr>
+                              <td class="text-white">{{ heurb.villeDepart }}</td>
+                              <td class="text-white">{{ heurb.villeArrivee }}</td>
+                              <td><b class="text-warning">{{ heurb.dateArrivee|date }} à
+                                    {{ heurb.dateArrivee|time }}</b></td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="tab-pane container active" id="avion-bord">
+                     <!-- <h2 class="text-white">Avion</h2> -->
+                     <table class="table">
+                        <thead>
+                           <h5 class="text-bolder text-white mt-2">Tableau des arrivées</h5>
+                           <tr class="text-primary">
+                              <th class="border-top-0">Departs</th>
+                              <th class="border-top-0">Destinations</th>
+                              <th class="border-top-0">Heures d'arrivées</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for heura in heuravion %}
+                           <tr>
+                              <td class="text-white">{{ heura.villeDepart }}</td>
+                              <td class="text-white">{{ heura.villeArrivee }}</td>
+                              <td><b class="text-warning">{{ heura.dateArrivee|date }} à
+                                    {{ heura.dateArrivee|time }}</b></td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+
+
+                  </div>
+                  <div class="tab-pane container p-4 fade" id="bus-bord">
+                     <!-- <h2 class="text-white">Bus</h2> -->
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th>Departs</th>
+                              <th>Destinations</th>
+                              <th>Heures d'arrivé</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for heurbu in heurbus %}
+                           <tr>
+                              <td class="text-white">{{ heurbu.villeDepart }}</td>
+                              <td class="text-white">{{ heurbu.villeArrivee }}</td>
+                              <td><b class="text-warning">{{ heurbu.dateArrivee|date }} à
+                                    {{ heurbu.dateArrivee|time }}</b></td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Tableau de bord des départs -->
+<section>
+   <div class="modal fade" id="tableau-bord-departs" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content dialog-modale-form bg-dark">
+            <div class="modal-header tabulation-2">
+               <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 text-white">
+                  <li class="nav-item">
+                     <a class="nav-link py-3" data-toggle="tab" href="#bateau-bord_"><span
+                           class="ion-ios-boat mr-2"></span>Bateau</a>
+                  </li>
+                  <li class="nav-item px-lg-2">
+                     <a class="nav-link active py-3" data-toggle="tab" href="#avion-bord_"><span
+                           class="ion-ios-airplane mr-2"></span>Avion</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link py-3" data-toggle="tab" href="#bus-bord_"><span class="ion-ios-bus mr-2"></span>
+                        Bus</a>
+                  </li>
+               </ul>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+
+               <div class="tab-content rounded mt-2 text-white">
+                  <div class="tab-pane container p-4 fade" id="bateau-bord_">
+                     <!-- <h2 class="text-white">Bateau</h2> -->
+
+                     <table class="table">
+                        <thead>
+                           <h5 class="text-bolder text-white mt-2">Tableau des départs des bateuax</h5>
+                           <tr class="border-top-0">
+                              <th>Departs</th>
+                              <th>Destinations</th>
+                              <th>Heures d'arrivé</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for heurb in heurbateau %}
+                           <tr>
+                              <td class="text-white">{{ heurb.villeDepart }}</td>
+                              <td class="text-white">{{ heurb.villeArrivee }}</td>
+                              <td><b class="text-warning">{{ heurb.dateDepert|date }} à
+                                    {{ heurb.dateDepert|time }}</b></td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="tab-pane container active" id="avion-bord_">
+                     <!-- <h2 class="text-white">Avion</h2> -->
+                     <table class="table">
+                        <thead>
+                           <h5 class="text-bolder text-white mt-2">Tableau des départs des vols</h5>
+                           <tr class="text-primary">
+                              <th class="border-top-0">Departs</th>
+                              <th class="border-top-0">Destinations</th>
+                              <th class="border-top-0">Heures d'arrivées</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for heura in heuravion %}
+                           <tr>
+                              <td class="text-white">{{ heura.villeDepart }}</td>
+                              <td class="text-white">{{ heura.villeArrivee }}</td>
+                              <td><b class="text-warning">{{ heura.dateDepert|date }} à
+                                    {{ heura.dateDepert|time }}</b></td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+
+
+                  </div>
+                  <div class="tab-pane container p-4 fade" id="bus-bord_">
+                     <!-- <h2 class="text-white">Bus</h2> -->
+                     <table class="table">
+                        <thead>
+                           <h5 class="text-bolder text-white mt-2">Tableau des départs des bus à la gars principale</h5>
+                           <tr>
+                              <th>Departs</th>
+                              <th>Destinations</th>
+                              <th>Heures d'arrivé</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for heurbu in heurbus %}
+                           <tr>
+                              <td class="text-white">{{ heurbu.villeDepart }}</td>
+                              <td class="text-white">{{ heurbu.villeArrivee }}</td>
+                              <td><b class="text-warning">{{ heurbu.dateDepert|date }} à
+                                    {{ heurbu.dateDepert|time }}</b></td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="img bg-image" style="height: 600px;">
+   <div class="container">
+      <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+         <div class=" text w-100 page-accueil">
+            <h2 class="text-primary titre-accueil animated fadeInLeft">Accès rapide aux tickets de transports</h2>
+            <div id="" class="no-uicustom barre mb-3 animated fadeInUp"></div>
+            <div class="row">
+               <div class="col-md-12 col-sm-12 col-lg-9 col-12 justify-left">
+                  <div class="mb-5 description-accueil">
+                     <p class="mb-4 animated fadeInLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                        Aut quae omnis nulla aperiam aspernatur voluptas explicabo nesciunt perspiciatis
+                        expedita voluptatibus?</p>
+                  </div>
+                  <h4 class="text-primary text-choix-accueil animated fadeInUp">Choisir votre moyen de transport souhaité</h4>
+                  <div id="" class="no-uicustom barre mb-3 animated fadeInUp"></div>
+                  <div class="row">
+                     <div class="col-md-4 col-sm-4 col-lg-4 col-4">
+                        <a href="" type="button" class="btn btn-warning py-3 btn-formulaire-achat" data-toggle="modal"
+                        data-target="#bus">Bus</a>
+                     </div>
+                     <div class="col-md-4 col-sm-4 col-lg-4 col-4">
+                        <a href="" type="bytton" class="btn btn-primary py-3 btn-formulaire-achat" data-toggle="modal"
+                        data-target="#avion">Avion </a>
+                     </div>
+                     <div class="col-md-4 col-sm-4 col-lg-4 col-4">
+                        <a href="" type="button" class="btn btn-info py-3 btn-formulaire-achat" data-toggle="modal"
+                        data-target="#bateau">Bateau</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+</section>
+
+
+
+{% endblock %}
+<!-- END section header -->
+
+{% block body %}
+
+<section class="container mt-5">
+   <div class="row">
+      <div class="col-md-12 heading-title mt-5">
+         <h1>C-Transports</h1>
+         <div id="" class="no-uicustom barre mb-5"></div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+            perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+            voluptatum nobis quos quibusdam mollitia repellat!
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+            perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+            voluptatum nobis quos quibusdam mollitia repellat!
+         </p>
+      </div>
+      <div class="col-12 col-sm-5 col-md-5 col-lg-65 col-xl-5">
+         <img src="{% static "images/1.svg" %}" alt="Round Image" class="rounded img-fluid image-2 w-75 h-75">
+      </div>
+   </div>
+</section>
+
+<section class="container mt-5">
+   <div class="row">
+      <div class="col-md-12 heading-title">
+         <h1>Votre de voyage sous forme de QR code</h1>
+         <div id="" class="no-uicustom barre mb-5"></div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+            perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+            voluptatum nobis quos quibusdam mollitia repellat!
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+            perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+            voluptatum nobis quos quibusdam mollitia repellat!
+         </p>
+      </div>
+      <div class="col-12 col-sm-5 col-md-5 col-lg-65 col-xl-5">
+         <img src="{% static "images/qr-code.png" %}" alt="Round Image" class="rounded img-fluid image-2 w-75 h-75">
+      </div>
+   </div>
+</section>
+
+<!-- Différents moyens de trasports -->
+<section class="container mt-5">
+   <div class="row">
+      <div class="col-md-12 heading-title">
+         <h1>Transports terrestre</h1>
+         <div id="" class="no-uicustom barre mb-5"></div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+            perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+            voluptatum nobis quos quibusdam mollitia repellat!
+         </p>
+         <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime corporis,
+            perferendis laboriosam non dolorum vitae sit quod quas ducimus, ea quidem obcaecati harum,
+            voluptatum nobis quos quibusdam mollitia repellat!
+         </p>
+      </div>
+      <div class="col-12 col-sm-5 col-md-5 col-lg-65 col-xl-5">
+         <img src="{% static "images/bu.svg" %}" alt="Round Image" class="rounded w-75 h-75 img-fluid image-2">
+      </div>
+   </div>
+</section>
+
+<!-- Nos services -->
+<section class="mt-5 mb-5 container">
+   <div class="row">
+      <div class="col-md-12 heading-title">
+         <h1>Nos différents services</h1>
+         <div id="" class="no-uicustom barre mb-5"></div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 mb-2 col-lg-4 col-xl-4">
+         <div class="card text-left">
+            <div class="pt-5">
+               <img class="card-img-top" src="{% static "images/stb.svg" %}" alt="">
+            </div>
+            <div class="card-body">
+               <h4 class="card-title">Transport terestre</h4>
+               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+                  enim dolorum vero. Doloribus, aliquam iure id fugiat dolorum beatae recusandae.</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-12 col-sm-6 mb-2 w-75 col-md-4 col-lg-4 col-xl-4">
+         <div class="card text-left">
+            <div class="pt-2">
+               <img class="card-img-top" src="{% static "images/av.svg" %}" alt="">
+            </div>
+            <div class="card-body">
+               <h4 class="card-title">Transport aérien</h4>
+               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+                  animi assumenda soluta atque debitis adipisci numquam nemo voluptatibus optio qui!</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-12 col-sm-6 mb-2 col-md-4 col-lg-4 col-xl-4">
+         <div class="card text-left">
+            <img class="card-img-top" src="{% static "images/ba.svg" %}" alt="">
+            <div class="card-body">
+               <h4 class="card-title">Trasport maritime</h4>
+               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+                  omnis modi asperiores! Soluta eius et quia, esse animi laudantium voluptate.</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- Les modes de paiement -->
+<section class="mt-5 mb-5 container">
+   <div class="description-paiement">
+      <div class="col-md-12 heading-title">
+         <h1>Les modes de paiement prise en charge</h1>
+         <div id="" class="no-uicustom barre mb-5"></div>
+      </div>
+      <div class="paragraphe-description-paiement text-center mb-5">
+         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde, dolorum!</p>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12 col-sm-4 col-md-4 mb-2 col-lg-4 col-xl-4">
+         <div class="card text-left">
+            <div class="pt-5">
+               <img class="card-img-top w-75" src="{% static "images/mp.svg" %}" alt="">
+            </div>
+            <div class="card-body">
+               <h4 class="card-title">Paiement mobile</h4>
+               <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+                  voluptatibus.</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-12 col-sm-4 mb-2 w-75 col-md-4 col-lg-4 col-xl-4">
+         <div class="card text-left">
+            <img class="card-img-top text-center" src="{% static "images/cart-credit.svg" %}" alt="">
+            <div class="card-body">
+               <h4 class="card-title">Paiement PyPal</h4>
+               <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+                  voluptatibus.</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-12 col-sm-4 mb-4 col-md-4 col-lg-4 col-xl-4">
+         <div class="card text-left">
+            <div class="pt-5">
+               <img class="card-img-top" src="{% static "images/carte-credit.svg" %}" alt="">
+            </div>
+            <div class="card-body">
+               <h4 class="card-title">Paiement par cart</h4>
+               <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+                  voluptatibus. </p>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- formulaire de contacte -->
+<section class="mt-5 container">
+   <div class="col-md-12 heading-title">
+      <h1>Contacter l'agence principal</h1>
+      <div id="" class="no-uicustom barre mb-5"></div>
+   </div>
+   <div class="row">
+      <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 ">
+         <form action="" method="post" class="formulaire-contact">
+            <div class="form-group mb-3">
+               <input type="text" class="form-control" placeholder=" " required>
+               <label for="">Votre nom complet (nom et prénom): </label>
+            </div>
+            <div class="form-group mb-3">
+               <input type="text" class="form-control" placeholder=" " required>
+               <label for="">Adresse électronique</label>
+            </div>
+            <div class="form-group mb-3">
+               <input type="text" class="form-control" placeholder=" " required>
+               <label for="">Numéro de téléphone actif</label>
+            </div>
+            <div class="form-group mb-3">
+               <input type="text" class="form-control" placeholder=" " required>
+               <label for="">Lieu de résidence</label>
+            </div>
+            <div class="form-group mb-3">
+               <input type="text" class="form-control" placeholder=" " required>
+               <label for="">Titre du message</label>
+            </div>
+            <div class="form-group">
+               <textarea name="" class="form-control" placeholder=" " id=""></textarea>
+               <label for="" class="label-form">Votre message bien détaillé</label>
+            </div>
+         </form>
+      </div>
+      <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+         <div class="col-md-12 heading-title">
+            <h4>Notre siège principal</h4>
+            <div id="" class="no-uicustom barre mb-5"></div>
+         </div>
+         <address class="adresse">
+            <i class="ion-ios-search"></i> Bandracouni Anjouan (Comores) <br>
+            Téléphoen : (+269) 3000000 | (+269) 4000000 <br>
+            E-mail : missafara-rahissi@rahissi.com
+         </address>
+      </div>
+   </div>
+</section>
+
+
+
+
+{% endblock body %}

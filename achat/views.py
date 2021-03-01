@@ -1,0 +1,88 @@
+from django.shortcuts import render
+from django.db.models import Q
+import datetime
+# Create your views here.
+from utilisateur.models import Utilisateur
+from voyages.models import VoyagesParAvion, VoyagesParBateau, VoyagesParBu, Ile, Ville
+
+#import qrcode
+from datetime import date
+from django.shortcuts import render
+from qr_code.qrcode.utils import ContactDetail, WifiConfig, Coordinates, QRCodeOptions
+
+
+def index(request, pkv=None, pku=None, tag=None, date=None):
+
+    date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
+    utilisateur = Utilisateur.objects.get(Q(email__exact=pku))
+
+    if tag == 'AV':
+        voyage = VoyagesParAvion.objects.get(pk=pkv)
+
+        heur = voyage.dateArrivee - voyage.dateDepert
+
+        prix = utilisateur.nombreSiegeReserve * voyage.prix
+
+    if tag == 'BA':
+        voyage = VoyagesParBateau.objects.get(pk=pkv)
+
+        heur = voyage.dateArrivee - voyage.dateDepert
+
+        prix = utilisateur.nombreSiegeReserve * voyage.prix
+
+    if tag == 'BU':
+        voyage = VoyagesParBu.objects.get(pk=pkv)
+
+        heur = voyage.dateArrivee - voyage.dateDepert
+
+        prix = utilisateur.nombreSiegeReserve * voyage.prix
+
+    # donnees = {'user': utilisateur,
+    #            'voyage': voyage, 'heur': heur, 'prix': prix}
+
+    # utilisateur = Utilisateur.objects.latest('dateEngregistrement')
+
+    datedepart = str(voyage.dateDepert)
+    prix = str(voyage.prix)
+    heur = str(heur)
+
+    villedepart = Ile.objects.get(nom=voyage.villeDepart)
+
+    villedestination = Ile.objects.get(nom=voyage.villeArrivee)
+
+    villedepart = villedepart.nom
+
+    villedestination = villedestination.nom
+
+    contact_detail = ContactDetail(
+        first_name=utilisateur.nom,
+        last_name=utilisateur.prenom,
+
+        first_name_reading=prix,
+
+        datedepart=datedepart,
+
+        villedestination=villedestination,
+
+        # last_name_reading=villedepart,
+
+        tel=utilisateur.telephone,
+        email=utilisateur.email,
+        url=villedepart,
+        # birthday=date(year=1985, month=10, day=2),
+        address=voyage.codeVoyage,
+        memo=heur,
+        org=voyage.agencePrincipal,
+    )
+
+    context = dict(
+        contact_detail=contact_detail,
+        # wifi_config=wifi_config,
+        # video_id='J9go2nj6b3M',
+        # google_maps_coordinates=google_maps_coordinates,
+        # geolocation_coordinates=geolocation_coordinates,
+        options_example=QRCodeOptions(
+            size='t', border=6, error_correction='L'),
+    )
+
+    return render(request, 'ticket.html', context=context)
