@@ -30,10 +30,13 @@ class Agence(models.Model):
 
     description = models.TextField(verbose_name="Description de l'agence")
 
-    responsable = models.CharField(max_length=50,)
+    responsable = models.CharField(max_length=50, verbose_name="Responsable de l'agence")
 
     dateAjout = models.DateTimeField(
         auto_now_add=True, verbose_name="Date d'integration")
+    
+    mdp =  models.CharField(max_length=20, blank=True, null=True, verbose_name="Mot de passe")
+
     dateModifiee = models.DateTimeField(
         auto_now=True, verbose_name="Date de modification")
 

@@ -22,33 +22,27 @@
                                     <div class="card-header bg-primary">
                                         <h4 class="text-white">Conectez vous</h4>
                                     </div>
-                                    <form method="post" action="">
+                                    <form method="GET" action="">
                                         <div class="card-body">
-                                            {% if form.errors %}
-                                            <p class="text-danger">Désolé ! les Identifiants ne sont pas corrects,
-                                                veillez réessayer plus tard !</p>
-                                            {% endif %}
-
-                                            {% if next %}
-                                                {% if user.is_authenticated %}
-                                                    <p>Your account doesn't have access to this page. To proceed,
-                                                    please login with an account that has access.</p>
-                                                {% else %}
-                                                    <p>Please login to see this page.</p>
-                                                {% endif %}
-                                            {% endif %}
-
                                             {% csrf_token %}
                                             
-                                            <span>{{ form.username.label_tag }}</span> <br>
-                                            <span class="border-0 w-100">{{ form.username }}</span><br>
-                                            <span>{{ form.password.label_tag }}</span><br>
-                                            <span class="">{{ form.password }}</span>
-
-                                            {% if form.errors %}
+                                            <div class="form-group">
+                                                <span>Adresse email de l'agence</span>
+                                                {{formulaire.adresseEmail}}
+                                            </div>
+                                            <div class="form-group">
+                                                <span>Mot de passe</span>
+                                                {{ formulaire.mdp }}
+                                            </div>
+                                            {% if erreur == True %}
                                             <div class="d-flex justify-content-between">
                                                 <a href="{% url 'infos:password' %}">Mot de passe oublié ?</a>
                                                 <a href="">Demandez l'accès </a>
+                                            </div>
+                                            {% endif %}
+                                            {% if erreur == False %}
+                                            <div class="text-danger">
+                                                <p>Identifiant incorrects</p>
                                             </div>
                                             {% endif %}
 

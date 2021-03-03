@@ -42,7 +42,7 @@ def index(request, pkv=None, pku=None, tag=None, date=None):
 
     # utilisateur = Utilisateur.objects.latest('dateEngregistrement')
 
-    datedepart = str(voyage.dateDepert)
+    datedepart = voyage.dateDepert
     prix = str(voyage.prix)
     heur = str(heur)
 
@@ -58,18 +58,18 @@ def index(request, pkv=None, pku=None, tag=None, date=None):
         first_name=utilisateur.nom,
         last_name=utilisateur.prenom,
 
-        first_name_reading=prix,
+        first_name_reading=prix + ' KMF',
 
-        datedepart=datedepart,
+        # datedepart=datedepart,
 
-        villedestination=villedestination,
-
+        url=villedepart,
+        # ville_destination=villedestination,
+        nickname=villedestination,
         # last_name_reading=villedepart,
 
         tel=utilisateur.telephone,
         email=utilisateur.email,
-        url=villedepart,
-        # birthday=date(year=1985, month=10, day=2),
+        birthday=datedepart,
         address=voyage.codeVoyage,
         memo=heur,
         org=voyage.agencePrincipal,

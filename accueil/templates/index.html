@@ -3,55 +3,6 @@
 
 {% block title %}C-Transports | accueil{% endblock %}
 
-{% block barrenave %}
-
-<div class="px-0 bg-primary navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <nav class="navbar px-0 navbar-expand-lg navbar-light">
-               <a class="navbar-brand" href="{% url 'accueil:index-accueil' %}">C-Transports</a>
-
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                  aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="oi oi-menu"></span>
-               </button>
-
-               <div class="collapse navbar-collapse" id="ftco-nav">
-                  <ul class="navbar-nav ml-auto">
-                     <li class="nav-item mr-2 mt-2">
-                        <a href="" type="button" class="btn btn-info btn-formulaire-achat" data-toggle="modal"
-                           data-target="#tableau-bord-departs">Départs <i class="ion-ios-arrow-round-up"></i></a>
-                     </li>
-                     <li class="nav-item mt-2">
-                        <a href="" type="bytton" class="btn btn-info btn-formulaire-achat" data-toggle="modal"
-                           data-target="#tableau-bord-arrivees">Arrivées <i class="ion-ios-arrow-round-down"></i></a>
-                     </li>
-                     <li class="dropdown nav-item d-flex">
-                        <a href="#" class="dropdown-toggle nav-link d-flex align-items-center icon"
-                           data-toggle="dropdown">
-                           <b class="lien-partenaire">Nos partenaires</b>
-                           <b class="caret"></b>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                           {% for agence in agence %}
-                           <a href="{% url 'agence:agence' agence.id %}" class="dropdown-item">{{ agence.nom }}</a>
-                           {% endfor %}
-                           <div class="dropdown-divider">
-                           </div>
-                           <a href="#" class="dropdown-item">Devenir partenaire</a>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-            </nav>
-         </div>
-      </div>
-   </div>
-</div>
-{% endblock barrenave %}
-
 
 {% block header %}
 
@@ -232,8 +183,8 @@
    <div class="modal fade" id="tableau-bord-arrivees" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
-         <div class="modal-content dialog-modale-form bg-dark">
-            <div class="modal-header tabulation-2">
+         <div class="modal-content dialog-modale-form bg-white">
+            <div class="modal-header tabulation-2 bg-info">
                <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 text-white">
                   <li class="nav-item">
                      <a class="nav-link py-3" data-toggle="tab" href="#bateau-bord"><span
@@ -254,7 +205,7 @@
             </div>
             <div class="modal-body">
 
-               <div class="tab-content rounded mt-2 text-white">
+               <div class="tab-content rounded mt-2">
                   <div class="tab-pane container p-4 fade" id="bateau-bord">
                      <!-- <h2 class="text-white">Bateau</h2> -->
 
@@ -269,8 +220,8 @@
                         <tbody>
                            {% for heurb in heurbateau %}
                            <tr>
-                              <td class="text-white">{{ heurb.villeDepart }}</td>
-                              <td class="text-white">{{ heurb.villeArrivee }}</td>
+                              <td class="text-primary">{{ heurb.villeDepart }}</td>
+                              <td class="text-primary">{{ heurb.villeArrivee }}</td>
                               <td><b class="text-warning">{{ heurb.dateArrivee|date }} à
                                     {{ heurb.dateArrivee|time }}</b></td>
                            </tr>
@@ -282,7 +233,7 @@
                      <!-- <h2 class="text-white">Avion</h2> -->
                      <table class="table">
                         <thead>
-                           <h5 class="text-bolder text-white mt-2">Tableau des arrivées</h5>
+                           <h5 class="text-bolder text-primary mt-2">Tableau des vols d'arivées</h5>
                            <tr class="text-primary">
                               <th class="border-top-0">Departs</th>
                               <th class="border-top-0">Destinations</th>
@@ -292,8 +243,8 @@
                         <tbody>
                            {% for heura in heuravion %}
                            <tr>
-                              <td class="text-white">{{ heura.villeDepart }}</td>
-                              <td class="text-white">{{ heura.villeArrivee }}</td>
+                              <td class="text-primary">{{ heura.villeDepart }}</td>
+                              <td class="text-primary">{{ heura.villeArrivee }}</td>
                               <td><b class="text-warning">{{ heura.dateArrivee|date }} à
                                     {{ heura.dateArrivee|time }}</b></td>
                            </tr>
@@ -316,8 +267,8 @@
                         <tbody>
                            {% for heurbu in heurbus %}
                            <tr>
-                              <td class="text-white">{{ heurbu.villeDepart }}</td>
-                              <td class="text-white">{{ heurbu.villeArrivee }}</td>
+                              <td class="text-primary">{{ heurbu.villeDepart }}</td>
+                              <td class="text-primary">{{ heurbu.villeArrivee }}</td>
                               <td><b class="text-warning">{{ heurbu.dateArrivee|date }} à
                                     {{ heurbu.dateArrivee|time }}</b></td>
                            </tr>
@@ -327,7 +278,7 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  <button type="button" class="btn btn-primary px-5" data-dismiss="modal">Fermer</button>
                </div>
             </div>
          </div>
@@ -340,8 +291,8 @@
    <div class="modal fade" id="tableau-bord-departs" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
-         <div class="modal-content dialog-modale-form bg-dark">
-            <div class="modal-header tabulation-2">
+         <div class="modal-content dialog-modale-form bg-white">
+            <div class="modal-header tabulation-2 bg-info">
                <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 text-white">
                   <li class="nav-item">
                      <a class="nav-link py-3" data-toggle="tab" href="#bateau-bord_"><span
@@ -362,13 +313,13 @@
             </div>
             <div class="modal-body">
 
-               <div class="tab-content rounded mt-2 text-white">
+               <div class="tab-content rounded mt-2 text-primary">
                   <div class="tab-pane container p-4 fade" id="bateau-bord_">
                      <!-- <h2 class="text-white">Bateau</h2> -->
 
                      <table class="table">
                         <thead>
-                           <h5 class="text-bolder text-white mt-2">Tableau des départs des bateuax</h5>
+                           <h5 class="text-bolder text-primary mt-2">Tableau des vols de départs</h5>
                            <tr class="border-top-0">
                               <th>Departs</th>
                               <th>Destinations</th>
@@ -378,8 +329,8 @@
                         <tbody>
                            {% for heurb in heurbateau %}
                            <tr>
-                              <td class="text-white">{{ heurb.villeDepart }}</td>
-                              <td class="text-white">{{ heurb.villeArrivee }}</td>
+                              <td class="text-primary">{{ heurb.villeDepart }}</td>
+                              <td class="text-primary">{{ heurb.villeArrivee }}</td>
                               <td><b class="text-warning">{{ heurb.dateDepert|date }} à
                                     {{ heurb.dateDepert|time }}</b></td>
                            </tr>
@@ -391,7 +342,7 @@
                      <!-- <h2 class="text-white">Avion</h2> -->
                      <table class="table">
                         <thead>
-                           <h5 class="text-bolder text-white mt-2">Tableau des départs des vols</h5>
+                           <h5 class="text-bolder text-primary mt-2">Tableau des vols de départs</h5>
                            <tr class="text-primary">
                               <th class="border-top-0">Departs</th>
                               <th class="border-top-0">Destinations</th>
@@ -401,8 +352,8 @@
                         <tbody>
                            {% for heura in heuravion %}
                            <tr>
-                              <td class="text-white">{{ heura.villeDepart }}</td>
-                              <td class="text-white">{{ heura.villeArrivee }}</td>
+                              <td class="text-primary">{{ heura.villeDepart }}</td>
+                              <td class="text-primary">{{ heura.villeArrivee }}</td>
                               <td><b class="text-warning">{{ heura.dateDepert|date }} à
                                     {{ heura.dateDepert|time }}</b></td>
                            </tr>
@@ -416,7 +367,7 @@
                      <!-- <h2 class="text-white">Bus</h2> -->
                      <table class="table">
                         <thead>
-                           <h5 class="text-bolder text-white mt-2">Tableau des départs des bus à la gars principale</h5>
+                           <h5 class="text-bolder text-primary mt-2">Tableau des départs des bus à la gars principale</h5>
                            <tr>
                               <th>Departs</th>
                               <th>Destinations</th>
@@ -426,8 +377,8 @@
                         <tbody>
                            {% for heurbu in heurbus %}
                            <tr>
-                              <td class="text-white">{{ heurbu.villeDepart }}</td>
-                              <td class="text-white">{{ heurbu.villeArrivee }}</td>
+                              <td class="text-primary">{{ heurbu.villeDepart }}</td>
+                              <td class="text-primary">{{ heurbu.villeArrivee }}</td>
                               <td><b class="text-warning">{{ heurbu.dateDepert|date }} à
                                     {{ heurbu.dateDepert|time }}</b></td>
                            </tr>
@@ -437,7 +388,7 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  <button type="button" class="btn btn-primary px-5" data-dismiss="modal">Fermer</button>
                </div>
             </div>
          </div>
@@ -445,33 +396,41 @@
    </div>
 </section>
 
-<section class="img bg-image" style="height: 600px;">
+<section class="img bg-image">
    <div class="container">
       <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
          <div class=" text w-100 page-accueil">
-            <h2 class="text-primary titre-accueil animated fadeInLeft">Accès rapide aux tickets de transports</h2>
+            <h2 class="text-warning titre-accueil animated fadeInLeft">Accès rapide aux tickets de transports partout aux Comores</h2>
             <div id="" class="no-uicustom barre mb-3 animated fadeInUp"></div>
             <div class="row">
-               <div class="col-md-12 col-sm-12 col-lg-9 col-12 justify-left">
+               <div class="col-md-12 col-sm-12 col-lg-12 col-12 justify-left">
                   <div class="mb-5 description-accueil">
-                     <p class="mb-4 animated fadeInLeft">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Aut quae omnis nulla aperiam aspernatur voluptas explicabo nesciunt perspiciatis
-                        expedita voluptatibus?</p>
+                     <p class="mb-2 animated fadeInLeft">Adoptez le type de transport selon votre destination </p>
+                     <p class="mb-2 animated fadeInLeft">Choisissez la destination et les dates de votre prochain voyage</p>
+                     <p class="mb-2 animated fadeInLeft">Consultez les tableaux d'affichages des horaires des départs et arrivées</p>
+                     <p class="mb-5 animated fadeInLeft">Pour les voyages inter-îles, seuls les transports maritimes ou aériens sont possibles</p>
+                     <a href="#informations-supplementaire" class="btn btn-outline-info py-3 px-5">Informations supplémentaires <i class="ion-ios-arrow-round-forward"></i> <i class="ion-ios-arrow-round-forward"></i></a>
                   </div>
-                  <h4 class="text-primary text-choix-accueil animated fadeInUp">Choisir votre moyen de transport souhaité</h4>
-                  <div id="" class="no-uicustom barre mb-3 animated fadeInUp"></div>
-                  <div class="row">
+                  <!-- <h4 class="text-primary text-choix-accueil animated fadeInUp">Choisir votre moyen de transport souhaité</h4> -->
+                  <!-- <div id="" class="no-uicustom barre mb-3 animated fadeInUp"></div> -->
+                  <div class="row animated fadeInUp">
                      <div class="col-md-4 col-sm-4 col-lg-4 col-4">
+                        <h4 class="text-info">Déplacement inter-villes</h4>
                         <a href="" type="button" class="btn btn-warning py-3 btn-formulaire-achat" data-toggle="modal"
                         data-target="#bus">Bus</a>
                      </div>
-                     <div class="col-md-4 col-sm-4 col-lg-4 col-4">
-                        <a href="" type="bytton" class="btn btn-primary py-3 btn-formulaire-achat" data-toggle="modal"
-                        data-target="#avion">Avion </a>
-                     </div>
-                     <div class="col-md-4 col-sm-4 col-lg-4 col-4">
-                        <a href="" type="button" class="btn btn-info py-3 btn-formulaire-achat" data-toggle="modal"
-                        data-target="#bateau">Bateau</a>
+                     <div class="col-md-8 col-sm-8 col-lg-8 col-8">
+                        <h4 class="text-center text-info">Déplacement inter-îles</h4>
+                        <div class="d-flex justify-content-between">
+                           <div class="">
+                              <a href="" type="bytton" class="btn btn-primary py-3 btn-formulaire-achat" data-toggle="modal"
+                              data-target="#avion">Avion </a>
+                           </div>
+                           <div class="">
+                              <a href="" type="button" class="btn btn-info py-3 btn-formulaire-achat" data-toggle="modal"
+                              data-target="#bateau">Bateau</a>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -489,8 +448,9 @@
 
 {% block body %}
 
-<section class="container mt-5">
-   <div class="row">
+<section class="container mt-5" id="informations-supplementaire">
+   <hr class="fancy-line">
+   <div class="row animated fadeInUp">
       <div class="col-md-12 heading-title mt-5">
          <h1>C-Transports</h1>
          <div id="" class="no-uicustom barre mb-5"></div>
@@ -518,7 +478,7 @@
 <section class="container mt-5">
    <div class="row">
       <div class="col-md-12 heading-title">
-         <h1>Votre de voyage sous forme de QR code</h1>
+         <h1>Votre de ticket de transport sous forme de QR code</h1>
          <div id="" class="no-uicustom barre mb-5"></div>
       </div>
    </div>

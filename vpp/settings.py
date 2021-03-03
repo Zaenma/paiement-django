@@ -179,3 +179,9 @@ QR_CODE_URL_PROTECTION = {
 
 # https://rapidsms.readthedocs.io/en/develop/tutorial/
 # https://github.com/rapidsms/rapidsms-project-template
+
+# utilisation d'environnement virtuel
+# https://docs.python.org/fr/3/tutorial/venv.html
+
+# authentification 
+# https://docs.djangoproject.com/fr/3.1/topics/auth/default/
