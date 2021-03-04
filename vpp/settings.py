@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # paypal
+    'paypal.standard.ipn',
     # Mes applications
 
     'qr_code',
@@ -62,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+PAYPAL_TEST = True
 
 ROOT_URLCONF = 'vpp.urls'
 

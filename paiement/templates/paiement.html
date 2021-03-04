@@ -1,55 +1,200 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block barrenave %}
+{% block header %}
 
-<div class="px-0 bg-primary navbar-wrap mb-2">
+<section>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar px-0 navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="{% url 'infos:dashbord' %}">Paiement</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
-                        aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="oi oi-menu"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarsExample03">
-                        <ul class="navbar-nav m-auto">
-                            <li class="nav-item d-flex">
-                                <!-- <a class="nav-link d-flex align-items-center" href="#">Paramettres</a> -->
-                            </li>
-                            <li class="nav-item d-flex">
-                                <a class="nav-link d-flex align-items-center" href="{% url 'accueil:index-accueil' %}">Racheter</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </nav>
+        <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
+            <div class=" text w-100 page-accueil">
+                <h2 class="text-primary mt-5 animated fadeInLeft"></h2>
+                
             </div>
         </div>
     </div>
-</div>
-{% endblock barrenave %}
-
-
-
-{% block header %}
-
+</section>
 
 {% endblock header %}
 
 
-
-
-
 {% block body %}
 
-<div class="" id="formulaire-infos-personne">
-    <section class="container my-5">
-        <h2 class="text-success">Nous acceptons les moyens de paiement suivants</h2>
-        <div id="" class="no-uicustom mb-5 barre"></div>
-        <div class="row">
+    <section class="container my-4">
+        <h2 class="text-warning titre">Finalisez votre achat | </h2> <h5>Choisissez le moyen de paiement qui vous convient</h5>
+        <div id="" class="no-uicustom mb-4 barre"></div>
+        
+        <div class="modal-header tabulation-2">
+            <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 bg-info">
+                <li class="nav-item">
+                    <a class="nav-link active py-3" data-toggle="tab" href="#mobile">Paiement mobile</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-3 h-100" data-toggle="tab" href="#paypal">Payez par PayPal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-3 h-100" data-toggle="tab" href="#carte-visa">Payer carte</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="mobile">
+                <div class="row">
+                    <div class="col-md-5">
+                        <form action="" method="post">
+                            <div class="form-group">
+                              <label for="">Numéro de téléphone</label>
+                              <input type="tel" name="" id="" class="form-control" placeholder="Numéro de téléphone" required aria-describedby="helpId">
+                              <small id="helpId" class="text-info">Vous percevrez un message de confirmation</small>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="" class="px-5 btn btn-info">Validez le paiement</a>
+                            </div>
+                        </form>
+                        <div class="text-center bg-primary mt-5 p-3 rounded">
+                            <h3 class="text-white">{{voyage.prix}} KMF = {{prix|floatformat:2}} € </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <table class="table">
+                            <tbody>
+                                <tr class="border-0">
+                                    <td><b>Compagnie</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.agencePrincipal }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">Ville de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeDepart }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">ville de destination</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateDepert }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date d'arrivée</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Heur du trajet</b></td>
+                                    <td><b class="infos-voyage">{{ heur }}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="paypal">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="formulaire-paypal my-3">
+                            <h4>Finalisez votre paiement par PayPal!</h4>
+                            <div id="" class="no-uicustom barre bg-info mb-3"></div>
+                            <!-- writes out the form tag automatically -->
+                            <div class="mt-5">
+                                {{ formPaypal.render }}
+                            </div>
+                        </div>
+                        
+                        <div class="text-center bg-primary mt-5 p-3 rounded">
+                            <h3 class="text-white">{{voyage.prix}} KMF = {{prix|floatformat:2}} € </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <table class="table">
+
+                            <thead>
+                                <h4 class="bg-primary text-white p-2 rounded">Information de votre voyage</h4>
+                            </thead>
+                            <tbody>
+                                <tr class="border-0">
+                                    <td><b>Compagnie</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.agencePrincipal }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">Ville de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeDepart }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">ville de destination</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateDepert }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date d'arrivée</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Heur du trajet</b></td>
+                                    <td><b class="infos-voyage">{{ heur }}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="carte-visa">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="formulaire-paypal my-3">
+                            <h4>Payez par carte de crédit !</h4>
+                            <div id="" class="no-uicustom barre bg-info mb-3"></div>
+                            <!-- writes out the form tag automatically -->
+                            <div class="mt-5">
+                                <form action="" method="post">
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center bg-primary mt-5 p-3 rounded">
+                            <h3 class="text-white">{{voyage.prix}} KMF = {{prix|floatformat:2}} € </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <table class="table">
+
+                            <thead>
+                                <h4 class="bg-primary text-white p-2 rounded">Information de votre voyage</h4>
+                            </thead>
+                            <tbody>
+                                <tr class="border-0">
+                                    <td><b>Compagnie</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.agencePrincipal }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">Ville de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeDepart }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">ville de destination</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.villeArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date de depart</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateDepert }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Date d'arrivée</b></td>
+                                    <td><b class="infos-voyage">{{ voyage.dateArrivee }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Heur du trajet</b></td>
+                                    <td><b class="infos-voyage">{{ heur }}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
             <div class="col-md-4">
                 <div class="card text-left">
                     <div class="card-body">
@@ -111,11 +256,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
 
     <section class="container my-5" v-if="success">
-        <div class="card text-left">
+        <!-- <div class="card text-left">
             <form action="" method="post">
                 <div class="card-header">
                     <h4 class="card-title text-primary">Numéro de téléphone integrant le service OrangeMoney</h4>
@@ -141,12 +286,12 @@
                     <button type="submit" class="btn btn-outline-primary">Valider le paiement</button>
                 </div>
             </form>
-        </div>
+        </div> -->
     </section>
 
 
     <section class="container my-5" v-model="paypal">
-        <div class="card text-left">
+        <!-- <div class="card text-left">
             <form action="" method="post">
                 <div class="card-header">
                     <h4 class="card-title text-primary">Numéro de téléphone integrant le service OrangeMoney</h4>
@@ -193,11 +338,13 @@
                 </div>
                 <div class="d-flex justify-content-between card-footer">
                     <b class="ml-5 text-primary bg-dark px-5 shadow">Prix HTT : <span class="ml-5 text-primary"> {{ prix }} KMF</span></b>
-                    <!-- <button type="submit" class="btn btn-outline-primary">Valider le paiement</button> -->
+                    
                     <a href="{% url 'achat:success' pkv pku tag date %}" class="btn btn-primary">Success</a>
                 </div>
             </form>
-        </div>
+        </div> -->
     </section>
 </div>
+
 {% endblock body %}
+

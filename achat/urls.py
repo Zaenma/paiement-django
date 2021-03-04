@@ -5,6 +5,6 @@ from . import views
 app_name = "achat"
 
 urlpatterns = [
-    path('', views.index, name='successs'),
+    path('', views.index, name='success'),
     path('<int:pkv>/<str:pku>/<str:tag>/<str:date>', views.index, name='success'),
 ]

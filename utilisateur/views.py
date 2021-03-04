@@ -97,23 +97,43 @@ def donneeAffichees(request, modelaffichee):
 
 # fonction de pagination -----------------------
 def voyagesAffichees(request, modelaffichee):
-    donnees_agence = Agence.objects.filter(responsable__exact=request.user.username)
+
+    # on prend l'agence à laquelle le reponsabe de l'agence et la personne qui est connecté 
+    donnees_agence = Agence.objects.get(responsable=request.user.username)
     
-    lite = modelaffichee.objects.filter(agencePrincipal__exact=donnees_agence.agence)
+    # on prend les données dans l'une des tables des voyages à condition que le nom de l'agence 
+    # est le même que celui qu'on a préalablement récupéré 
+    lite = modelaffichee.objects.filter(agencePrincipal=donnees_agence.nom)
+
     pagination = Paginator(lite, 5)
+
     nombre_page = request.GET.get('p')
+
     voyagesaffiche = pagination.get_page(nombre_page)
 
     return voyagesaffiche
 
+
+# calcule le nombre de voyage par agence 
+def nombreVoyage(request):
+
+     # on prend l'agence à laquelle le reponsabe de l'agence et la personne qui est connecté 
+    donnees_agence = Agence.objects.get(responsable=request.user.username)
+    
+    # on prend les données dans l'une des tables des voyages à condition que le nom de l'agence 
+    # est le même que celui qu'on a préalablement récupéré 
+    
+    nbv = VoyagesParAvion.objects.filter(agencePrincipal=donnees_agence.nom).count() + VoyagesParBateau.objects.filter(agencePrincipal=donnees_agence.nom).count() + VoyagesParBu.objects.filter(agencePrincipal=donnees_agence.nom).count()
+    return nbv
+
+
 # vue de dashbord des administrateur des agences
 def dashbord(request, action=None, element=None, formulaire=None, statut=None):
 
-    
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
-        donnees_agence = Agence.objects.filter(responsable__exact=request.user.username)
+        donnees_agence = Agence.objects.get(responsable=request.user.username)
         
         if action == "ajout":
             if element == "ile":
@@ -155,18 +175,19 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
 
             elif element == 'maritime':
                 donneeaffiche = voyagesAffichees(request, VoyagesParBateau)
-                if donneeaffiche == None :
-                    donneeaffiche = None
 
             elif element == 'terreste':
                 donneeaffiche = voyagesAffichees(request, VoyagesParBu)
 
             elif element == 'aerien':
+                nbreV = nombreVoyage(request, VoyagesParAvion)
                 donneeaffiche = voyagesAffichees(request, VoyagesParAvion)
             else:
                 pass
 
-            donnees = {'donnee': donneeaffiche,
+            donnees = {
+                    'donnee': donneeaffiche,
+                    # 'nbvg': nbreV,
                     'action': action,
                     'element': element,
                     'statut': statut,
@@ -177,10 +198,9 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
             donnees = {'action': action,
                     'element': element,
                     'statut': statut, 
-                    'ag': donnees_agence,
                     }
-    # if request.user.is_authenticated:
-        
+
+        donnees = {'nbvg': nombreVoyage(request), 'ag': donnees_agence,}
         return render(request, 'dashbord.html', donnees)
 
 

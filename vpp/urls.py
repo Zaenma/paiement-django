@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin, messages
 from django.urls import path, include
+from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +28,7 @@ urlpatterns = [
     path('success/', include('achat.urls')),
     path('agence/', include('agence.urls')),
 ]
+
+
+admin.site.site_header = 'Comores-Transports'
+admin.site.index_title = 'Super Administrateur | Zaenma' 

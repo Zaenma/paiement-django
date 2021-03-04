@@ -354,3 +354,16 @@ hr.fancy-line {
     scrollbar-width: thin;
     bottom: 0;
   }
+
+.titre{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+input[type='image']{
+    font-size: 70px;
+    padding: 20px;
+    background-color: #07689f;
+    width: 100%;
+    border-radius: 5px;
+}

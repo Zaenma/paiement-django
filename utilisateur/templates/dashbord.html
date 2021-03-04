@@ -11,8 +11,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar px-0 navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="{% url 'accueil:index-accueil' %}"><span
-                                class="text-warning">C-</span>Transports</a>
+                        <a class="navbar-brand" href="{% url 'infos:dashbord' %}"><span
+                                class="text-warning">C-</span>T | {{ ag.nom }}</a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,7 +122,7 @@
                                 <h5 class="text-white">Evolution de l'agence</h5>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">10,86%</h4>
+                                <h4 class="card-title">0,00%</h4>
                                 <a href="{% url 'infos:dashbord' 'deatil' 'activite' %}" class="btn btn-outline-info">Voir les details <i class="ion-ios-arrow-round-forward"></i></a>
                             </div>
                         </div>
@@ -130,10 +130,10 @@
                     <div class="col-md-3">
                         <div class="card animated fadeInUp">
                             <div class="card-header bg-warning">
-                                <h5 class="text-white">Places restantes</h5>
+                                <h5 class="text-white">Sièges restantes</h5>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">0 place restante</h4>
+                                <h4 class="card-title"> {{ nbvg }} siège{{ nbvg|pluralize:"s" }} restant{{ nbvg|pluralize:"s" }} </h4>
                                 <a href="{% url 'infos:dashbord' 'deatil' 'place-restant' %}" class="btn btn-outline-warning">Voir les details <i class="ion-ios-arrow-round-forward"></i></a>
                             </div>
                         </div>
@@ -801,7 +801,7 @@
                 <nav id="menu">
                     <ul>
                         <li>
-                            <span class="opener">Les Achats</span>
+                            <span class="opener">Les ventes</span>
                             <ul>
                                 <li>
                                     <div class="d-flex justify-content-between pb-2">

@@ -35,7 +35,7 @@
     <section>
         <div class="modal-header tabulation-2">
             <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 bg-info">
-                <li class="nav-item px-lg-2">
+                <li class="nav-item">
                     <a class="nav-link active py-3 px-0" data-toggle="tab" href="#infos-personnelles"><span
                             class="ion-ios-airplae">Client sans abonnement</span></a>
                 </li>
@@ -44,10 +44,12 @@
                             class="ion-ios-bu"></span>
                         Client avec abonnement</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link py-3 h-100" data-toggle="tab" href="#tourisme">Tourisme</a>
+                </li>
             </ul>
         </div>
         <div class="modal-body">
-
             <div class="tab-content rounded mt-2 text-white">
                 <div class="tab-pane fade" id="formulaire-abonnement">
                     {% if erreur %}
@@ -353,6 +355,11 @@
                             </div>
 
                         </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tourisme">
+                    <div class="text-white p-3 bg-primary">
+                        traitmement de formulaire pour les toursites
                     </div>
                 </div>
             </div>
