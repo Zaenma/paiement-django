@@ -65,6 +65,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51HcnuxBXtR6NoHYCmhTktICwoW89a2ZBU5svHO8WjIFqJnlG9gsFPQFaYs0fosAV7a58Ks4O7JaSwXjJpDEdac1c00cCwNZHMf'
+STRIPE_SECRET_KEY = 'sk_test_51HcnuxBXtR6NoHYCJUVZy9GS0kNVhQjWF9eqESoCtYdr2qhKTQgmv3xuTMdIoe2EqrKmnXqUfS8GIoh1Ko6ISJgC00An6P4iWL'
+
 PAYPAL_TEST = True
 
 ROOT_URLCONF = 'vpp.urls'
@@ -189,3 +192,6 @@ QR_CODE_URL_PROTECTION = {
 
 # authentification 
 # https://docs.djangoproject.com/fr/3.1/topics/auth/default/
+
+# tutorial de paiement avec strip
+# https://testdriven.io/blog/django-stripe-tutorial/

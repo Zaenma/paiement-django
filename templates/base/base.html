@@ -13,7 +13,7 @@
         <!-- Pour l'inclusion des fichiers de styles particuliers -->
         {% block styles %}
         
-            
+        <script src="https://js.stripe.com/v3/"></script>  <!-- new -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/animate.css' %}">
@@ -152,7 +152,7 @@
 
         {% block script %}
         
-<script src="{% static 'js/js-perso/script-modal.js' %}"></script>
+        <script src="{% static 'js/js-perso/script-modal.js' %}"></script>
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
         <script src="{% static 'js/popper.min.js' %}"></script>

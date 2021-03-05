@@ -367,3 +367,25 @@ input[type='image']{
     width: 100%;
     border-radius: 5px;
 }
+
+.Button-animationWrapper-child--primary{
+    background-color: #0c056d;
+}
+
+.stripe-button-el{
+    padding: 20px !important;
+}
+
+.Header-purchaseDescription{
+    background-color: #0c056d;
+    color: white;
+    font-size: 30px;
+    content: "Payer par carte visa";
+}
+.u-textTruncate{
+    color: white;
+    font-size: 30px;
+}
+.stripe-button .Header-purchaseDescription{
+    content: "Payer par carte visa";
+}

@@ -32,7 +32,7 @@
                     <a class="nav-link py-3 h-100" data-toggle="tab" href="#paypal">Payez par PayPal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-3 h-100" data-toggle="tab" href="#carte-visa">Payer carte</a>
+                    <a class="nav-link py-3 h-100" data-toggle="tab" href="#carte-visa">Payer par carte de crédit</a>
                 </li>
             </ul>
         </div>
@@ -87,6 +87,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="paypal">
                 <div class="row">
                     <div class="col-md-5">
@@ -139,11 +140,12 @@
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="carte-visa">
                 <div class="row">
                     <div class="col-md-5">
                         <div class="formulaire-paypal my-3">
-                            <h4>Payez par carte de crédit !</h4>
+                            <h4>Cliquez sur le boutton pour procéder au paiement</h4>
                             <div id="" class="no-uicustom barre bg-info mb-3"></div>
                             <!-- writes out the form tag automatically -->
                             <div class="mt-5">
@@ -152,9 +154,18 @@
                                 </form>
                             </div>
                         </div>
-                        
+                        <form action="{% url 'achat:success' pkv pku tag date %}" method="post">
+                            {% csrf_token %}
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="{{ key }}"
+                                    data-description="Ticket de transport de {{ voyage.villeDepart }} à {{ voyage.villeArrivee }}"
+                                    data-amount="{{ prix_visa }}"
+                                    data-locale="auto">
+                            </script>
+                        </form>
+
                         <div class="text-center bg-primary mt-5 p-3 rounded">
-                            <h3 class="text-white">{{voyage.prix}} KMF = {{prix|floatformat:2}} € </h3>
+                            <h3 class="text-white">{{voyage.prix}} KMF = {{prix|floatformat:2}} € = {{ prix_visa_info|floatformat:2 }} USD</h3>
                         </div>
                     </div>
                     <div class="col-md-7">
