@@ -38,7 +38,7 @@ class Utilisateur(models.Model):
         auto_now_add=True, verbose_name="Date d'inscription")
 
     class Meta:
-        verbose_name="Les Clients"
+        verbose_name="Les Client"
 
     def __str__(self):
         return self.nom
@@ -81,10 +81,26 @@ class Personne(models.Model):
     montantMensuelVerse = models.IntegerField(
         help_text='Montant par mois', verbose_name='Montant minimum à verser par mois')
 
+    nombreSiegeReserve = models.IntegerField(
+        help_text='Nombre de voyags', verbose_name='Nombre de siège pour l\'achat', default=1)
 
     class Meta:
         abstract = True
 
+class AbonnesHebdomadaire(Personne):
+
+    def __str__(self):
+       return self.nom
+
+    class Meta:
+        verbose_name="Abonnements Hebdomadaire"
+    pass
+
+class AdminAbonnesHebdomadaire(admin.ModelAdmin):
+    list_display = ('nom', 'prenom', 'codeAbonnement', 'dateAbonnement',)
+    list_filter = ('dateAbonnement',)
+    search_fields = ['nom']
+    pass
 
 class AbonnesMensuel(Personne):
 

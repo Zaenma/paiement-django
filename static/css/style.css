@@ -3688,10 +3688,10 @@ input[type="button"].btn-block {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #212529;
+  color: var(--white);
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: var(--primary);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -5334,8 +5334,8 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  /* border: 1px solid rgba(0, 0, 0, 0.125); */
+  /* border-radius: 0.25rem; */
 }
 
 .card>hr {
@@ -9368,7 +9368,7 @@ button.bg-dark:focus {
 
 .pr-0,
 .px-0 {
-  padding-right: 0 !important;
+  padding-right: 0;
 }
 
 .pb-0,
@@ -9378,7 +9378,7 @@ button.bg-dark:focus {
 
 .pl-0,
 .px-0 {
-  padding-left: 0 !important;
+  padding-left: 0;
 }
 
 .p-1 {
@@ -11778,7 +11778,7 @@ h5,
 }
 
 .ftco-section.ftco-section-2 {
-  padding: 6em 0;
+  padding: 2em 0;
 }
 
 .ftco-section .overlay {
@@ -12171,8 +12171,9 @@ h5,
 
 .dropdown .dropdown-menu .dropdown-item {
   font-size: 13px;
-  color: rgba(0, 0, 0, 0.7);
-  font-weight: 400;
+  /* color: rgba(0, 0, 0, 0.7); */
+  color: var(--white);
+  font-weight: 500;
 }
 
 .dropdown .dropdown-menu .dropdown-item i {
@@ -12186,7 +12187,7 @@ h5,
 }
 
 .form-control {
-  height: 48px !important;
+  /* height: 48px !important; */
   background: transparent !important;
   /* color: rgba(255, 255, 255, 0.4) !important; */
   color: #160f30;
@@ -13971,16 +13972,17 @@ h5,
 
 .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu {
   border: none;
-  background: #fff;
+  background: var(--primary);
+  color: #fefefe;
   -webkit-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
   -moz-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
   box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.3);
-  font-weight: 400;
+  font-size: 15px;
+  /* color: rgba(0, 0, 0, 0.3); */
+  font-weight: 500;
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item i {
@@ -13991,6 +13993,7 @@ h5,
 .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item:focus {
   background: transparent;
   color: #000;
+  color: var(--warning);
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item.ftco-seperator {

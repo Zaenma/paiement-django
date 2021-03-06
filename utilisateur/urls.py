@@ -9,6 +9,9 @@ app_name = "infos"
 urlpatterns = [
      path('<int:pkv>/<str:tag>',
          views.information, name='information'),
+         
+    path('<int:pkv>/<str:tag>/<str:msg>',
+         views.information, name='erreur-abonnement'),
 
      path('password', views.reset_password, name='password'),
 

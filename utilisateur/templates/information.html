@@ -4,23 +4,25 @@
 
 
 {% block header %}
-<section class="">
+<section class="pt-lg-5">
     <div class="container">
         <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
             <div class=" text w-100 page-accueil">
                 <h4 class="text-primary page-accueil">Remplissez l'un des formulaire suivant pour continuer</h4>
                 <div id="" class="no-uicustom barre mb-3"></div>
 
-                <div class="alert alert-warning pb-1">
-                    <div class="d-flex">
-                        <h5 class="text-white py-3">Si vous disposez d'un code d'abonnement, merci de remplir le
-                            formulaire correspondant !</h5>
-                    </div>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="ion-ios-close"></i></span>
-                    </button>
+                {% if request.GET.msg == None %}
+                    <div class="alert alert-warning pb-1">
+                        <div class="d-flex">
+                            <h5 class="text-white py-1">Votre code d'abonnement que vous avez indiqué n'est pas valide</h5>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                        </button>
 
-                </div>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
@@ -29,9 +31,7 @@
 
 {% block body %}
 
-<section class="container my-5" id="formulaire-infos-personne">
-
-
+<section class="container my-2">
     <section>
         <div class="modal-header tabulation-2">
             <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 bg-info">
@@ -68,6 +68,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h5>Informations du passager</h5>
+                                    <span>{{request.GET}}</span> 
                                 </div>
                                 <form action="" method="GET">
                                     <div class="card-body">

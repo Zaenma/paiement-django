@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import Http404, HttpResponseRedirect
+from django.forms import formset_factory
 import datetime
 from django.conf import settings
 from django.shortcuts import redirect
@@ -8,20 +9,52 @@ from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator
 from agence.models import Agence
 from voyages.models import VoyagesParAvion, VoyagesParBateau, VoyagesParBu, Ville, Ile
-from .models import AbonnesMensuel
+from .models import AbonnesMensuel, AbonnesAnnuel, AbonnesHebdomadaire
 from .formulaire import UtilisateurForm, VoyagesParAvionForm, VilleForm, IleForm, VoyagesParBateauForm, AbonneForm
 
+def abonnement(request, pkv, tag=None):
+    # Traitement de formulaire d'abonnement 
+    # AbonneForm = formset_factory(AbonneForm)
+    if request.method == "GET":
+        # formAbonnement = AbonneForm(request.GET)
+        if AbonneForm(request.GET).is_valid:
+            if AbonnesMensuel.objects.filter(codeAbonnement=request.GET["codeAbonnement"]).exists():
+                return AbonnesMensuel.objects.filter(codeAbonnement=request.GET["codeAbonnement"])
+            elif AbonnesAnnuel.objects.filter(codeAbonnement=request.GET["codeAbonnement"]).exists():
+                return AbonnesAnnuel.objects.filter(codeAbonnement=request.GET["codeAbonnement"])
+            elif AbonnesHebdomadaire.objects.filter(codeAbonnement=request.GET["codeAbonnement"]).exists():
+                return AbonnesHebdomadaire.objects.filter(codeAbonnement=request.GET["codeAbonnement"])
+            else:
+                return None
+        else:
+            return AbonneForm
+            
+def informationPersonnelles(request, formulaire):
+    erreur = 1
+    if request.method == "POST":
+        formulaire = UtilisateurForm(request.POST)
+        if request.POST["nom"] != request.POST["prenom"]:
+            if int(request.POST["nombreSiegeReserve"]) >= 1:
+                if formulaire.is_valid:
+                    formulaire.save()
+                    return HttpResponseRedirect(reverse('paiement:paiement', kwargs={'pkv': pkv, 'tag': tag, 'pku': request.POST["email"], 'date': datetime.datetime.now()}))
+                else:
+                    # formulaire = UtilisateurForm(request.POST)
+                    return erreur
+            else:
+                # formulaire = UtilisateurForm(request.POST)
+                return erreur
+        else:
+            # formulaire = UtilisateurForm(request.POST)
+            return erreur
 
-def information(request, pkv, tag=None):
+
+def information(request, pkv, tag=None, msg=None):
     # Initialisation du formulaire
-    formulaire = UtilisateurForm()
+    # formulaire = UtilisateurForm()
 
     #initiation du formulaire d'abonnement 
     formAbonnement = AbonneForm()
-
-    erreurForm = None
-    # Variable d'erreur
-    erreur = 0
 
     if tag == 'AV':
         informationVoyage = VoyagesParAvion.objects.get(pk=pkv)
@@ -33,41 +66,21 @@ def information(request, pkv, tag=None):
         informationVoyage = VoyagesParBu.objects.get(pk=pkv)
 
     # Traitement du formulaire d'un nouveua utilisateur
-    if request.method == "POST":
-        formulaire = UtilisateurForm(request.POST)
-        if request.POST["nom"] != request.POST["prenom"]:
-            if int(request.POST["nombreSiegeReserve"]) >= 1:
-                if formulaire.is_valid:
-                    formulaire.save()
-                    return HttpResponseRedirect(reverse('paiement:paiement', kwargs={'pkv': pkv, 'tag': tag, 'pku': request.POST["email"], 'date': datetime.datetime.now()}))
-                else:
-                    formulaire = UtilisateurForm(request.POST)
-                    erreur = 1
-            else:
-                formulaire = UtilisateurForm(request.POST)
-                erreur = 1
-        else:
-            formulaire = UtilisateurForm(request.POST)
-            erreur = 1
+    # Utilisation des formulaire groupés
+    formulaire = UtilisateurForm()
+    
+    erreur = informationPersonnelles(request, formulaire)
 
-        erreurForm = formulaire.errors.items()
-
-    # Traitement de formulaire d'abonnement 
-    if request.method == "GET":
-        formAbonnement = AbonneForm(request.GET)
-
-        if formAbonnement.is_valid:
-            pass
-            # abonne = AbonnesMensuel.objects.get(codeAbonnement__exact=request.GET["codeAbonnement"])
-            # return HttpResponseRedirect(reverse('paiement:paiement', kwargs={'pkv': pkv, 'tag': tag, 'pku': abonnee., 'date': datetime.datetime.now()}))
-        else:
-            formulaire = AbonneForm(request.POST)
-            erreur = 1
-
+    if abonnement(request, pkv, tag) != None:
+        variable_get = {'pkv': pkv, 'tag': tag, 'pku': request.GET['codeAbonnement'], 'date': datetime.datetime.now()}
+        return HttpResponseRedirect(reverse('paiement:paiement', kwargs=variable_get))
+    else:
+        msg = 1
+        HttpResponseRedirect(reverse('infos:erreur-abonnement', kwargs={'pkv': pkv, 'tag': tag, 'msg': msg}))
+        
     donnees = {'infvoyage': informationVoyage,
                'form': formulaire,
                'erreur': erreur,
-               'erf': erreurForm,
                'abf': formAbonnement
                }
 
@@ -134,7 +147,8 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     else:
         donnees_agence = Agence.objects.get(responsable=request.user.username)
-        
+        nbreV = nombreVoyage(request)
+
         if action == "ajout":
             if element == "ile":
                 formulaire = IleForm()
@@ -180,14 +194,14 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
                 donneeaffiche = voyagesAffichees(request, VoyagesParBu)
 
             elif element == 'aerien':
-                nbreV = nombreVoyage(request, VoyagesParAvion)
+            
                 donneeaffiche = voyagesAffichees(request, VoyagesParAvion)
             else:
                 pass
 
             donnees = {
                     'donnee': donneeaffiche,
-                    # 'nbvg': nbreV,
+                    'nbvg': nbreV,
                     'action': action,
                     'element': element,
                     'statut': statut,
@@ -197,10 +211,11 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
         else:
             donnees = {'action': action,
                     'element': element,
-                    'statut': statut, 
+                    'nbvg': nbreV,
+                    'statut': statut,
+                    'ag': donnees_agence,
                     }
 
-        donnees = {'nbvg': nombreVoyage(request), 'ag': donnees_agence,}
         return render(request, 'dashbord.html', donnees)
 
 

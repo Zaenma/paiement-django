@@ -86,7 +86,8 @@
 
 .card {
     background: rgba(255, 255, 255);
-    box-shadow: 0 2px 2px 0 #a39e9e;
+    box-shadow: 0 3px 3px 0 #999393;
+    /* height: 100px; */
 }
 
 .section-footer {
@@ -128,8 +129,6 @@
     font-weight: bold;
 }
 
-
-
 .navbar-wrap .lien-partenaire {
     font-weight: 200;
     font-size: 20px;
@@ -138,7 +137,6 @@
 .card-connexion {
     background: #160f3081;
     opacity: 0.7;
-
     color: #ffffff;
 }
 
@@ -236,7 +234,7 @@ input:valid {
 }
 
 .titre-accueil {
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 60px;
     font-weight: bold;
 }
@@ -246,30 +244,23 @@ input:valid {
     font-weight: bold;
 } */
 .description-accueil {
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-/* @media (max-width: 500px) {
-    .btn-formulaire-achat {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    
-} */
 
 .bg-image {
-    background: url("../images/cate.PNG") no-repeat;
+    background: url("../images/carte-1.jpg") no-repeat;
     background-position: right;
-    background-size: 700px;
+    background-size: 400px;
     background-position-x: 100%;
-    background-color: #40455b15;
     background-blend-mode: overlay;
-    height: 650px;
+    
+    /* height: 650px; */
     /* padding: 60px 0 0 0; */
 }
 
-hr {
+hr, .hr-menu {
     display: block;
     clear: both;
     height: 0;
@@ -286,19 +277,19 @@ hr:after {
     content: "\273D \273D \273D \273D \273D \273D";
     height: 0;
     letter-spacing: 1em;
-    color: #0c056d;
+    color: #fd5f00;
 }
 
-/* 
-hr.fancy-line { 
-    border: 0; 
-    height: 1px; 
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(215,215,215,0.75), rgba(0,0,0,0)); 
-    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(215,215,215,0.75), rgba(0,0,0,0)); 
-    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(215,215,215,0.75), rgba(0,0,0,0)); 
-    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(215,215,215,0.75), rgba(0,0,0,0)); 
-    box-shadow: 0px -2px 4px rgba(136,136,136,0.75);
-} */
+.hr-menu:after {
+    content: "\273D \273D \273D";
+    height: 0;
+    letter-spacing: 1em;
+    color: #fd5f00;
+}
+
+.titre-menu{
+    font-weight: bold;
+}
 
 #id_username, #id_password {
     display: block;
@@ -356,7 +347,7 @@ hr.fancy-line {
   }
 
 .titre{
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -388,4 +379,53 @@ input[type='image']{
 }
 .stripe-button .Header-purchaseDescription{
     content: "Payer par carte visa";
+}
+
+@media (max-width: 767px){
+
+    .titre-accueil {
+        font-size: 15px;
+        margin-top: 20px;
+    }
+
+    .description-accueil {
+        font-size: 12px;
+    }
+    .bg-image {
+        background-image: none;
+    }
+    .description-bouton{
+        display: none;
+    }
+    hr:after {
+        content: "\273D \273D \273D";
+    }
+    .navbar-perso{
+        background-color: #0c056d;
+    }
+    .navbar-expand-lg nav{
+        padding-left: 20px;
+    }
+
+    .page-accueil {
+        margin-top: 20px !important;
+    }
+    
+}
+
+@media (max-width: 500px){
+    body{
+        font-size: 14px;
+    }
+    .identifiant-cache{
+        display: none;
+    }
+    .dure-cache{
+        display: none;
+    }
+    
+    .pl-0, .px-0{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
 }

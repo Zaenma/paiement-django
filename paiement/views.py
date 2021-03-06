@@ -13,15 +13,23 @@ from django.urls import reverse
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 
 # Create your views here.
-from utilisateur.models import Utilisateur, AbonnesAnnuel
+from utilisateur.models import Utilisateur, AbonnesAnnuel, AbonnesMensuel, AbonnesHebdomadaire
 from voyages.models import VoyagesParAvion, VoyagesParBateau, VoyagesParBu
 
 def paiement(request, pkv, pku, tag, date):
 
     date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
 
-    utilisateur = Utilisateur.objects.get(Q(email__exact=pku))
+    # utilisateur = Utilisateur.objects.get(Q(email__exact=pku))
 
+    if Utilisateur.objects.filter(email=pku).exists():
+        utilisateur = Utilisateur.objects.get(Q(email__exact=pku))
+    elif AbonnesMensuel.objects.filter(codeAbonnement=pku).exists():
+        utilisateur = AbonnesMensuel.objects.get(Q(codeAbonnement__exact=pku))
+    elif AbonnesHebdomadaire.objects.filter(codeAbonnement=pku).exists():
+        utilisateur = AbonnesHebdomadaire.objects.filter(codeAbonnement=pku).exists()
+    else:
+        utilisateur = None
     # utilisateur = Utilisateur.objects.get(Q(email__exact=pku) & Q(dateEngregistrement__contains=date))
 
     if tag == 'AV':
@@ -72,13 +80,6 @@ def paiement(request, pkv, pku, tag, date):
 
     
     form = PayPalPaymentsForm(initial=paypal_dict)
-
-    # Paiement avec stripe
-
-    # def get_context_data(self, **kwargs): # new
-    #     context = super().get_context_data(**kwargs)
-    #     context['key'] = settings.STRIPE_PUBLISHABLE_KEY
-    #     return context
 
     donnees = {'user': utilisateur,
                'voyage': voyage, 'heur': heur, 
