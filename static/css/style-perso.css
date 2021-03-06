@@ -264,7 +264,7 @@ hr, .hr-menu {
     display: block;
     clear: both;
     height: 0;
-    margin: 40px 0 80px;
+    margin: 40px 0 30px;
     padding: 0;
     border: 0;
     font-family: arial;
@@ -380,7 +380,9 @@ input[type='image']{
 .stripe-button .Header-purchaseDescription{
     content: "Payer par carte visa";
 }
-
+.description-bouton{
+    font-weight: bold;
+}
 @media (max-width: 767px){
 
     .titre-accueil {
