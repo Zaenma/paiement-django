@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '&@ehk(2d@$11&@6h3$doykzv(q-1%xh-5r=$zuv&k&&pgyhf*p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -134,6 +135,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+gettext = lambda x: x
+
+LANGUAGES = (
+   ('fr', gettext('French')),
+   ('en', gettext('English')),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

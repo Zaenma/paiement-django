@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
 import datetime
+from django.http import HttpResponseRedirect
 # Create your views here.
 from utilisateur.models import Utilisateur, AbonnesAnnuel, AbonnesMensuel, AbonnesHebdomadaire
 from voyages.models import VoyagesParAvion, VoyagesParBateau, VoyagesParBu, Ile, Ville

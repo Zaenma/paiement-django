@@ -1,10 +1,3 @@
-.section-formulaire {
-    min-width: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
 
 .form-control:focus {
     border-color: 2px #0c056d !important;
@@ -430,4 +423,29 @@ input[type='image']{
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
+}
+
+@media (max-width: 1000px){
+    .bg-image {
+        background-image: none;
+    }
+    
+    .navbar-perso{
+        background-color: #0c056d;
+    }
+
+    .titre-accueil {
+        font-size: 25px;
+        margin-top: 20px;
+    }
+}
+
+.info-adresse{
+    color: #06051a;
+    font-size: 18px;
+    font-style: inherit;
+}
+
+#id_message{
+    width: 30px;
 }

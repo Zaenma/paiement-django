@@ -82,16 +82,6 @@
             </div>
             <form action="{% url 'voyages:voyages' %}" method="GET">
                <div class="modal-body">
-                  <div class="alert alert-info pb-1">
-                     <div class="container-fluid">
-                        <div class="d-flex">
-                           <p class="">Merci de bien remplire le formulaire</p>
-                        </div>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                           <span aria-hidden="true"><i class="ion-ios-close"></i></span>
-                        </button>
-                     </div>
-                  </div>
                   {% csrf_token %}
 
                   <div class="input-group mb-3">
@@ -138,16 +128,6 @@
             </div>
             <form action="{% url 'voyages:voyages' %}" method="GET">
                <div class="modal-body">
-                  <div class="alert alert-info pb-1">
-                     <div class="container-fluid">
-                        <div class="d-flex">
-                           <p class="">Merci de bien remplire le formulaire</p>
-                        </div>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                           <span aria-hidden="true"><i class="ion-ios-close"></i></span>
-                        </button>
-                     </div>
-                  </div>
                   {% csrf_token %}
                   <div class="input-group mb-3">
                      {{ba.typev}}
@@ -397,6 +377,7 @@
    </div>
 </section>
 
+<!-- Header -->
 <section class="img bg-image">
    <div class="container">
       <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
@@ -474,6 +455,8 @@
       </div>
    </div>
 </section>
+
+
 <section class="">
    <div class="container-fluid">
       <div class="row bg-primary text-white">
@@ -501,6 +484,8 @@
       </div>
    </div>
 </section>
+
+
 <!-- Nos services -->
 <section class="mt-5 mb-5 container">
    <div class="row">
@@ -599,57 +584,86 @@
 <!-- formulaire de contacte -->
 <section class="mt-5 container">
    <div class="col-md-12 heading-title">
-      <h1>Contacter l'agence principal</h1>
+      <h1 class="text-warning titre">Contactez-nous pour plus d'infos</h1>
       <div id="" class="no-uicustom barre mb-5"></div>
    </div>
+   {% if statuscontact == 1 %}
+   <div class="alert alert-info pb-1">
+      <div class="container-fluid">
+         <div class="d-flex">
+            <p class="">Merci pour votre message ! Une réponse vous sera envoyée dans les plus brefs délais !</p>
+         </div>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+         </button>
+      </div>
+   </div>
+   {% endif %}
+
+   <!-- Message non envoyé -->
+   {% if statuscontact == 0 %}
+   <div class="alert alert-info pb-1">
+      <div class="container-fluid">
+         <div class="d-flex">
+            <p class="">Le message n'a pas été envoyé, merci de vérifier les informations que vous avez saisis</p>
+         </div>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+         </button>
+      </div>
+   </div>
+   {% endif %}
    <div class="row">
       <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 ">
-         <form action="" method="post" class="formulaire-contact">
+         <form action="" method="POST">
+            {% csrf_token %}
             <div class="row">
                <div class="col-6">
-                  <div class="form-group mb-3">
-                     <label for="">Votre nom complet: </label>
-                     <input type="text" class="form-control" placeholder=" " required>
+                  <label for="">Votre nom complet : </label>
+                  <div class="input-group mb-3">
+                     {{cf.nom}}
                   </div>
                </div>
                <div class="col-6">
-                  <div class="form-group mb-3">
-                     <label for="">Adresse électronique</label>
-                     <input type="text" class="form-control" placeholder=" " required>
+                  <label for="">Numéro de téléphone actif</label>
+                  <div class="input-group mb-3">
+                     {{cf.telephone}}
                   </div>
                </div>
                <div class="col-6">
-                  <div class="form-group mb-3">
-                     <label for="">Numéro de téléphone actif</label>
-                     <input type="text" class="form-control" placeholder=" " required>
+                  <label for="">Adresse électronique</label>
+                  <div class="input-group mb-3">
+                     {{cf.email}}
                   </div>
                </div>
                <div class="col-6">
-                  <div class="form-group mb-3">
-                     <label for="">Titre du message</label>
-                     <input type="text" class="form-control" placeholder=" " required>
+                  <label for="">Titre du message</label>
+                  <div class="input-group mb-3">
+                     {{cf.sujet}}
                   </div>
                </div>
                <div class="col-12">
-                  <div class="form-group">
-                     <label for="" class="label-form">Votre message bien détaillé</label>
-                     <textarea name="" class="form-control" placeholder=" " id=""></textarea>
+                  <label for="" class="label-form">Votre message bien détaillé</label>
+                  <div class="input-group mb-3">
+                     {{cf.message}}
                   </div>
                </div>
+            </div>
+            <div class="d-flex justify-content-end mb-5">
+               <button type="submit" class="btn btn-primary py-3 px-5">Envoyez le messages</button>
             </div>
          </form>
       </div>
       <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
-         <address class="adresse">
-            Bandracouni Anjouan (Comores) <br>
-            Téléphoen : (+269) 3000000 | (+269) 4000000 <br>
-            E-mail : missafara-rahissi@rahissi.com
+         <address class="adresse animated">
+            <span class="info-adresse"> <span class="ion-ios-home pr-3 text-primary"></span> Bandracouni Anjouan (Comores)</span> <br> <br>
+            <span class="info-adresse"> <span class="ion-ios-pin pr-3 text-primary"></span> Bandrani, en face du lycée privé Jules Ferry</span> <br> <br>
+            <span class="info-adresse"> <samp class="ion-ios-call pr-3 text-primary"></samp> Téléphoen : (+269) 3000000 | (+269) 4000000</span> <br> <br>
+            <span class="info-adresse"> <span class="ion-ios-beaker pr-3 text-primary"></span> RN2 BP : 0000 </span> <br> <br>
+            <span class="info-adresse"> <span class="ion-ios-mail pr-3 text-primary"></span> E-mail : c-transport@c-transport.com</span>
          </address>
       </div>
    </div>
 </section>
-
-
-
 
 {% endblock body %}
