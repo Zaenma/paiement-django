@@ -3,7 +3,20 @@
 
 {% block title %}C-Transport | accueil{% endblock %}
 
-
+{% block menu %}
+<li class="nav-item mt-2">
+   <a href="" type="button" class="text-white" data-toggle="modal" data-target="#bateau"> <b class="liens">Bateau</b> </a>
+</li>
+<li class="nav-item mt-2">
+   <a href="" type="bytton" class="text-white" data-toggle="modal" data-target="#avion"><b class="liens">Avion</b>  </a>
+</li>
+<li class="nav-item mt-2">
+   <a href="" type="button" class="text-white" data-toggle="modal" data-target="#bus"> <b class="liens">Bus</b> </a>
+</li>
+<li class="nav-item mt-2">
+   <span class="text-warning separe px-4">| </span>
+</li>
+{% endblock menu %}
 {% block header %}
 
 <!-- BOITE MODAL DE FORMULAIRE DES BUS -->
@@ -20,15 +33,6 @@
             </div>
             <form action="{% url 'voyages:voyages' %}" method="GET">
                <div class="modal-body">
-                  <div class="alert alert-info pb-1">
-                     <div class="d-flex">
-                        <p class="">Merci de bien remplire le formulaire</p>
-                     </div>
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="ion-ios-close"></i></span>
-                     </button>
-
-                  </div>
                   {% csrf_token %}
 
                   <div class="input-group mb-3">
@@ -165,7 +169,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content dialog-modale-form bg-white">
             <div class="modal-header tabulation-2 bg-info">
-               <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 text-white">
+               <ul class="nav nav-pills nav-fill d-flex d-block w-100 text-white">
                   <li class="nav-item">
                      <a class="nav-link py-3" data-toggle="tab" href="#bateau-bord"><span
                            class="ion-ios-boat mr-2"></span>Bateau</a>
@@ -273,7 +277,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content dialog-modale-form bg-white">
             <div class="modal-header tabulation-2 bg-info">
-               <ul class="nav nav-pills nav-fill d-md-flex d-block w-100 text-white">
+               <ul class="nav nav-pills nav-fill d-flex d-block w-100 text-white">
                   <li class="nav-item">
                      <a class="nav-link py-3" data-toggle="tab" href="#bateau-bord_"><span
                            class="ion-ios-boat mr-2"></span>Bateau</a>
@@ -395,25 +399,33 @@
                         arrivées</p>
                      <p class="mb-5 animated fadeInLeft">Pour les voyages inter-îles, seuls les transports maritimes ou
                         aériens sont possibles</p>
-                     <a href="#informations-supplementaire" class="btn btn-outline-warning px-lg-5 py-lg-3">Lire plus <i class="ion-ios-arrow-round-forward"></i> <i
+                     <a href="#informations-supplementaire" class="btn btn-outline-warning mt-5 px-lg-5 py-lg-3">Lire plus <i class="ion-ios-arrow-round-forward"></i> <i
                            class="ion-ios-arrow-round-forward"></i></a>
                   </div>
-                  <div class="row animated fadeInUp">
-                     <div class="col-md-4 col-sm-4 col-lg-4 col-4">
+                  <div class=" animated fadeInUp">
+                     <!-- <div class="col-md-4 col-sm-4 col-lg-4 col-4">
                         <h4 class="text-info description-bouton">Déplacement inter-villes</h4>
                         <a href="" type="button" class="btn btn-warning px-lg-5 py-lg-2" data-toggle="modal"
                            data-target="#bus">Bus</a>
-                     </div>
-                     <div class="col-md-8 col-sm-8 col-lg-8 col-8">
-                        <h4 class="text-center text-info description-bouton">Déplacement inter-îles</h4>
-                        <div class="d-flex justify-content-between">
+                     </div> -->
+                     <div class="">
+                        <!-- <h4 class="text-center text-info description-bouton">Déplacement inter-îles</h4> -->
+                        <div class="d-flex justify-content-end">
                            <div class="">
-                              <a href="" type="bytton" class="btn btn-primary px-lg-5 py-lg-2"
-                                 data-toggle="modal" data-target="#avion">Avion </a>
+                              <!-- <a href="" type="bytton" class="btn btn-primary px-lg-5 py-lg-2"
+                                 data-toggle="modal" data-target="#avion">Avion </a> -->
+                                 <a href="" type="bytton" class="btn btn-info mr-5 btn-formulaire-achat"
+                                            data-toggle="modal" data-target="#tableau-bord-arrivees">Arrivées <i
+                                                class="ion-ios-arrow-round-down"></i> <i
+                                                class="ion-ios-arrow-round-down"></i></a>
                            </div>
                            <div class="">
-                              <a href="" type="button" class="btn btn-info px-lg-5 py-lg-2"
-                                 data-toggle="modal" data-target="#bateau">Bateau</a>
+                              <!-- <a href="" type="button" class="btn btn-info px-lg-5 py-lg-2"
+                                 data-toggle="modal" data-target="#bateau">Bateau</a> -->
+                                 <a href="" type="button" class="btn btn-primary btn-formulaire-achat"
+                                            data-toggle="modal" data-target="#tableau-bord-departs">Départs <i
+                                                class="ion-ios-arrow-round-up"></i> <i
+                                                class="ion-ios-arrow-round-up"></i></a>
                            </div>
                         </div>
                      </div>
@@ -433,25 +445,33 @@
 
 {% block body %}
 
-<section class="container mt-5" id="informations-supplementaire">
+<section class="container my-5" id="informations-supplementaire">
    <hr class="fancy-line">
    <div class="row animated fadeInUp">
-      <div class="col-md-12 heading-title mt-5">
-         <h2 class="text-warning titre">C-Transports</h2>
+      <div class="col-md-12 heading-title  my-5">
+         <h2 class="text-warning titre">La solution simple, rapide et sécurisée pour acheter ses titres de transport</h2>
+         <!-- <h2 class="text-primary">La solution simple, rapide et sécurisée pour acheter vos titres de transport</h2> -->
       </div>
    </div>
    <div class="row">
       <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7 animated animated-fast">
          <p>
-            <b>C-Transports :</b> la communauté s'engageant sur la facilitation de l'accès aux titres de trasports.
+            <b>C-Transports :</b> vous propose une fonction d’achat de tickets virtuels. 
+            Comme l’Appli TCAT, le ticket virtuel est compatible avec tous les Smartphones IOS et Android. 
+            Le système intègre un module de vente sécurisé.
          </p>
-         <p>
-            On donne accès aux usagers de voyager avec différents réseaux de transports comoriens <br>
-            Quelque soit le moyen de transport souhaité, C-Transports vous accompagne avec assurance
-         </p>
+         <p>Validez votre titre sur l’application en montant dans le bus et présentez-le à l’agent de conduite.</p>
+         <div class="">
+            <h4 class="text-warning">C-Transport, un système avantageux</h4>
+            <b class="text-primary mb-4"><i class="ion-ios-arrow-round-forward"></i> Achat rapide et sécurisé</b> <br> <br>
+            <b class="text-primary mb-4"><i class="ion-ios-arrow-round-forward"></i> Contrôle facilité vérification à vue, avec les nouvelles technologies </b> <br> <br>
+            <b class="text-primary pb-4"><i class="ion-ios-arrow-round-forward"></i> Possibilité de stocker plusieurs titres de transport (cas d'abonnement)</b> <br> <br>
+            <b class="text-primary mb-4"><i class="ion-ios-arrow-round-forward"></i> Service accécible à tout moment</b> <br> <br>
+            <b class="text-primary mb-4"><i class="ion-ios-arrow-round-forward"></i> Achat rapide et sécurisé</b>
+         </div>
       </div>
       <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5 text-right">
-         <img src="{% static "images/1.svg" %}" alt="Round Image" class="rounded img-fluid image-2 w-50 h-75">
+         <img src="{% static "images/1.svg" %}" alt="Round Image" class="rounded img-fluid image-2 w-75 h-75">
       </div>
    </div>
 </section>
@@ -495,37 +515,33 @@
       </div>
    </div>
    <div class="row">
-      <div class="col-12 col-sm-6 col-md-4 mb-2 col-lg-4 col-xl-4">
+      <div class="col-12 col-sm-6 col-md-6 mb-2 col-lg-6 col-xl-6">
          <div class="card text-left">
-            <div class="pt-5">
-               <img class="card-img-top" src="{% static "images/stb.svg" %}" alt="">
-            </div>
             <div class="card-body">
-               <h4 class="card-title">Transports terrestres</h4>
-               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-                  enim dolorum vero. Doloribus, aliquam iure id fugiat dolorum beatae recusandae.</p>
+               <h4 class="">Deplacement inter-villes</h4>
+               <div class="d-flex justify-contect-between">
+                  <div class="w-75">
+                     <img class="img-fluid img-transport" src="{% static "images/stb.svg" %}" alt="">
+                  </div>
+                  <p class="card-text">Pour les deplacements à l'intérieur d'une île, il existe de nombreux bus pour les transports en commun. <br> 
+                     Ce moyen de transport est uniquement pour les trajets inter-villes</p>
+               </div>
             </div>
          </div>
       </div>
-      <div class="col-12 col-sm-6 mb-2 w-75 col-md-4 col-lg-4 col-xl-4">
-         <div class="card text-left">
-            <div class="pt-2">
-               <img class="card-img-top" src="{% static "images/av.svg" %}" alt="">
-            </div>
+      <div class="col-12 col-sm-6 mb-2 col-md-6 col-lg-6 col-xl-6">
+         <div class="card">
             <div class="card-body">
-               <h4 class="card-title">Transports aériens</h4>
-               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-                  animi assumenda soluta atque debitis adipisci numquam nemo voluptatibus optio qui!</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-12 col-sm-6 mb-2 col-md-4 col-lg-4 col-xl-4">
-         <div class="card text-left">
-            <img class="card-img-top" src="{% static "images/ba.svg" %}" alt="">
-            <div class="card-body">
-               <h4 class="card-title">Trasports maritimes</h4>
-               <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-                  omnis modi asperiores! Soluta eius et quia, esse animi laudantium voluptate.</p>
+               <h4 class="card-title">Delacement inter-îles</h4>
+               <div class="d-flex justify-contect-between">
+                  <div class="w-75">
+                     <img class="img-fluid img-transport" src="{% static "images/av.svg" %}" alt="">
+                  </div>
+                  <p class="card-text _texte_">Pour circuler entre les différentes îles (Grande-Comore, Moheli et Anjouan) on a le choix entre le bateau et l'avion. <br>
+                     différentes compagnies maritimes et aériennes comoriennes desservent les îles quotidienment.
+                      <!-- Elles se valent sur le plan de la fiabilité et des prix. Il est bien sûr beaucoup moins cher de prendre le bateau. Il existe une compagnie de bateaux rapides (4 heures entre Moroni et Anjouan). Cela peut être très agréable par beau temps, cauchemardesque par mer agitée. 
+                        Comptez 70 / 80 euros pour Moroni Anjouan en avion aller simple; 30 à 35 euros en bateau. De part son statut Mayotte est un cas à part, elle est desservie par la compagnie EWA (chère) et par bateau uniquement au départ d'Anjouan, assez cher aussi, compter une centaine d'euros. --> </p> 
+               </div>
             </div>
          </div>
       </div>
@@ -533,7 +549,7 @@
 </section>
 
 <!-- Les modes de paiement -->
-<section class="mt-5 mb-5 container">
+<!-- <section class="mt-5 mb-5 container">
    <div class="description-paiement">
       <div class="col-md-12 heading-title">
          <h2 class="text-warning titre">Modes de paiement</h2>
@@ -579,12 +595,29 @@
          </div>
       </div>
    </div>
+</section> -->
+
+<!-- Téléchargement des applications -->
+
+<section class="bg-info my-5 py-3">
+   <div class="container">
+      <h2 class="titre text-center pb-2 text-white">Télécharger notre application mobile pour bénéficier d'avantage</h2>
+      <!-- <p class="text-white"></p> -->
+      <div class="d-flex text-center">
+         <div class="">
+            <a href=""><img src="{% static "images/app-store.png" %}" class="img-fluid w-50 rounded ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></a>
+         </div>
+         <div class="">
+            <a href=><img src="{% static "images/google-play.png" %}" class="img-fluid w-50 rounded ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></a>
+         </div>
+      </div>
+   </div>
 </section>
 
 <!-- formulaire de contacte -->
 <section class="mt-5 container">
    <div class="col-md-12 heading-title">
-      <h1 class="text-warning titre">Contactez-nous pour plus d'infos</h1>
+      <h2 class="text-warning titre">Contactez-nous pour plus d'infos</h2>
       <div id="" class="no-uicustom barre mb-5"></div>
    </div>
    {% if statuscontact == 1 %}
@@ -619,7 +652,7 @@
             {% csrf_token %}
             <div class="row">
                <div class="col-6">
-                  <label for="">Votre nom complet : </label>
+                  <label for="">Nom complet </label>
                   <div class="input-group mb-3">
                      {{cf.nom}}
                   </div>
@@ -643,14 +676,14 @@
                   </div>
                </div>
                <div class="col-12">
-                  <label for="" class="label-form">Votre message bien détaillé</label>
+                  <label for="" class="label-form">Message détaillé</label>
                   <div class="input-group mb-3">
                      {{cf.message}}
                   </div>
                </div>
             </div>
             <div class="d-flex justify-content-end mb-5">
-               <button type="submit" class="btn btn-primary py-3 px-5">Envoyez le messages</button>
+               <button type="submit" class="btn btn-primary py-3 px-5">Envoyer</button>
             </div>
          </form>
       </div>
@@ -658,9 +691,10 @@
          <address class="adresse animated">
             <span class="info-adresse"> <span class="ion-ios-home pr-3 text-primary"></span> Bandracouni Anjouan (Comores)</span> <br> <br>
             <span class="info-adresse"> <span class="ion-ios-pin pr-3 text-primary"></span> Bandrani, en face du lycée privé Jules Ferry</span> <br> <br>
-            <span class="info-adresse"> <samp class="ion-ios-call pr-3 text-primary"></samp> Téléphoen : (+269) 3000000 | (+269) 4000000</span> <br> <br>
+            <span class="info-adresse"> <samp class="ion-ios-call pr-3 text-primary"></samp> Téléphones : (+269) 3000000 | (+269) 4000000</span> <br> <br>
             <span class="info-adresse"> <span class="ion-ios-beaker pr-3 text-primary"></span> RN2 BP : 0000 </span> <br> <br>
-            <span class="info-adresse"> <span class="ion-ios-mail pr-3 text-primary"></span> E-mail : c-transport@c-transport.com</span>
+            <span class="info-adresse"> <span class="ion-ios-mail pr-3 text-primary"></span> E-mail : c-transport@c-transport.com</span> <br><br>
+            <span class="info-adresse"> <span class="ion-ios-archive pr-3 text-primary"></span> E-mail personnel : contact.zaenma@gmail.com</span>
          </address>
       </div>
    </div>

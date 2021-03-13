@@ -11,8 +11,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar px-0 navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="{% url 'infos:dashbord' %}"><span
-                                class="text-warning">C-</span>T | {{ ag.nom }}</a>
+                        <a class="navbar-brand" href="{% url 'infos:dashbord' %}"><span class="text-warning">C-</span>T
+                            | {{ ag.nom }}</a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,10 +22,10 @@
                         <div class="collapse navbar-collapse" id="ftco-nav">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item d-flex">
-                                    <a class="nav-link d-flex align-items-center actif" href="#"><i
-                                            class="ion-ios-notifications"></i> <sup class="notification">0</sup></a>
                                 </li>
                                 <li class="nav-item d-flex">
+                                    <a class="nav-link d-flex align-items-center actif" href="#"><i
+                                            class="ion-ios-notifications"></i> <sup class="notification">0</sup></a>
                                     <a class="nav-link d-flex align-items-center actif" href="#"> <i
                                             class="ion-ios-chatboxes"></i> <sup class="notification">5</sup> </a>
                                     <a class="nav-link d-flex align-items-center actif" href="#"> <i
@@ -37,12 +37,12 @@
                                     <a class="nav-link d-flex align-items-center actif" href="#"> <i
                                             class="ion-ios-bus"></i><sup class="notification">0</sup></a>
                                 </li>
-                                <li class="nav-item d-flex">
+                                <li class="nav-item d-flex text-center">
                                     <a class="nav-link d-flex align-items-center actif" href="#">Paramèttres</a>
-                                </li>
-                                <li class="nav-item d-flex">
                                     <a class="nav-link d-flex align-items-center actif"
                                         href="{% url 'accueil:index-accueil' %}">Déconnexion</a>
+                                </li>
+                                <li class="nav-item d-flex">
                                 </li>
                             </ul>
                         </div>
@@ -57,185 +57,280 @@
 
 
 {% block header %}
-
-
 <section>
     <div class="container">
         <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
             <div class=" text w-100 page-accueil">
                 <h2 class="text-primary mt-5 animated fadeInLeft"></h2>
-                
+
             </div>
         </div>
     </div>
 </section>
-
 {% endblock header %}
 
 
 {% block body %}
-    <!-- Wrapper -->
-    <div id="wrapper">
-        <section class="container">
-            {% if action == None and element == None %}
-            <div class="mb-5">
-
-                <h2 class="text-primary mt-5 animated fadeInLeft">Vue d'ensemble</h2>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card animated fadeInLeft">
-                            <div class="card-header bg-primary">
-                                <h5 class="text-white">Vente du jour</h5>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">0 vente</h4>
-                                <a href="{% url 'infos:dashbord' 'detail' 'vente-jour' %}" class="btn btn-outline-primary">Voir les details <i class="ion-ios-arrow-round-forward"></i> </a>
-                            </div>
+<!-- Wrapper -->
+<div id="wrapper">
+    <section class="container">
+        {% if action == None and element == None %}
+        <div class="mb-5">
+            <h2 class="text-primary mb-5 animated fadeInLeft">Vue d'ensemble</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card animated fadeInLeft">
+                        <div class="card-header bg-white">
+                            <h6 class="text-center">Vente du jour</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4 class=""> {{nombreticketvendu}} vente{{ nbvg|pluralize:"s" }}</h4>
+                        </div>
+                        <div class="card-footer bg-white d-flex justify-content-end">
+                            <a href="{% url 'infos:dashbord' 'vente-jour' %}"
+                            class="btn btn-outline-primary">Voir les details <i
+                                class="ion-ios-arrow-round-forward"></i> </a>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card  animated fadeInUp">
-                            <div class="card-header bg-info">
-                                <h5 class="text-white">Evolution de l'agence</h5>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">0,00%</h4>
-                                <a href="{% url 'infos:dashbord' 'detail' 'activite' %}" class="btn btn-outline-info">Voir les details <i class="ion-ios-arrow-round-forward"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card animated fadeInUp">
-                            <div class="card-header bg-warning">
-                                <h5 class="text-white">Sièges restantes</h5>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title"> {{ nbvg }} siège{{ nbvg|pluralize:"s" }} restant{{ nbvg|pluralize:"s" }} </h4>
-                                <a href="{% url 'infos:dashbord' 'detail' 'place-restant' %}" class="btn btn-outline-warning">Voir les details <i class="ion-ios-arrow-round-forward"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card animated fadeInRight">
-                            <div class="card-header bg-secondary">
-                                <h5 class="text-white">Messages non répondus</h5>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">5 Messages</h4>
-                                <a href="{% url 'infos:dashbord' 'detail' 'message' %}" class="btn btn-outline-secondary">Voir les details <i class="ion-ios-arrow-round-forward"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3"></div>
                 </div>
-                <hr>
+                <div class="col-md-3">
+                    <div class="card animated fadeInUp">
+                        <div class="card-header bg-white">
+                            <h6 class="text-center">Evolution de l'agence</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4 class="card-title">0,00%</h4>
+                        </div>
+                        <div class="card-footer bg-white d-flex justify-content-end">
+                            <a href="{% url 'infos:dashbord' 'activite' %}" class="btn btn-outline-info">Voir
+                                les details <i class="ion-ios-arrow-round-forward"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card animated fadeInUp">
+                        <div class="card-header bg-white">
+                            <h6 class="text-center">Trajets prévus</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4 class=""> {{ nbvg }} trajet{{ nbvg|pluralize:"s" }}
+                                restant{{ nbvg|pluralize:"s" }} </h4>
+                        </div>
+                        <div class="card-footer bg-white d-flex justify-content-end">
+                            <a href="{% url 'infos:dashbord' 'place-restant' %}"
+                                class="btn btn-outline-warning">Voir les details <i
+                                    class="ion-ios-arrow-round-forward"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 card-admin">
+                    <div class="card animated fadeInRight">
+                        <div class="card-header bg-white">
+                            <h6 class="text-center">Messages non répondus</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4 class="card-title">5 Messages</h4>
+                        </div>
+                        <div class="card-footer bg-white d-flex justify-content-end">
+                            <a href="{% url 'infos:dashbord' 'message' %}"
+                                class="btn btn-outline-secondary">Voir les details <i
+                                    class="ion-ios-arrow-round-forward"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
 
-                <!-- Chat -->
-                <section class="">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="card-header bg-primary">
-                                    <h5 class="text-white">Discussions</h5>
+            <!-- Chat -->
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="">Discussions</h5>
+                            </div>
+                            <div class="card-body scroller">
+                                <div class="d-flex">
+                                    <div class="">
+                                        <span>Bonjour Zaenma !.</span> <br>
+                                        <small>Admin</small>
+                                    </div>
                                 </div>
-                                <div class="card-body scroller">
-                                    <div class="d-flex">
-                                        <span class="logo-profil text-white mr-1 pr-1 pl-1">C-T</span>
+                                <div class="d-flex">
+                                    <div class="text-right w-100">
                                         <div class="">
-                                            <span>Bonjour Zaenma !.</span> <br>
-                                            <small>Admin</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="text-right w-100">
-                                            <div class="">
-                                                <span>Bonjour Administrateur !</span> <br>
-                                                <small>Zaenma</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <span class="logo-profil text-white mr-1 pr-1 pl-1">C-T</span>
-                                        <div class="">
-                                            <span>ça va, tout va bien !</span> <br>
-                                            <small>Admin</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="text-right w-100">
-                                            <div class="">
-                                                <span>Ouais, tout est super !</span> <br>
-                                                <small>Zaenma</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <span class="logo-profil text-white mr-1 pr-1 pl-1">C-T</span>
-                                        <div class="">
-                                            <span>L'affichage est correcte ?</span> <br>
-                                            <small>Admin</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="text-right w-100">
-                                            <div class="">
-                                                <span>Oui, bien affiché</span> <br>
-                                                <small>Zaenma</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <span class="logo-profil text-white mr-1 pr-1 pl-1">C-T</span>
-                                        <div class="">
-                                            <span>Bravoooooo !!!</span> <br>
-                                            <small>Admin</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="text-right w-100">
-                                            <div class="">
-                                                <span>Merci boss :) </span> <br>
-                                                <small>Zaenma</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <span class="logo-profil text-white mr-1 pr-1 pl-1">C-T</span>
-                                        <div class="">
-                                            <span>Je t'en prie !</span> <br>
-                                            <small>Admin</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="text-right w-100">
-                                            <div class="">
-                                                <span>A plus tard</span> <br>
-                                                <small>Zaenma</small>
-                                            </div>
+                                            <span>Bonjour Administrateur !</span> <br>
+                                            <small>Zaenma</small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer">
-                                    <div class="d-flex justify-content-between border border-bottom-1 border-top-0 border-left-0 border-right-0">
-                                        <textarea name="" id="" class="form-control form-chat border-0" placeholder="Message..."></textarea>
-                                        <div class="mt-2 lien-envoie">
-                                            <a href="">
-                                                <span class=""><i class="ion-ios-send"></i></span>
-                                            </a>
+                                <div class="d-flex">
+                                    <div class="">
+                                        <span>ça va, tout va bien !</span> <br>
+                                        <small>Admin</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="text-right w-100">
+                                        <div class="">
+                                            <span>Ouais, tout est super !</span> <br>
+                                            <small>Zaenma</small>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="">
+                                        <span>L'affichage est correcte ?</span> <br>
+                                        <small>Admin</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="text-right w-100">
+                                        <div class="">
+                                            <span>Oui, bien affiché</span> <br>
+                                            <small>Zaenma</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="">
+                                        <span>Bravoooooo !!!</span> <br>
+                                        <small>Admin</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="text-right w-100">
+                                        <div class="">
+                                            <span>Merci boss :) </span> <br>
+                                            <small>Zaenma</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="">
+                                        <span>Je t'en prie !</span> <br>
+                                        <small>Admin</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="text-right w-100">
+                                        <div class="">
+                                            <span>A plus tard</span> <br>
+                                            <small>Zaenma</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div
+                                    class="d-flex justify-content-between border border-bottom-1 border-top-0 border-left-0 border-right-0">
+                                    <textarea name="" id="" class="form-control form-chat border-0"
+                                        placeholder="Message..."></textarea>
+                                    <div class="mt-2 lien-envoie">
+                                        <a href="">
+                                            <span class=""><i class="ion-ios-send"></i></span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                {% endif %}
-                <!-- ==================== Ajouter un voyage aérien =================== -->
-                {% if action == "ajout" and element == "aerien" %}
-                <div class="">
+                </div>
+            </section>
+            {% endif %}
+            
+            <!-- ==================== Ajouter un voyage aérien =================== -->
+            {% if action == "ajout" and element == "aerien" %}
+            <div class="">
+                <div class="my-4">
+                    <div class="alert alert-info">
+                        <h4 class=""> Ajout d'un voyage aérien</h4>
+                    </div>
+                    {% if statut %}
+                    <div class="alert alert-success">
+                        <b>Action effectuer avec succès</b>
+                    </div>
+                    {% endif %}
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span>Le nom de l'agence <i class="text-danger">*</i> </span>
+                            <div class="form-group">
+                                {{form.agencePrincipal}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Code (Identifiant) du voyage <i class="text-danger">*</i> </span>
+                            <div class="form-group">
+                                {{form.codeVoyage}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Ville de depart <i class="text-danger">*</i> </span>
+                            <div class="form-group">
+                                {{form.villeDepart}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Ville de destination <i class="text-danger">*</i> :</span>
+                            <div class="form-group">
+                                {{form.villeArrivee}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Ville d'éscale : </span>
+                            <div class="form-group">
+                                {{form.villeEscale}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Date de depart <i class="text-danger">*</i> : </span>
+                            <div class="form-group">
+                                {{form.dateDepert}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Date d'arrivée <i class="text-danger">*</i> : </span>
+                            <div class="form-group">
+                                {{form.dateArrivee}}
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <span>Nombre de siège disponible <i class="text-danger">*</i> :</span>
+                            <div class="form-group">
+                                {{form.nombreSiege}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Prix par siège <i class="text-danger">*</i> : </span>
+                            <div class="form-group">
+                                {{form.prix}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <span>Quantité de bagages en KG :</span>
+                            <div class="form-group">
+                                {{form.bagage}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Ajouter le voyage</button>
+                </form>
+            </div>
+            {% endif %}
+
+            <!-- ======================= Ajouter un voyage maritime ===================== -->
+            {% if action == "ajout" and element == "maritime" %}
+            <div class="card">
+                <div class="card-body">
                     <div class="my-4">
                         <div class="alert alert-info">
-                            <h4 class=""> Ajout d'un voyage aérien</h4>
+                            <h4 class=""> Ajout d'un voyage maritime</h4>
                         </div>
                         {% if statut %}
                         <div class="alert alert-success">
@@ -289,7 +384,6 @@
                                     {{form.dateArrivee}}
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <span>Nombre de siège disponible <i class="text-danger">*</i> :</span>
                                 <div class="form-group">
@@ -309,673 +403,597 @@
                                 </div>
                             </div>
                         </div>
-
                         <button type="submit" class="btn btn-primary">Ajouter le voyage</button>
                     </form>
                 </div>
-                {% endif %}
-
-                <!-- ======================= Ajouter un voyage maritime ===================== -->
-                {% if action == "ajout" and element == "maritime" %}
-                <div class="card">
-                    <div class="card-body">
-                        <div class="my-4">
-                            <div class="alert alert-info">
-                                <h4 class=""> Ajout d'un voyage maritime</h4>
-                            </div>
-                            {% if statut %}
-                            <div class="alert alert-success">
-                                <b>Action effectuer avec succès</b>
-                            </div>
-                            {% endif %}
-                        </div>
-                        <form action="" method="post">
-                            {% csrf_token %}
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span>Le nom de l'agence <i class="text-danger">*</i> </span>
-                                    <div class="form-group">
-                                        {{form.agencePrincipal}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Code (Identifiant) du voyage <i class="text-danger">*</i> </span>
-                                    <div class="form-group">
-                                        {{form.codeVoyage}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Ville de depart <i class="text-danger">*</i> </span>
-                                    <div class="form-group">
-                                        {{form.villeDepart}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Ville de destination <i class="text-danger">*</i> :</span>
-                                    <div class="form-group">
-                                        {{form.villeArrivee}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Ville d'éscale : </span>
-                                    <div class="form-group">
-                                        {{form.villeEscale}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Date de depart <i class="text-danger">*</i> : </span>
-                                    <div class="form-group">
-                                        {{form.dateDepert}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Date d'arrivée <i class="text-danger">*</i> : </span>
-                                    <div class="form-group">
-                                        {{form.dateArrivee}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Nombre de siège disponible <i class="text-danger">*</i> :</span>
-                                    <div class="form-group">
-                                        {{form.nombreSiege}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Prix par siège <i class="text-danger">*</i> : </span>
-                                    <div class="form-group">
-                                        {{form.prix}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Quantité de bagages en KG :</span>
-                                    <div class="form-group">
-                                        {{form.bagage}}
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Ajouter le voyage</button>
-                        </form>
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-- ======================= Ajouter une ville ===================== -->
-                {% if action == "ajout" and element == "ville" %}
-                <div class="">
-                    <div class="alert alert-info">
-                        <h4 class=""> Ajout d'une ville</h4>
-                    </div>
-                    {% if statut %}
-                    <div class="alert alert-success">
-                        <b>Action effectuer avec succès</b>
-                    </div>
-                    {% endif %}
-                    <form action="" method="POST">
-                        {% csrf_token %}
-
-                        <div class="form-group">
-                            {{ form.nom }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.ile }}
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ajouter la ville</button>
-                    </form>
-                </div>
-                {% endif %}
-
-                <!-- ================== Ajouter une ville ======================= -->
-
-                {% if action == "ajout" and element == "ile" %}
-                <div class="">
-                    <div class="alert alert-info">
-                        <h4 class=""> Ajout d'une île</h4>
-                    </div>
-                    {% if statut %}
-                    <div class="alert alert-success">
-                        <b>Action effectuer avec succès</b>
-                    </div>
-                    {% endif %}
-                    <form action="" method="post">
-                        {% csrf_token %}
-
-                        <div class="form-group">
-                            {{form.as_p}}
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Ajouter une île</button>
-                    </form>
-                </div>
-                {% endif %}
-
-                <!-- ======================== Afficher les voyages aériens ================================= -->
-
-                {% if action == "affiche" and element == "aerien" %}
-                <div class="">
-                    <h4 class="mt-3 mb-3 fadeOut">Liste des vols déjà prévus</h4>
-                    <div class="card text-left">
-                        <div class="card-header mb-3">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
-                                </div>
-                                <div class="col-md-4">
-                                    <a class="btn btn-primary w-100 text-white">Ajouter <i class="icon-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table border-top-0">
-                                <thead>
-                                    <tr>
-                                        <th class="identifiant-cache">Identifiant</th>
-                                        <th>depart</th>
-                                        <th>destination</th>
-                                        <th>D. depart</th>
-                                        <th class="dure-cache">Durée</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for inf in donnee %}
-                                    <tr>
-                                        <td class="identifiant-cache"> <a
-                                                href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
-                                        </td>
-                                        <td>{{ inf.villeDepart }}</td>
-                                        <td>{{ inf.villeArrivee }}</td>
-                                        <td>{{ inf.dateDepert }}</td>
-                                        <td class="dure-cache">{{ duree }}</td>
-                                        <td>{{ inf.prix }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ----------------------- Pagination ------------------------ -->
-                        <div class="card-footer mb-0">
-                            <div class="d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="pagination pagination-1 mb-4">
-                                            {% if donnee.has_previous %}
-                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
-                                            {% endif %}
-
-                                            <a href="" class="active">{{ donnee.number }}</a>
-                                            
-                                            {% if donnee.has_next %}
-                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="current">
-                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mt-5 text-center">
-                        <h1 class="text-success">Elle sera bientôt disponible</h1>
-                    </div>
-                </div>
-                {% endif %}
-                <!-- ======================== Afficher les voyages maritime ================================= -->
-
-                {% if action == "affiche" and element == "maritime" %}
-                <div class="">
-                    <h4>Liste des voyages prévus pour votre agence</h4>
-                    <div class="card text-left">
-                        <div class="card-header mb-3">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
-                                </div>
-                                <div class="col-md-4">
-                                    <a class="btn btn-primary w-100 text-white">Ajouter <i class="icon-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table border-top-0">
-                                <thead>
-                                    <tr>
-                                        <th class="identifiant-cache">Identifiant</th>
-                                        <th>Départ</th>
-                                        <th>destination</th>
-                                        <th>D. depart</th>
-                                        <th class="dure-cache">Durée</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for inf in donnee %}
-                                    <tr>
-                                        <td class="identifiant-cache">
-                                            <a
-                                                href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
-                                        </td>
-                                        <td>{{ inf.villeDepart }}</td>
-                                        <td>{{ inf.villeArrivee }}</td>
-                                        <td>{{ inf.dateDepert }}</td>
-                                        <td class="dure-cache">{{ duree }}</td>
-                                        <td>{{ inf.prix }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ----------------------- pagination -----------------------  -->
-                        <div class="card-footer mb-0">
-                            <div class="d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="pagination pagination-1 mb-4">
-                                            {% if donnee.has_previous %}
-                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
-                                            {% endif %}
-
-                                            <a href="" class="active">{{ donnee.number }}</a>
-
-                                            {% if donnee.has_next %}
-                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
-                                            {% endif %}
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="current">
-                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-- ======================== Afficher les voyages terrestre ================================= -->
-
-                {% if action == "affiche" and element == "terreste" %}
-                <div class="">
-                    <h4>Liste des voyages prévus pour votre agence</h4>
-                    <div class="card text-left">
-                        <div class="card-header mb-3">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="" class="btn btn-primary w-100 text-white">Ajouter <i
-                                            class="icon-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table border-top-0">
-                                <thead>
-                                    <tr>
-                                        <th class="identifiant-cache">Identifiant</th>
-                                        <th>Départ</th>
-                                        <th>Destination</th>
-                                        <th>D. depart</th>
-                                        <th class="dure-cache">Durée</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for inf in donnee %}
-                                    <tr>
-                                        <td>
-                                            <a
-                                                href="{% url 'infos:dashbord' 'modification' inf.codeVoyage %}">{{ inf.codeVoyage }}</a>
-                                        </td>
-                                        <td class="identifiant-cache">{{ inf.villeDepart }}</td>
-                                        <td>{{ inf.villeArrivee }}</td>
-                                        <td>{{ inf.dateDepert }}</td>
-                                        <td class="dure-cache">{{ duree }}</td>
-                                        <td>{{ inf.prix }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ----------------------- Pagination ----------------------- -->
-                        <div class="card-footer mb-0">
-                            <div class="d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="pagination pagination-1 mb-4">
-                                            {% if donnee.has_previous %}
-                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
-                                            {% endif %}
-
-                                            <a href="" class="active">{{ donnee.number }}</a>
-
-                                            {% if donnee.has_next %}
-                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
-                                            {% endif %}
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="current">
-                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                <!-- ====================== Afficher les îles ======================= -->
-
-                {% if action == "affiche" and element == "ile" %}
-                <div class="">
-                    <div class="card text-left">
-                        <div class="card-header">
-                            <h4>Liste des îles disponible</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="table border-top-0">
-                                <thead>
-                                    <tr>
-                                        <th>#id</th>
-                                        <th>Nome</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for inf in donnee %}
-                                    <tr>
-                                        <td>{{ inf.id }}</td>
-                                        <td>{{ inf.nom }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                <!-- ===================== Afficher les villes =========================== -->
-
-                {% if action == "affiche" and element == "ville" %}
-                <div class="">
-                    <div class="card text-left">
-                        <div class="card-header">
-                            <h4>Liste des villes disponible</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#id</th>
-                                        <th>Ville</th>
-                                        <th>Île</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for inf in donnee %}
-                                    <tr>
-                                        <td>{{ inf.id }}</td>
-                                        <td>{{ inf.nom }}</td>
-                                        <td>{{ inf.ile }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ----------------------- Pagination ----------------------- -->
-                        <div class="card-footer mb-0">
-                            <div class="d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="pagination pagination-1 mb-4">
-                                            {% if donnee.has_previous %}
-                                            <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
-                                            {% endif %}
-
-                                            <a href="" class="active">{{ donnee.number }}</a>
-
-                                            {% if donnee.has_next %}
-                                            <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
-                                            {% endif %}
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="current">
-                                        Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                {% if action == "detail" and element == "place-restant" %}
-                    <div class="titre text-warning">
-                        <h2>Détaile du reste de tickets</h2>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Nombre de sièges restant pour les voyages aériens</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="">
-                                <div class="card text-left">
-                                    <div class="card-header mb-3">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <a class="btn btn-primary w-100 text-white">Ajouter <i class="icon-plus"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="table border-top-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="identifiant-cache">Identifiant</th>
-                                                    <th>depart</th>
-                                                    <th>destination</th>
-                                                    <th>D. depart</th>
-                                                    <th class="dure-cache">Durée</th>
-                                                    <th>Prix</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for inf in donnee %}
-                                                <tr>
-                                                    <td class="identifiant-cache"> <a
-                                                            href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
-                                                    </td>
-                                                    <td>{{ inf.villeDepart }}</td>
-                                                    <td>{{ inf.villeArrivee }}</td>
-                                                    <td>{{ inf.dateDepert }}</td>
-                                                    <td class="dure-cache">{{ duree }}</td>
-                                                    <td>{{ inf.prix }}</td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- ----------------------- Pagination ------------------------ -->
-                                    <div class="card-footer mb-0">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="pagination pagination-1 mb-4">
-                                                        {% if donnee.has_previous %}
-                                                        <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
-                                                        {% endif %}
-            
-                                                        <a href="" class="active">{{ donnee.number }}</a>
-                                                        
-                                                        {% if donnee.has_next %}
-                                                        <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <span class="current">
-                                                    Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            <h4>Nombre de sièges restant pour les voyages aériens</h4>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Title</h4>
-                            <p class="card-text">Text</p>
-                        </div>
-                        <div class="card-header">
-                            <h4>Nombre de sièges restant pour les voyages aériens</h4>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Title</h4>
-                            <p class="card-text">Text</p>
-                        </div>
-                    </div>
-                {% endif %}
             </div>
-        </section>
+            {% endif %}
 
-        <!-- Sidebar -->
-        <div id="sidebar" class="bg-dark">
-            <div class="inner">
-                <h4 class="text-center text-secondary titre-menu"> {{ ag.nom }} | {{user.username}} </h4>
-                <hr class="hr-menu">
-                <!-- Menu -->
-                <nav id="menu">
+            <!-- ======================= Ajouter une ville ===================== -->
+            {% if action == "ajout" and element == "ville" %}
+            <div class="">
+                <div class="alert alert-info">
+                    <h4 class=""> Ajout d'une ville</h4>
+                </div>
+                {% if statut %}
+                <div class="alert alert-success">
+                    <b>Action effectuer avec succès</b>
+                </div>
+                {% endif %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        {{ form.nom }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.ile }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter la ville</button>
+                </form>
+            </div>
+            {% endif %}
+
+            <!-- ================== Ajouter une ville ======================= -->
+
+            {% if action == "ajout" and element == "ile" %}
+            <div class="">
+                <div class="alert alert-info">
+                    <h4 class=""> Ajout d'une île</h4>
+                </div>
+                {% if statut %}
+                <div class="alert alert-success">
+                    <b>Action effectuer avec succès</b>
+                </div>
+                {% endif %}
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        {{form.as_p}}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Ajouter une île</button>
+                </form>
+            </div>
+            {% endif %}
+
+            <!-- ======================== Afficher les voyages aériens ================================= -->
+
+            {% if action == "affiche" and element == "aerien" %}
+            <div class="">
+                <h4 class="mt-3 mb-3 fadeOut">Liste des vols déjà prévus</h4>
+                <div class="text-left">
+                    <div class="card-header mb-3">
+                        <div class="d-flex justify-content-between">
+                            <input type="text" class="form-control w-25" placeholder="Filtrer par ville de depart">
+                            <a class="btn btn-primary text-white"><i class="icon-plus"></i></a>
+                        </div>
+                    </div>
+                    <div class="">
+                        <table class="table border-top-0">
+                            <thead>
+                                <tr class="border-top-0">
+                                    <th class="identifiant-cache">Code du trajet</th>
+                                    <th>Programmé le </th>
+                                    
+                                    <th class="">Départ</th>
+                                    <th class="">Arrivée</th>
+                                    <th class="">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inf in donnee %}
+                                <tr>
+                                    <td class="identifiant-cache"> <a
+                                            href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
+                                    </td>
+                                    <td>{{ inf.dateAjoutee|date }} à {{ inf.dateAjoutee|time }}</td>
+                                    <td>{{ inf.villeDepart }} </td>
+                                    <td>{{ inf.villeArrivee }}</td>
+                                    <td class="d-flex justify-content-end">
+                                        <a href="" type="button" class="btn btn-info mx-2" data-toggle="modal"
+                                        data-target="#affiche_{{inf.id}}"><i class="ion-ios-eye"></i></a>
+                                        <a href="" class="btn btn-yellow mx-2"><i class="ion-ios-eye-off"></i></a>
+                                        <a href="" class="btn btn-danger mx-2"><i class="ion-ios-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <!-- Modal d'affichage -->
+                                <section>
+                                    <div class="modal fade" id="affiche_{{inf.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                       aria-hidden="true">
+                                       <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content dialog-modale-form">
+                                                <div class="modal-header">
+                                                    <b class="modal-title text-warning" id="exampleModalLongTitle">Trajet numéro {{inf.codeVoyage}} </b>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Assuré par <b class="text-primary">{{inf.agencePrincipal}}</b> </h5> <br>
+                                                    <p>Provenance de <b class="text-primary">{{ inf.villeDepart }}</b> le <b class="text-primary">{{ inf.dateDepert|date }} à {{ inf.dateDepert|time }}</b></p>
+                                                    <p>Destination <b class="text-primary">{{ inf.villeArrivee }}</b> le <b class="text-primary">{{ inf.dateArrivee|date }} à {{ inf.dateArrivee|time }}</b> </p>
+                                                    <p> <i class="icon"></i> Ville d'escale : <b class="text-primary">{{ inf.villeEscale }}</b> </p>
+                                                    <p class="ml-4">Arrivée : <b class="text-primary">{{ inf.villeEscale }}</b> </p>
+                                                    <p class="ml-4">Départ : <b class="text-primary">{{ inf.villeEscale }}</b> </p>
+                                                    <p>Quantité de bagage autorisée : <b class="text-primary">{{inf.bagage}}</b> </p>
+                                                    <p>Prix : <b class="text-primary">{{ inf.prix }}</b></p>
+                                                    <p>Nombre de sièges prévus : <b class="text-primary">{{ inf.nombreSiege }}</b></p>
+                                                    <p>Date ajoutée : <b class="text-primary">{{ inf.dateAjoutee|date }} à {{ inf.dateAjoutee|time }}</b></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                                              </div>
+                                            </div>
+                                       </div>
+                                    </div>
+                                 </section>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ----------------------- Pagination ------------------------ -->
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pagination pagination-1 mb-4">
+                                        {% if donnee.has_previous %}
+                                        <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                        {% endif %}
+
+                                        <a href="" class="active">{{ donnee.number }}</a>
+
+                                        {% if donnee.has_next %}
+                                        <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="current">
+                                    Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- ======================== Afficher les voyages maritime ================================= -->
+
+            {% if action == "affiche" and element == "maritime" %}
+            <div class="">
+                <h4>Liste des voyages prévus pour votre agence</h4>
+                <div class="card text-left">
+                    <div class="card-header mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-primary w-100 text-white">Ajouter <i class="icon-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table border-top-0">
+                            <thead>
+                                <tr>
+                                    <th class="identifiant-cache">Identifiant</th>
+                                    <th>Départ</th>
+                                    <th>destination</th>
+                                    <th>D. depart</th>
+                                    <th class="dure-cache">Durée</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inf in donnee %}
+                                <tr>
+                                    <td class="identifiant-cache">
+                                        <a
+                                            href="{% url 'infos:dashbord' 'modification' inf.id %}">{{ inf.codeVoyage }}</a>
+                                    </td>
+                                    <td>{{ inf.villeDepart }}</td>
+                                    <td>{{ inf.villeArrivee }}</td>
+                                    <td>{{ inf.dateDepert }}</td>
+                                    <td class="dure-cache">{{ duree }}</td>
+                                    <td>{{ inf.prix }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ----------------------- pagination -----------------------  -->
+                    <div class="card-footer mb-0">
+                        <div class="d-flex justify-content-between">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pagination pagination-1 mb-4">
+                                        {% if donnee.has_previous %}
+                                        <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                        {% endif %}
+
+                                        <a href="" class="active">{{ donnee.number }}</a>
+
+                                        {% if donnee.has_next %}
+                                        <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="current">
+                                    Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- ======================== Afficher les voyages terrestre ================================= -->
+
+            {% if action == "affiche" and element == "terreste" %}
+            <div class="">
+                <h4>Liste des voyages prévus pour votre agence</h4>
+                <div class="card text-left">
+                    <div class="card-header mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Filtrer par ville de depart">
+                            </div>
+                            <div class="col-md-4">
+                                <a href="" class="btn btn-primary w-100 text-white">Ajouter <i
+                                        class="icon-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table border-top-0">
+                            <thead>
+                                <tr>
+                                    <th class="identifiant-cache">Identifiant</th>
+                                    <th>Départ</th>
+                                    <th>Destination</th>
+                                    <th>D. depart</th>
+                                    <th class="dure-cache">Durée</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inf in donnee %}
+                                <tr>
+                                    <td>
+                                        <a
+                                            href="{% url 'infos:dashbord' 'modification' inf.codeVoyage %}">{{ inf.codeVoyage }}</a>
+                                    </td>
+                                    <td class="identifiant-cache">{{ inf.villeDepart }}</td>
+                                    <td>{{ inf.villeArrivee }}</td>
+                                    <td>{{ inf.dateDepert }}</td>
+                                    <td class="dure-cache">{{ duree }}</td>
+                                    <td>{{ inf.prix }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ----------------------- Pagination ----------------------- -->
+                    <div class="card-footer mb-0">
+                        <div class="d-flex justify-content-between">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pagination pagination-1 mb-4">
+                                        {% if donnee.has_previous %}
+                                        <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                        {% endif %}
+
+                                        <a href="" class="active">{{ donnee.number }}</a>
+
+                                        {% if donnee.has_next %}
+                                        <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="current">
+                                    Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- ====================== Afficher les îles ======================= -->
+
+            {% if action == "affiche" and element == "ile" %}
+            <div class="">
+                <div class="card text-left">
+                    <div class="card-header">
+                        <h4>Liste des îles disponible</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table border-top-0">
+                            <thead>
+                                <tr>
+                                    <th>#id</th>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inf in donnee %}
+                                <tr>
+                                    <td>{{ inf.id }}</td>
+                                    <td>{{ inf.nom }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- ===================== Afficher les villes =========================== -->
+
+            {% if action == "affiche" and element == "ville" %}
+            <div class="">
+                <div class="card text-left">
+                    <div class="card-header">
+                        <h4>Liste des villes disponible</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#id</th>
+                                    <th>Ville</th>
+                                    <th>Île</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inf in donnee %}
+                                <tr>
+                                    <td>{{ inf.id }}</td>
+                                    <td>{{ inf.nom }}</td>
+                                    <td>{{ inf.ile }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ----------------------- Pagination ----------------------- -->
+                    <div class="card-footer mb-0">
+                        <div class="d-flex justify-content-between">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pagination pagination-1 mb-4">
+                                        {% if donnee.has_previous %}
+                                        <a href="?p={{ donnee.previous_page_number }}">&laquo;</a>
+                                        {% endif %}
+
+                                        <a href="" class="active">{{ donnee.number }}</a>
+
+                                        {% if donnee.has_next %}
+                                        <a href="?p={{ donnee.next_page_number }}">&raquo;</a>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="current">
+                                    Page {{ donnee.number }} / {{ donnee.paginator.num_pages }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+
+            {% if action == "place-restant" %}
+                <div class="titre text-warning">
+                    <h2>Détaile du reste de tickets</h2>
+                </div>
+
+                {% if av != None %}
+                <table class="table border-top-0">
+                    <thead>
+                        <tr>
+                            <th class="identifiant-cache">Identifiant</th>
+                            <th>Sièges disponible </th>
+                            <th>Programmé le </th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for av in av %}
+                        <tr>
+                            <td>{{av.codeVoyage}}</td>
+                            <td>{{av.nombreSiege}}</td>
+                            <td>{{av.dateAjoutee|date}} à {{av.dateAjoutee|time}}</td>
+                            <td class="d-flex justify-content-between">
+                                <a href="" class="btn btn-yellow">Suspendre</a>
+                                <a href="" class="btn btn-info">Voir plus d'actionss</a>
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                    {% endif %}
+                </table>
+
+                {% if ba != None %}
+
+                <table class="table border-top-0">
+                    <thead class="">
+                        <tr>
+                            <p class="text-center bg-primary py-1 text-white">Voyages maritime</p>
+                        </tr>
+                        <tr>
+                            <th class="identifiant-cache">Identifiant</th>
+                            <th>Sièges disponible </th>
+                            <th>Programmé le </th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ba in ba %}
+                        <tr>
+                            <td>{{ba.codeVoyage}}</td>
+                            <td>{{ba.nombreSiege}}</td>
+                            <td>{{ba.dateAjoutee|date}} à {{ba.dateAjoutee|time}}</td>
+                            <td class="d-flex justify-content-between">
+                                <a href="" class="btn btn-yellow">Suspendre</a>
+                                <a href="" class="btn btn-info">Voir plus d'actionss</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% endif %}
+                </table>
+
+                {% if bu != None %}
+                <table class="table border-top-0">
+                    <tbody>
+                        {% for bu in bu %}
+                        <tr>
+                            <td>{{bu.codeVoyage}}</td>
+                            <td>{{bu.dateAjoutee|date}} à {{bu.dateAjoutee|time}}</td>
+                            <td class="d-flex justify-content-between">
+                                <a href="" class="btn btn-info">Afficher</a>
+                                <a href="" class="btn btn-primary">Modifier</a>
+                                <a href="" class="btn btn-yellow">Suspendre</a>
+                                <a href="" class="btn btn-danger">Supprimer</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            {% endif %}
+        </div>
+    </section>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="bg-dark">
+    <div class="inner">
+        <h4 class="text-center text-secondary titre-menu"> {{ ag.nom }} | {{user.username}} </h4>
+        <hr class="hr-menu">
+        <!-- Menu -->
+        <nav id="menu">
+            <ul>
+                <li>
+                    <span class="opener">Les ventes</span>
                     <ul>
                         <li>
-                            <span class="opener">Les ventes</span>
-                            <ul>
-                                <li>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <a href="" class="card-text">Ajourd'hui</a> <br>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div
-                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
-                                        <a href="" class="card-text">Cette semaine</a> <br>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="d-flex justify-content-between py-2">
-                                        <a href="" class="card-text">Ce mois</a> <br>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div
-                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2 border-bottom-0">
-                                        <a href="" class="card-text">Cette année</a> <br>
-                                    </div>
+                            <div class="d-flex justify-content-between pb-2">
+                                <a href="" class="card-text">Ajourd'hui</a> <br>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
+                                <a href="" class="card-text">Cette semaine</a> <br>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex justify-content-between py-2">
+                                <a href="" class="card-text">Ce mois</a> <br>
+                            </div>
+                        </li>
+                        <li>
+                            <div
+                                class="d-flex justify-content-between border-left-0 border border-right-0 py-2 border-bottom-0">
+                                <a href="" class="card-text">Cette année</a> <br>
+                            </div>
 
-                                </li>
-                            </ul>
                         </li>
-                        <li>
-                            <span class="opener">Les messages</span>
-                            <ul>
-                                <li><a href="" class="">Nos répondus</a></li>
-                                <li><a href="" class="">Ajourd'hui</a></li>
-                                <li><a href="">Cette semaine</a></li>
-                                <li><a href="">Ce mois-ci</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="opener">Mes abonnées</span>
-                            <ul>
-                                <li><a href="" class="">Mensuels</a></li>
-                                <li><a href="" class="">Annuels</a></li>
-                                <li><a href="">Hebdomadaire</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="opener">Destinations | Départs</span>
-                            <ul>
-                                <li><a href="" class="">îles</a></li>
-                                <li>
-                                    <div
-                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
-                                        <a href="{% url 'infos:dashbord' 'affiche' 'ville' %}"
-                                            class="card-text">Ville</a>
-                                        <a href="{% url 'infos:dashbord' 'ajout' 'ville' %}" class="text-secondary">
-                                            Ajouter <i class="icon-plus"></i></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="opener">Voyages</span>
-                            <ul>
-                                <li>
-                                    <div class="d-flex justify-content-between py-2">
-                                        <a href="{% url 'infos:dashbord' 'affiche' 'maritime' %}"
-                                            class="card-text">Voyages maritime</a>
-                                        <a href="{% url 'infos:dashbord' 'ajout' 'maritime' %}" class="text-secondary">
-                                            Ajouter
-                                            <i class="icon-plus"></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div
-                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2 border-bottom-0">
-                                        <a href="{% url 'infos:dashbord' 'affiche' 'aerien' %}"
-                                            class="card-text">Voyages
-                                            aérien</a>
-                                        <a href="{% url 'infos:dashbord' 'ajout' 'aerien' %}" class="text-secondary">
-                                            Ajouter <i class="icon-plus"></i></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div
-                                        class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
-                                        <a href="{% url 'infos:dashbord' 'affiche' 'terreste' %}"
-                                            class="card-text">Voyages
-                                            terrestre</a>
-                                        <a href="{% url 'infos:dashbord' 'ajout' 'terreste' %}" class="text-secondary">
-                                            Ajouter
-                                            <i class="icon-plus"></i></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- <li><a href="#">Maximus Erat</a></li>
-                        <li><a href="#">Sapien Mauris</a></li>
-                        <li><a href="#">Amet Lacinia</a></li> -->
                     </ul>
-                </nav>
-            </div>
-        </div>
-
+                </li>
+                <li>
+                    <span class="opener">Les messages</span>
+                    <ul>
+                        <li><a href="" class="">Nos répondus</a></li>
+                        <li><a href="" class="">Ajourd'hui</a></li>
+                        <li><a href="">Cette semaine</a></li>
+                        <li><a href="">Ce mois-ci</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="opener">Mes abonnées</span>
+                    <ul>
+                        <li><a href="" class="">Mensuels</a></li>
+                        <li><a href="" class="">Annuels</a></li>
+                        <li><a href="">Hebdomadaire</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="opener">Destinations | Départs</span>
+                    <ul>
+                        <li><a href="" class="">îles</a></li>
+                        <li>
+                            <div class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
+                                <a href="{% url 'infos:dashbord' 'affiche' 'ville' %}" class="card-text">Ville</a>
+                                <a href="{% url 'infos:dashbord' 'ajout' 'ville' %}" class="text-secondary">
+                                    Ajouter <i class="icon-plus"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="opener">Voyages</span>
+                    <ul>
+                        <li>
+                            <div class="d-flex justify-content-between py-2">
+                                <a href="{% url 'infos:dashbord' 'affiche' 'maritime' %}" class="card-text">Voyages
+                                    maritime</a>
+                                <a href="{% url 'infos:dashbord' 'ajout' 'maritime' %}" class="text-secondary">
+                                    Ajouter
+                                    <i class="icon-plus"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div
+                                class="d-flex justify-content-between border-left-0 border border-right-0 py-2 border-bottom-0">
+                                <a href="{% url 'infos:dashbord' 'affiche' 'aerien' %}" class="card-text">Voyages
+                                    aérien</a>
+                                <a href="{% url 'infos:dashbord' 'ajout' 'aerien' %}" class="text-secondary">
+                                    Ajouter <i class="icon-plus"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="d-flex justify-content-between border-left-0 border border-right-0 py-2">
+                                <a href="{% url 'infos:dashbord' 'affiche' 'terreste' %}" class="card-text">Voyages
+                                    terrestre</a>
+                                <a href="{% url 'infos:dashbord' 'ajout' 'terreste' %}" class="text-secondary">
+                                    Ajouter
+                                    <i class="icon-plus"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </div>
-    {% endblock body %}
+</div>
 
-    {% block script %}
+</div>
+{% endblock body %}
 
-    <script src="{% static 'js/js-perso/jquery.min.js' %}"></script>
-    <script src="{% static 'js/js-perso/browser.min.js' %}"></script>
-    <script src="{% static 'js/js-perso/breakpoints.min.js' %}"></script>
-    <script src="{% static 'js/js-perso/main.js' %}"></script>
+{% block script %}
 
-    {% endblock script %}
+<script src="{% static 'js/js-perso/jquery.min.js' %}"></script>
+<script src="{% static 'js/js-perso/browser.min.js' %}"></script>
+<script src="{% static 'js/js-perso/breakpoints.min.js' %}"></script>
+<script src="{% static 'js/js-perso/main.js' %}"></script>
+
+{% endblock script %}

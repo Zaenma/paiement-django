@@ -1,3 +1,8 @@
+*{
+    margin:0;
+    padding:0;    
+}
+
 
 .form-control:focus {
     border-color: 2px #0c056d !important;
@@ -40,33 +45,9 @@
 }
 
 .ftco-navbar-light.scrolled .label-connexion {
-
     color: #160f30;
 }
 
-.input-connection {
-    /* border: none; */
-    outline: none;
-    padding-left: -300px;
-    border: 2px solid #ffffff !important;
-}
-
-.btn-connexion {
-    height: 48px !important;
-    font-weight: bold;
-}
-
-.formulaire-connexion {
-    background: #6c757d;
-    display: flex;
-    flex-direction: column-reverse;
-    margin: 1.2em 0;
-}
-
-
-.par-defaut {
-    color: #ffffff;
-}
 
 .btn-formulaire-achat {
     padding-left: 60px;
@@ -79,7 +60,8 @@
 
 .card {
     background: rgba(255, 255, 255);
-    box-shadow: 0 3px 3px 0 #999393;
+    /* box-shadow: 2px 2px 3px 3px #999393; */
+    box-shadow: 0px 1px 7px 0px #999393;
     /* height: 100px; */
 }
 
@@ -181,10 +163,6 @@
     transition: .05s;
 }
 
-input:valid {
-    border: 2px solid #64e291;
-}
-
 .shadow {
     box-shadow: 0 1px 1px 0 #d3d2d2;
     border-radius: 5px;
@@ -209,11 +187,6 @@ input:valid {
     border-radius: 50%;
     margin-right: 20px;
 }
-
-.p-icone-agence {
-    margin-top: 60px;
-}
-
 .icon-agence:hover {
     margin-top: 60px;
     background: #ed0cef;
@@ -243,14 +216,11 @@ input:valid {
 
 
 .bg-image {
-    background: url("../images/carte-1.jpg") no-repeat;
+    background: url("../images/depart.svg") no-repeat;
     background-position: right;
     background-size: 400px;
     background-position-x: 100%;
     background-blend-mode: overlay;
-    
-    /* height: 650px; */
-    /* padding: 60px 0 0 0; */
 }
 
 hr, .hr-menu {
@@ -448,4 +418,37 @@ input[type='image']{
 
 #id_message{
     width: 30px;
+}
+
+.btn-yellow{
+    color: #fff;
+    background-color: #ffc107d5;
+}
+.btn-yellow:hover{
+    color: #fff;
+    background-color: #ffc107;
+}
+
+.liens{
+    font-size: 16px;
+    padding: 10px 30px 12px 30px;
+    border-radius: 1px;
+}
+
+.liens:hover{
+    background-color: #07689f;
+    transition: 800ms;
+    bottom: 15px;
+}
+.separe{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.img-transport{
+    float: left;
+}
+
+._texte_{
+    clear: both;
 }

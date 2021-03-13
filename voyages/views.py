@@ -49,6 +49,7 @@ def voyages(request):
     if nombre_voyage == 0:
         # la date de jour exclue l'heure
         datedujour = datetime.datetime.now()
+        
         datedujour = datedujour.date()
 
         # la date de l'utilisateur

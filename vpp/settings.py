@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Cacher les variables 
+# CACHES={'default': django_cache_url.config()}
 
 # Application definition
 
@@ -70,6 +72,10 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51HcnuxBXtR6NoHYCmhTktICwoW89a2ZBU5svHO8WjIFqJ
 STRIPE_SECRET_KEY = 'sk_test_51HcnuxBXtR6NoHYCJUVZy9GS0kNVhQjWF9eqESoCtYdr2qhKTQgmv3xuTMdIoe2EqrKmnXqUfS8GIoh1Ko6ISJgC00An6P4iWL'
 
 PAYPAL_TEST = True
+
+# SMS_BACKEND = 'sms.backends.console.SmsBackend'
+SMS_BACKEND = 'sms.backends.filebased.SmsBackend'
+SMS_FILE_PATH = '/tmp/app-messages'
 
 ROOT_URLCONF = 'vpp.urls'
 

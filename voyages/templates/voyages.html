@@ -71,7 +71,18 @@
 
 {% block body %}
     <section class="container my-5">
+      {% if nombre_voyage == 0 %}
+      
+         <div class="alert alert-info pb-1">
+            <div class="d-flex">
+               <p class="py-4">Aucun trajet trouvé selon vos critères de recherche </p>
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+            </button>
 
+         </div>
+      {% endif %}
         {% for voyage in voyages %}
         <div class="card text-left mb-3">
             <div class="card-header">

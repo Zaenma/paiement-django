@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="shortcut icon" href="{% static "images/bus.jpg" %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
@@ -52,7 +51,7 @@
                     <div class="col-md-12">
                         <nav class="navbar px-0 navbar-expand-lg navbar-light">
                             <a class="navbar-brand" href="{% url 'accueil:index-accueil' %}"><span
-                                    class="text-warning">C-</span>Transports</a>
+                                    class="text-warning">C-</span>Transport</a>
 
                             <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#ftco-nav"
                                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,6 +60,8 @@
 
                             <div class="collapse navbar-collapse" id="ftco-nav">
                                 <ul class="navbar-nav ml-auto">
+                                    
+                                    {% block menu %}
                                     <li class="nav-item mr-2 mt-2">
                                         <a href="" type="button" class="btn btn-info btn-formulaire-achat"
                                             data-toggle="modal" data-target="#tableau-bord-departs">Départs <i
@@ -73,6 +74,9 @@
                                                 class="ion-ios-arrow-round-down"></i> <i
                                                 class="ion-ios-arrow-round-down"></i></a>
                                     </li>
+                                    {% endblock menu %}
+                                   
+
                                     <li class="dropdown nav-item d-flex">
                                         <a href="#" class="dropdown-toggle nav-link d-flex align-items-center icon"
                                             data-toggle="dropdown">
@@ -140,9 +144,8 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;<script>
                         document.write(new Date().getFullYear());
-                    </script> Tous droits réservés | site conçu par <span class="text-warning">Zaenma</span> avec <i
-                        class="icon-heart text-warning" aria-hidden="true"></i> pour <span class="text-warning">Comores
-                        Transport</span>
+                    </script> Tous droits réservés | travil fait par <span class="text-warning">Zaenma</span> avec <i
+                        class="icon-heart text-warning" aria-hidden="true"></i> <span class="text-warning">passion</span> pour <span class="text-warning">l'amour de mon pays</span>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>

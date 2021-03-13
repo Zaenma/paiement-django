@@ -13,20 +13,17 @@
                 <section class="container my-5">
                     <div class="">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-lg-6 col-12">
+                            <div class="offset-1 col-md-6 col-sm-6 col-lg-6 col-12">
                                 <img src="{% static "images/login.svg" %}" alt="Round Image"
-                                    class="rounded img-fluid animated fadeInLeft image-2 w-75 h-75">
+                                    class="rounded img-logine img-fluid animated fadeInLeft image-2 w-75 h-75">
                             </div>
-                            <div class="col-md-6 col-sm-6 col-lg-6 col-12">
-                                <div class="card">
-                                    <div class="card-header bg-primary">
-                                        <h4 class="text-white">Conectez vous</h4>
-                                    </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-12">
+                                <div class="card  animated fadeInRight">
                                     <form method="post" action="">
                                         <div class="card-body">
+                                            <h4 class="text-center"> <b>Conectez vous</b></h4>
                                             {% if form.errors %}
-                                            <p class="text-danger">Désolé ! les Identifiants ne sont pas corrects,
-                                                veillez réessayer plus tard !</p>
+                                            <p class="text-danger">Désolé ! les Identifiants sont incorrects</p>
                                             {% endif %}
 
                                             {% if next %}
@@ -46,16 +43,16 @@
                                             <span class="">{{ form.password }}</span>
 
                                             {% if form.errors %}
-                                            <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-between py-4">
                                                 <a href="{% url 'infos:password' %}">Mot de passe oublié ?</a>
                                                 <a href="">Demandez l'accès </a>
                                             </div>
                                             {% endif %}
 
-                                        </div>
-                                        <div class="card-footer d-flex justify-content-end">
-                                            <input type="submit" class="px-5 btn btn-primary" value="Me connecter" />
-                                            <input type="hidden" name="next" value="{{ next }}" />
+                                            <div class="text-center mt-5">
+                                                <input type="submit" class="px-5 btn btn-primary" value="Me connecter" />
+                                                <input type="hidden" name="next" value="{{ next }}" />
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -66,7 +63,6 @@
             </div>
         </div>
     </div>
-    <hr>
 </section>
 
 {% endblock header %}

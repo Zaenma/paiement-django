@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.forms import formset_factory
-import datetime
+from datetime import datetime 
+from time import strftime
+from django.db.models import Q
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
@@ -11,12 +13,11 @@ from agence.models import Agence
 from voyages.models import VoyagesParAvion, VoyagesParBateau, VoyagesParBu, Ville, Ile
 from .models import AbonnesMensuel, AbonnesAnnuel, AbonnesHebdomadaire
 from .formulaire import UtilisateurForm, VoyagesParAvionForm, VilleForm, IleForm, VoyagesParBateauForm, AbonneForm
+from achat.models import Achat
 
+# Traitement de formulaire d'abonnement 
 def abonnement(request, pkv, tag=None):
-    # Traitement de formulaire d'abonnement 
-    # AbonneForm = formset_factory(AbonneForm)
     if request.method == "GET":
-        # formAbonnement = AbonneForm(request.GET)
         if AbonneForm(request.GET).is_valid:
             if AbonnesMensuel.objects.filter(codeAbonnement=request.GET["codeAbonnement"]).exists():
                 return AbonnesMensuel.objects.filter(codeAbonnement=request.GET["codeAbonnement"])
@@ -37,7 +38,7 @@ def informationPersonnelles(request, formulaire):
             if int(request.POST["nombreSiegeReserve"]) >= 1:
                 if formulaire.is_valid:
                     formulaire.save()
-                    return HttpResponseRedirect(reverse('paiement:paiement', kwargs={'pkv': pkv, 'tag': tag, 'pku': request.POST["email"], 'date': datetime.datetime.now()}))
+                    return HttpResponseRedirect(reverse('paiement:paiement', kwargs={'pkv': pkv, 'tag': tag, 'pku': request.POST["email"]}))
                 else:
                     # formulaire = UtilisateurForm(request.POST)
                     return erreur
@@ -59,29 +60,33 @@ def information(request, pkv, tag=None, msg=None):
     if tag == 'AV':
         informationVoyage = VoyagesParAvion.objects.get(pk=pkv)
 
-    if tag == 'BA':
+    elif tag == 'BA':
         informationVoyage = VoyagesParBateau.objects.get(pk=pkv)
 
-    if tag == 'BU':
+    elif tag == 'BU':
         informationVoyage = VoyagesParBu.objects.get(pk=pkv)
-
+    else:
+        return render(request, 'erreur.html')
+        
     # Traitement du formulaire d'un nouveua utilisateur
     # Utilisation des formulaire groupés
     formulaire = UtilisateurForm()
     
     erreur = informationPersonnelles(request, formulaire)
 
-    if abonnement(request, pkv, tag) != None:
-        variable_get = {'pkv': pkv, 'tag': tag, 'pku': request.GET['codeAbonnement'], 'date': datetime.datetime.now()}
-        return HttpResponseRedirect(reverse('paiement:paiement', kwargs=variable_get))
-    else:
-        msg = 1
-        HttpResponseRedirect(reverse('infos:erreur-abonnement', kwargs={'pkv': pkv, 'tag': tag, 'msg': msg}))
+    if request.GET.get("codeAbonnement") != None:
+        if abonnement(request, pkv, tag):
+            variable_get = {'pkv': pkv, 'tag': tag, 'pku': request.GET['codeAbonnement']}
+            return HttpResponseRedirect(reverse('paiement:paiement', kwargs=variable_get))
+        elif abonnement(request, pkv, tag) == None:
+            msg = 1
+            HttpResponseRedirect(reverse('infos:erreur-abonnement', kwargs={'pkv': pkv, 'tag': tag, 'msg': msg}))
         
     donnees = {'infvoyage': informationVoyage,
                'form': formulaire,
                'erreur': erreur,
-               'abf': formAbonnement
+               'abf': formAbonnement,
+               'data': request.GET
                }
 
     return render(request, 'information.html', donnees)
@@ -130,7 +135,7 @@ def voyagesAffichees(request, modelaffichee):
 # calcule le nombre de voyage par agence 
 def nombreVoyage(request):
 
-     # on prend l'agence à laquelle le reponsabe de l'agence et la personne qui est connecté 
+    # on prend l'agence à laquelle le reponsabe de l'agence et la personne qui est connecté 
     donnees_agence = Agence.objects.get(responsable=request.user.username)
     
     # on prend les données dans l'une des tables des voyages à condition que le nom de l'agence 
@@ -139,6 +144,15 @@ def nombreVoyage(request):
     nbv = VoyagesParAvion.objects.filter(agencePrincipal=donnees_agence.nom).count() + VoyagesParBateau.objects.filter(agencePrincipal=donnees_agence.nom).count() + VoyagesParBu.objects.filter(agencePrincipal=donnees_agence.nom).count()
     return nbv
 
+# Nombre de ticket vendu
+def ticketvendu(request):
+    # on prend l'agence à laquelle le reponsabe de l'agence et la personne qui est connecté 
+    donnees_agence = Agence.objects.get(responsable=request.user.username)
+    # on prend les données dans l'une des tables des voyages à condition que le nom de l'agence 
+    # est le même que celui qu'on a préalablement récupéré 
+    nombreticketvendu = Achat.objects.filter(agence=donnees_agence.nom).count()
+
+    return nombreticketvendu
 
 # vue de dashbord des administrateur des agences
 def dashbord(request, action=None, element=None, formulaire=None, statut=None):
@@ -148,6 +162,8 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
     else:
         donnees_agence = Agence.objects.get(responsable=request.user.username)
         nbreV = nombreVoyage(request)
+
+        nombreticketvendu = ticketvendu(request)
 
         if action == "ajout":
             if element == "ile":
@@ -198,7 +214,6 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
                 donneeaffiche = voyagesAffichees(request, VoyagesParAvion)
             else:
                 pass
-
             donnees = {
                     'donnee': donneeaffiche,
                     'nbvg': nbreV,
@@ -206,12 +221,29 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
                     'element': element,
                     'statut': statut,
                     'ag': donnees_agence,
+                    'nombreticketvendu': nombreticketvendu,
+                    }
+
+        elif action == "place-restant":
+            bu = voyagesAffichees(request, VoyagesParBu)
+            ba = voyagesAffichees(request, VoyagesParBateau)
+            av = voyagesAffichees(request, VoyagesParAvion)
+
+            donnees = {
+                    'nbvg': nbreV,
+                    'action': action,
+                    'bu': bu,
+                    'ba': ba,
+                    'av': av,
+                    'ag': donnees_agence,
+                    'nombreticketvendu': nombreticketvendu,
                     }
 
         else:
             donnees = {'action': action,
                     'element': element,
                     'nbvg': nbreV,
+                    'nombreticketvendu': nombreticketvendu,
                     'statut': statut,
                     'ag': donnees_agence,
                     }

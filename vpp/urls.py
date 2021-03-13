@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin, messages
 from django.urls import path, include
 from django.contrib import admin
+from django.conf.urls import handler404, handler500
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('agence/', include('agence.urls')),
 ]
 
+# handler404 = views.page_404
 
 admin.site.site_header = 'Comores-Transports'
 admin.site.index_title = 'Super Administrateur | Zaenma' 

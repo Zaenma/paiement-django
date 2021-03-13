@@ -154,7 +154,7 @@
                                 </form>
                             </div>
                         </div>
-                        <form action="{% url 'achat:success' pkv pku tag date %}" method="post">
+                        <form action="{% url 'achat:success' pkv pku tag %}" method="post">
                             {% csrf_token %}
                             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="{{ key }}"
