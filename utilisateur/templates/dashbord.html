@@ -74,8 +74,8 @@
 <!-- Wrapper -->
 <div id="wrapper">
     <section class="container">
-        {% if action == None and element == None %}
         <div class="mb-5">
+            {% if action == None and element == None %}
             <h2 class="text-primary mb-5 animated fadeInLeft">Vue d'ensemble</h2>
             <div class="row">
                 <div class="col-md-3">
@@ -99,7 +99,7 @@
                             <h6 class="text-center">Evolution de l'agence</h6>
                         </div>
                         <div class="card-body text-center">
-                            <h4 class="card-title">0,00%</h4>
+                            <h4 class="card-title">{{pc}} % </h4>
                         </div>
                         <div class="card-footer bg-white d-flex justify-content-end">
                             <a href="{% url 'infos:dashbord' 'activite' %}" class="btn btn-outline-info">Voir
@@ -141,9 +141,9 @@
                 <div class="col-md-3"></div>
             </div>
 
-            <!-- Chat -->
             <section class="mt-5">
                 <div class="row">
+                    <!-- Chat -->
                     <div class="col-md-5">
                         <div class="card">
                             <div class="card-header">
@@ -235,8 +235,67 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Envoie d'une message -->
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="">Envoyer un message</h5>
+                            </div>
+                            <form action="" method="post">
+                                <div class="card-body">
+                                    {% if rm == 0 %}
+                                    <div class="alert alert-danger pb-1">
+                                        <div class="container-fluid">
+                                            <div class="d-flex">
+                                               <p class="">Le message n'a pas été envoyé, merci de vérifier les informations que vous avez saisis</p>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                               <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                     {% endif %}
+                                     {% if rm != 0 %}
+                                    <div class="alert alert-success pb-1">
+                                        <div class="container-fluid">
+                                            <div class="d-flex">
+                                               <p class="">Le message a été bien envoyé !</p>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                               <span aria-hidden="true"><i class="ion-ios-close"></i></span>
+                                            </button>
+                                         </div>
+                                    </div>
+                                    {% endif %}
+                                    {% csrf_token %}
+
+                                    <label for="">Adresse email du destinataire</label>
+                                    <div class="form-group">
+                                      {{fm.email}}
+                                    </div>
+                                    <label for="">Titre du message</label>
+                                    <div class="form-group">
+                                        {{fm.sujet}}
+                                    </div>
+                                    <label for="">Message</label>
+                                    <div class="input-group mb-3">
+                                        {{fm.message}}
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary px-5">Envoyer</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </section>
+
+            <!-- Envoie d'une message -->
+            
             {% endif %}
             
             <!-- ==================== Ajouter un voyage aérien =================== -->

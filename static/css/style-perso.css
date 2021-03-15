@@ -216,7 +216,7 @@
 
 
 .bg-image {
-    background: url("../images/depart.svg") no-repeat;
+    /* background: url("../images/depart.svg") no-repeat; */
     background-position: right;
     background-size: 400px;
     background-position-x: 100%;

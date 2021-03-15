@@ -4,16 +4,19 @@ from django.http import Http404, HttpResponseRedirect
 from django.forms import formset_factory
 from datetime import datetime 
 from time import strftime
-from django.db.models import Q
+from django.db.models import Q, Sum, Avg
 from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator
-from agence.models import Agence
+from agence.models import Agence, MessagesEnvoye
+from agence.formulaire import MessageEnvoyeForm
 from voyages.models import VoyagesParAvion, VoyagesParBateau, VoyagesParBu, Ville, Ile
 from .models import AbonnesMensuel, AbonnesAnnuel, AbonnesHebdomadaire
 from .formulaire import UtilisateurForm, VoyagesParAvionForm, VilleForm, IleForm, VoyagesParBateauForm, AbonneForm
 from achat.models import Achat
+from django.core.mail import BadHeaderError, send_mail
+# from django.db.models import Sum
 
 # Traitement de formulaire d'abonnement 
 def abonnement(request, pkv, tag=None):
@@ -48,7 +51,6 @@ def informationPersonnelles(request, formulaire):
         else:
             # formulaire = UtilisateurForm(request.POST)
             return erreur
-
 
 def information(request, pkv, tag=None, msg=None):
     # Initialisation du formulaire
@@ -91,7 +93,6 @@ def information(request, pkv, tag=None, msg=None):
 
     return render(request, 'information.html', donnees)
 
-
 def formulaireAffiche(request, formulaire):
     if request.method == "POST":
         formulaire = VilleForm(request.POST)
@@ -100,9 +101,6 @@ def formulaireAffiche(request, formulaire):
             return 1
         else:
             return 0
-    else:
-        return 0
-
 
 # fonction de pagination -----------------------
 def donneeAffichees(request, modelaffichee):
@@ -131,7 +129,6 @@ def voyagesAffichees(request, modelaffichee):
 
     return voyagesaffiche
 
-
 # calcule le nombre de voyage par agence 
 def nombreVoyage(request):
 
@@ -153,6 +150,34 @@ def ticketvendu(request):
     nombreticketvendu = Achat.objects.filter(agence=donnees_agence.nom).count()
 
     return nombreticketvendu
+
+def calculePourcentage(request):
+     # on prend l'agence à laquelle le reponsabe de l'agence et la personne qui est connecté 
+    donnees_agence = Agence.objects.get(responsable=request.user.username)
+    # on prend les données dans l'une des tables des voyages à condition que le nom de l'agence 
+    # est le même que celui qu'on a préalablement récupéré 
+    voyage = VoyagesParAvion.objects.filter(agencePrincipal=donnees_agence.nom)
+    pourcentage = (3/8)*100
+    # totalsiege = voyage.annotate(Sum(nombreSiege))
+    # totalsiege = voyage.codeVoyage
+    return pourcentage
+    
+def formulaireEnvoieMessage(request):
+    if request.method == "POST":
+        formulairemessage = MessageEnvoyeForm(request.POST)
+        if formulairemessage.is_valid():
+            sujet = request.POST['sujet']
+            email = request.POST['email']
+            message = request.POST['message']
+            agence = Agence.objects.get(responsable=request.user.username).nom
+            if MessagesEnvoye.objects.create(agence=agence, email=email, sujet=sujet, message=message):
+        
+                # à decomenter lors du déploiement
+                # send_mail(sujet, message, 'contact.zaenma@gmail.Com', [email, 'zaenma.halidisalim@gmil.com'])
+                
+                return 1
+            else:
+                return 0
 
 # vue de dashbord des administrateur des agences
 def dashbord(request, action=None, element=None, formulaire=None, statut=None):
@@ -240,12 +265,16 @@ def dashbord(request, action=None, element=None, formulaire=None, statut=None):
                     }
 
         else:
+            reponsemessage = formulaireEnvoieMessage(request)
             donnees = {'action': action,
                     'element': element,
                     'nbvg': nbreV,
                     'nombreticketvendu': nombreticketvendu,
                     'statut': statut,
                     'ag': donnees_agence,
+                    'pc': calculePourcentage(request),
+                    'fm': MessageEnvoyeForm(),
+                    'rm': reponsemessage,
                     }
 
         return render(request, 'dashbord.html', donnees)

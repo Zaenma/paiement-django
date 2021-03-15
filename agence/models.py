@@ -53,28 +53,30 @@ class AdminAgence(admin.ModelAdmin):
 
 
 class MessageAgence(models.Model):
-    nom = models.CharField(max_length=50, verbose_name='Nom')
-    prenom = models.CharField(max_length=50, verbose_name='Prénom')
+    nom = models.CharField(max_length=50, verbose_name='Nom de l\'expéditeur')
+    agence = models.CharField(max_length=50, verbose_name='Agence destinataire')
+
     email = models.EmailField(
-        max_length=255, verbose_name="Adresse email de l'expediteur")
-    destinateur = models.EmailField(
-        max_length=255, verbose_name="Adresse email du destinateur")
+        max_length=255, verbose_name="Adresse email de l'expediteur", blank=True, null=True)
     telephone = models.CharField(
-        max_length=100, verbose_name="Téléphone de l'expediteur")
+        max_length=100, verbose_name="Téléphone de l'expediteur", blank=True, null=True)
     sujet = models.CharField(max_length=255, verbose_name="Titre du message")
     message = models.TextField(verbose_name="Messages")
     dateEnvoie = models.DateTimeField(
         auto_now_add=True, verbose_name="Date d'envoie")
 
     def __str__(self):
-        return self.expediteur
+        return self.nom
+
+    class Meta:
+        verbose_name = "Messages reçu"
 
 
 class AdminMessage(admin.ModelAdmin):
-    list_display = ('nom', 'prenom', 'destinateur',
+    list_display = ('nom', 'agence',
                     'sujet', 'dateEnvoie',)
     list_filter = ('dateEnvoie',)
-    search_fields = ['nom', 'destinateur']
+    search_fields = ['nom',]
 
 
 class Reponse(models.Model):
@@ -89,8 +91,30 @@ class Reponse(models.Model):
     dateEnvoie = models.DateTimeField(
         auto_now_add=True, verbose_name="Date d'envoie")
 
+    class Meta:
+        verbose_name = "Réponses envoyé"
 
 class AdminReponse(admin.ModelAdmin):
     list_display = ('destinateur', 'sujet', 'dateEnvoie',)
     list_filter = ('dateEnvoie',)
     search_fields = ['destinateur']
+
+class MessagesEnvoye(models.Model):
+    email = models.EmailField(max_length=50, verbose_name='Email du destinataire')
+    agence = models.EmailField(max_length=50, verbose_name='Agence expédiée')
+    sujet = models.CharField(max_length=255, verbose_name="Titre du message")
+    message = models.TextField(verbose_name="Messages")
+    dateEnvoie = models.DateTimeField(
+        auto_now_add=True, verbose_name="Date d'envoie")
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = "Messages envoyé"
+
+class AdminMessageEnvoye(admin.ModelAdmin):
+    list_display = ('agence', 'email',
+                    'sujet', 'dateEnvoie',)
+    list_filter = ('dateEnvoie',)
+    search_fields = ['email', 'sujet']

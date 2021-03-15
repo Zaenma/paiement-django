@@ -168,7 +168,6 @@ class AdminVersementsAbonneMensuel(admin.ModelAdmin):
     list_filter = ('dateVersement',)
     search_fields = ['abonneMensuel']
 
-
 # modèle du formulare de recherche
 class AbonneModel(models.Model):
     codeAbonnement = models.CharField(

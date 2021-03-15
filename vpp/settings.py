@@ -187,7 +187,7 @@ QR_CODE_URL_PROTECTION = {
     # Optional random token length for URL protection. Defaults to 20.
     constants.TOKEN_LENGTH: 30,
     # Optional signing key for URL token. Uses SECRET_KEY if not defined.
-    constants.SIGNING_KEY: 'my-secret-signing-key',
+    constants.SIGNING_KEY: 'C-Transport avec Zaenma',
     # Optional signing salt for URL token.
     constants.SIGNING_SALT: 'my-signing-salt',
     # Tells whether a registered user can request the QR code URLs from outside a site that uses this app. It can be a boolean value used for any user, or a callable that takes a user as parameter. Defaults to False (nobody can access the URL without the security token).
